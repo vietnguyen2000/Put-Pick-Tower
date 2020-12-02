@@ -20,6 +20,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         get { return deadZone; }
         set { deadZone = Mathf.Abs(value); }
     }
+    public bool OnJoystickDown { get { return onJoystickDown;} }
+    public bool OnJoystickUp { get { return onJoystickUp;}}
 
     public AxisOptions AxisOptions { get { return AxisOptions; } set { axisOptions = value; } }
     public bool SnapX { get { return snapX; } set { snapX = value; } }
@@ -39,6 +41,10 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     private Camera cam;
 
     private Vector2 input = Vector2.zero;
+
+    private bool onJoystickDown = false;
+    private bool onJoystickUp = false;
+    private bool flagButton;
 
     protected virtual void Start()
     {
@@ -60,6 +66,8 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     public virtual void OnPointerDown(PointerEventData eventData)
     {
         OnDrag(eventData);
+        onJoystickDown = true;
+        flagButton = true;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -82,6 +90,7 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         {
             if (magnitude > 1)
                 input = normalised;
+            flagButton = false;
         }
         else
             input = Vector2.zero;
@@ -133,6 +142,10 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
     {
         input = Vector2.zero;
         handle.anchoredPosition = Vector2.zero;
+        if (input.magnitude < DeadZone && flagButton){
+            onJoystickUp = true;
+            flagButton = false;
+        }
     }
 
     protected Vector2 ScreenPointToAnchoredPosition(Vector2 screenPosition)
@@ -144,6 +157,10 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
             return localPoint - (background.anchorMax * baseRect.sizeDelta) + pivotOffset;
         }
         return Vector2.zero;
+    }
+    private void LateUpdate() {
+        onJoystickDown = false;    
+        onJoystickUp = false;
     }
 }
 
