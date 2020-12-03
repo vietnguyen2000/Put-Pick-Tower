@@ -2,28 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tower : IPickupable, IPutdownable, IAttackable,IUpgradeable
+public class Tower : IPutPickable, IAttackable,IUpgradeable
 {
     [SerializeField]
-    private float _timePickup;
-    public float timePickup{
-        get => _timePickup;
-        set => _timePickup = value;}
+    private float timePickup;
+    public float TimePickup{
+        get => timePickup;
+    }
     [SerializeField]
-    private float _timePutDown;
-    public float timePutdown{
-        get => _timePutDown;
-        set => _timePutDown = value;}
+    private float timePutDown;
+    public float TimePutdown{
+        get => timePutDown;
+    }
     [SerializeField]
-    private float _damage;
-    public float damage{
-        get => _damage;
-        set => _damage = value;}
+    private float damage;
+    public float Damage{
+        get => damage;
+        set => damage = value;}
     [SerializeField]
-    private float _attackSpeed;
-    public float attackSpeed{
-        get => _attackSpeed;
-        set => _attackSpeed = value;}
+    private float attackSpeed;
+    public float AttackSpeed{
+        get => attackSpeed;
+        set => attackSpeed = value;}
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +35,7 @@ public class Tower : IPickupable, IPutdownable, IAttackable,IUpgradeable
     {
         
     }
-    public void Pickup()
+    public void Pickup(Player player)
     {
 
     }
@@ -43,7 +43,7 @@ public class Tower : IPickupable, IPutdownable, IAttackable,IUpgradeable
     {
 
     }
-    public void InflictDamage(LiveObject attackedObject)
+    public void InflictDamage(IDamageable attackedObject)
     {
 
     }
