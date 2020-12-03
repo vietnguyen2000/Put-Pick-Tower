@@ -25,9 +25,12 @@ public interface IAnimation{
 }
 public interface IPutPickable{
     float TimePickup{get;}
-    float TimePutDown{get;}
+    float TimePutdown{get;}
     void Pickup(Player player);
     void Putdown();
+}
+public interface ICollider{
+    Collider2D Collider{get;}
 }
 public interface IAttackable{
     float Damage{get;set;}
