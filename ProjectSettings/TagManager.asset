@@ -14,14 +14,14 @@ TagManager:
   - UI
   - 
   - 
+  - 
+  - 
+  - Ground
+  - Monster
+  - Player Ground
+  - Player
+  - Decorations
   - Tower
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
   - 
   - 
   - 
@@ -41,4 +41,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Monster Ground
+    uniqueID: 641346281
+    locked: 0
+  - name: Player Ground
+    uniqueID: 829060989
+    locked: 0
+  - name: Decoration Ground
+    uniqueID: 3742977613
     locked: 0
