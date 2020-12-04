@@ -2,39 +2,59 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LiveObject : MonoBehaviour, IStatistic, IDamageable, IMoveable
+public class LiveObject : AnimateObject, IStatistic, IDamageable, IMoveable
 {
-    [SerializeField]
-    private float _hp;
-    public float hp{
-        get => _hp;
-        set => _hp = value;}
-    [SerializeField]
-    private float _speed;    
-    public float speed{
-        get => _speed;
-        set => _speed = value;}
+    public float Hp{
+        get => hp;
+    }
+    public float Speed{
+        get => speed;
+    }
+    public Vector2 Direction{get => rb.velocity.normalized;}
+    public Vector2 Velocity{ get => rb.velocity;}
+    public Rigidbody2D Rigidbody{
+        get => rb;
+    }
+
+    [SerializeField] protected float hp;        
+    [SerializeField] protected float speed;    
+    [SerializeField] protected Rigidbody2D rb;
+
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+        if (rb == null) rb= GetComponent<Rigidbody2D>();
         
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
+
+    }
+    public virtual void Damage(float damage)
+    {
+
+    }
+    public virtual void Kill()
+    {
+
+    }
+    public virtual void Move(Vector2 direction, float speed)
+    // Move object by set velocity to direction*speed and play Walk animation
+    {
+        anim.Play(Constants.WALK,0);
+        if (direction.x > 0) FaceDirection = FaceDirectionType.Right;
+        else if (direction.x <0) FaceDirection = FaceDirectionType.Left;
         
+        rb.velocity = direction*speed;
     }
-    public void Damage(float damage)
-    {
 
-    }
-    public void Kill()
+    public virtual void Stop()
+    // Stop function will set velocity to zero and play Idle animation
     {
-
-    }
-    public void Move(Vector2 vector, float speed)
-    {
-
+        anim.Play(Constants.IDLE,0);
+        rb.velocity = Vector2.zero;
     }
 }
