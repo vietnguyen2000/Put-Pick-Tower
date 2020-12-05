@@ -24,11 +24,10 @@ public interface IAnimation{
     Animator Anim{get;}
 }
 public interface IPutPickable{
-    float TimePickup{get;}
-    float TimePutdown{get;}
-    void Pickup(Player player);
-    void Putdown();
+    void Pickup(Player player, float timePutup);
+    void Putdown(float timePutdown);
 }
+
 public interface ICollider{
     Collider2D Collider{get;}
 }

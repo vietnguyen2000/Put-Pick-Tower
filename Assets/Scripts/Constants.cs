@@ -8,6 +8,6 @@ public static class Constants{
     public const string PUTPICKABLE = "PutPickable";
     public const string IDLEONBAG = "IdleOnBag";
     public const string RUNONBAG = "RunOnBag";
-    public const float TIMEPICKUP = 0.5f;
-    public const float TIMEPUTDOWN = 0.5f;
+    public const float DEFAULTPUTPICKTIME = 0.5f;
+    public const string PUTPICKSPEED = "PutPickSpeed";
 }
