@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PutPickable
   layers:
   - Default
   - TransparentFX
@@ -15,12 +16,12 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Monster
+  - Player Ground
+  - Player
+  - Decorations
+  - Tower
   - 
   - 
   - 
@@ -40,4 +41,19 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Monsters
+    uniqueID: 641346281
+    locked: 0
+  - name: Player Ground
+    uniqueID: 829060989
+    locked: 0
+  - name: Decorations
+    uniqueID: 3742977613
+    locked: 0
+  - name: PutPickObject
+    uniqueID: 3839457199
+    locked: 0
+  - name: Player
+    uniqueID: 1746026351
     locked: 0
