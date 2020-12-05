@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnMonsterManager : MonoBehaviour 
 {
     public enum Spawn_State {Waiting, Counting, Spawning};
-    public enum Option {MonsterDead, MonsterOut, AfterFirstSpawn, AfterLastSpawn }
+    public enum Option {MonsterDead, AfterFirstSpawn, AfterLastSpawn }
 
     [System.Serializable]
     public class Wave
@@ -28,6 +28,7 @@ public class SpawnMonsterManager : MonoBehaviour
     private float searchCountDown = 1f;
 
     private Spawn_State state;
+    public Option option = Option.MonsterDead;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +42,24 @@ public class SpawnMonsterManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        switch(option)
+        {
+            case Option.MonsterDead:
+                SpawnAfterMonsterDead();
+                break;
+            case Option.AfterFirstSpawn:
+                SpawnAfterFirstSpawn();
+                break;
+            case Option.AfterLastSpawn:
+                SpawnAfterLastSpawn();
+                break;
+        }
+
+    }
+
+    //Spawn monster after they are killed.
+    private void SpawnAfterMonsterDead()
     {
         if (state == Spawn_State.Waiting)
         {
@@ -65,7 +84,45 @@ public class SpawnMonsterManager : MonoBehaviour
         {
             waveCountDown -= Time.deltaTime;
         }
-    }    
+    }
+
+    //Spawn monster after x seconds from the first monster spawned
+    void SpawnAfterFirstSpawn()
+    {
+        if (waveCountDown <= 0)
+        {
+            if (state != Spawn_State.Spawning)
+            {
+                StartCoroutine(SpawnWave(waves[nextWave]));
+            }
+        }
+        else
+        {
+            waveCountDown -= Time.deltaTime;
+        }
+
+        WaveCompleted();
+    }
+
+    //Spawn monster after x seconds from the last monster spawned
+    void SpawnAfterLastSpawn()
+    {
+        if (waveCountDown <= 0)
+        {
+            if (state != Spawn_State.Spawning)
+            {
+                StartCoroutine(SpawnWave(waves[nextWave]));
+                waveCountDown = timeBetweenWaves;
+            }
+        }
+        else
+        {
+            waveCountDown -= Time.deltaTime;
+        }
+
+        if (state == Spawn_State.Waiting)
+            WaveCompleted();
+    }
 
     IEnumerator SpawnWave(Wave _wave)
     {
