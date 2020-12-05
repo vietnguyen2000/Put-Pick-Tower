@@ -94,14 +94,13 @@ public class SpawnMonsterManager : MonoBehaviour
             if (state != Spawn_State.Spawning)
             {
                 StartCoroutine(SpawnWave(waves[nextWave]));
+                WaveCompleted();
             }
         }
         else
         {
             waveCountDown -= Time.deltaTime;
         }
-
-        WaveCompleted();
     }
 
     //Spawn monster after x seconds from the last monster spawned
