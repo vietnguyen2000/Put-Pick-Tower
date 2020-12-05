@@ -51,6 +51,9 @@ TagManager:
   - name: Decorations
     uniqueID: 3742977613
     locked: 0
+  - name: PutPickObject
+    uniqueID: 3839457199
+    locked: 0
   - name: Player
     uniqueID: 1746026351
     locked: 0
