@@ -10,4 +10,7 @@ public static class Constants{
     public const string RUNONBAG = "RunOnBag";
     public const float DEFAULTPUTPICKTIME = 0.5f;
     public const string PUTPICKSPEED = "PutPickSpeed";
+
+    public const string NORMALOBJECTLAYER = "NormalObject";
+    public const string PUTPICKOBJECTLAYER = "PutPickObject";
 }
