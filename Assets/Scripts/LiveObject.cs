@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+[RequireComponent(typeof(Rigidbody2D))]
 public class LiveObject : AnimateObject, IStatistic, IDamageable, IMoveable
 {
     public float Hp{
@@ -12,6 +12,7 @@ public class LiveObject : AnimateObject, IStatistic, IDamageable, IMoveable
     }
     public Vector2 Direction{get => rb.velocity.normalized;}
     public Vector2 Velocity{ get => rb.velocity;}
+    
     public Rigidbody2D Rigidbody{
         get => rb;
     }
