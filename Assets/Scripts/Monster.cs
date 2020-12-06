@@ -17,10 +17,4 @@ public class Monster : LiveObject
         }
         position = gameObject.transform.position;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
