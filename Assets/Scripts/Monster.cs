@@ -5,16 +5,32 @@ using UnityEngine;
 public class Monster : LiveObject
 {
     public Transform[] path;
-    public Transform monster;
-
     private Vector2 position;
     // Start is called before the first frame update
-    void Start()
+    private int currentPointIndex=1;
+    protected override void Start()
     {
-        if (path.Length == 0)
-        {
-            Debug.LogError("No path referenced.");
+        base.Start();
+    }
+    protected override void Update()
+    {
+        base.Update();
+        if (currentPointIndex <= path.Length -1) {
+            if (Vector2.Distance(transform.position, path[currentPointIndex].position) < 0.005f) {
+                currentPointIndex +=1;
+                if (currentPointIndex > path.Length-1) return;
+            }
+            Move(path[currentPointIndex].position-transform.position,speed);
         }
-        position = gameObject.transform.position;
+        else{
+            GameObject.Destroy(gameObject);
+        }
+        
+        
+    }
+    public override void Move(Vector2 direction, float speed)
+    // Move object by set velocity to direction*speed and play Walk animation
+    {   
+        rb.velocity = direction.normalized*speed;
     }
 }
