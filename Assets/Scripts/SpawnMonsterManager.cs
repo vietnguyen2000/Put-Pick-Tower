@@ -12,8 +12,10 @@ public class SpawnMonsterManager : MonoBehaviour
     {
         public string name;
         public Transform monster;
+        public GameObject monsterGameObject;
         public int count;
         public float rate;
+        public Transform[] path;
     }
 
     public Wave[] waves;
@@ -106,6 +108,8 @@ public class SpawnMonsterManager : MonoBehaviour
     //Spawn monster after x seconds from the last monster spawned
     void SpawnAfterLastSpawn()
     {
+        if (state == Spawn_State.Waiting)
+            WaveCompleted();
         if (waveCountDown <= 0)
         {
             if (state != Spawn_State.Spawning)
@@ -119,8 +123,6 @@ public class SpawnMonsterManager : MonoBehaviour
             waveCountDown -= Time.deltaTime;
         }
 
-        if (state == Spawn_State.Waiting)
-            WaveCompleted();
     }
 
     IEnumerator SpawnWave(Wave _wave)
@@ -131,7 +133,7 @@ public class SpawnMonsterManager : MonoBehaviour
 
         for (int i = 0; i < _wave.count; i++)
         {
-            SpawnMonster(_wave.monster);
+            SpawnMonster(_wave.monsterGameObject, _wave.path[0], _wave.path);
             yield return new WaitForSeconds(1f / _wave.rate);
         }
 
@@ -140,12 +142,14 @@ public class SpawnMonsterManager : MonoBehaviour
         yield break;
     }
 
-    void SpawnMonster (Transform _monster)
+    void SpawnMonster (GameObject _monster, Transform position, Transform[] path)
     {
         Debug.Log("Spawning Enemy: " + _monster.name);
-
-        Transform _sp = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        Instantiate(_monster, _sp.position, _sp.rotation);
+        
+        GameObject _mons = GameObject.Instantiate(_monster, position.position, new Quaternion());
+        Monster m = _mons.GetComponent<Monster>();
+        m.path = path;
+    
     }
 
     bool MonsterIsAlive()
@@ -166,7 +170,7 @@ public class SpawnMonsterManager : MonoBehaviour
 
     void WaveCompleted()
     {
-        Debug.Log("Wave Completed");
+        Debug.Log("Wave " + nextWave + " Completed");
 
         state = Spawn_State.Counting;
         waveCountDown = timeBetweenWaves;
