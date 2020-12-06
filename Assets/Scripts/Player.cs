@@ -11,13 +11,18 @@ public class Player : LiveObject
     }
     protected bool isPutPicking{
         get{
-            if (putpickTime > 0) return true;
+            if (countPutPickTime > 0) return true;
             else return false;
         }
     }
-    private float putpickTime;
+    public float TimePutPick{
+        get => putpickTime;
+        set => putpickTime = Mathf.Clamp(value,0.2f,0.5f);
+    }
+    [SerializeField]private float putpickTime = 0.5f;
+    [SerializeField]private float countPutPickTime;
     [SerializeField] protected JoystickController controller;
-    [SerializeField] protected Tower pickupableObject;
+    [SerializeField] protected PutPickableObject pickupableObject;
     [Header("Detect Tower")]
     [SerializeField] private float distanceDetect;
     [SerializeField] private float highDetect;
@@ -41,8 +46,8 @@ public class Player : LiveObject
     protected override void Update()
     {
         base.Update();
-        if (putpickTime > 0){
-            putpickTime -= Time.deltaTime;
+        if (countPutPickTime > 0){
+            countPutPickTime -= Time.deltaTime;
         }
         else{
             RaycastHit2D[] hits = Physics2D.BoxCastAll(positionOfRectDetect, sizeOfRectDetect,0,Vector2.zero);
@@ -92,23 +97,22 @@ public class Player : LiveObject
     {
         if (pickupableObject != null){
             Stop();
+            countPutPickTime = putpickTime;
+            pickupableObject.Putdown(putpickTime);
             anim.Play(Constants.PUTDOWN,0);
-            pickupableObject.Anim.Play(Constants.PUTDOWN,0);
-            putpickTime = pickupableObject.TimePutdown;
-            pickupableObject.Putdown();
             pickupableObject = null;
             speed = NORMALSPEED;
         }
         else Debug.Log("NuLL object to put down!!!!");
     }
-    protected void PickObjectUp(Tower o){
+    protected void PickObjectUp(PutPickableObject o){
         if (pickupableObject == null){
             Stop();
             pickupableObject = o;
             pickupableObject.FaceDirection = FaceDirection;
+            countPutPickTime = putpickTime;
             anim.Play(Constants.PICKUP,0);
-            putpickTime = o.TimePickup;
-            o.Pickup(this);
+            o.Pickup(this, putpickTime);
             speed = CARRYSPEED;
         }
         else Debug.Log("Null object to pick up!!!");

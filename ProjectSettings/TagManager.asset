@@ -4,6 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Enemy
   - PutPickable
   layers:
   - Default
@@ -48,9 +49,9 @@ TagManager:
   - name: Player Ground
     uniqueID: 829060989
     locked: 0
-  - name: Decorations
-    uniqueID: 3742977613
+  - name: PutPickObject
+    uniqueID: 3839457199
     locked: 0
-  - name: Player
+  - name: NormalObject
     uniqueID: 1746026351
     locked: 0

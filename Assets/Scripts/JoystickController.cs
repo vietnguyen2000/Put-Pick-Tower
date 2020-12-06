@@ -10,9 +10,9 @@ public class JoystickController : MonoBehaviour
     public bool OnPutPick { get { return joystick.OnJoystickUp || Input.GetButtonDown("PutPick");}}
     [SerializeField] private Joystick joystick;
 
-    private void Update() {
-        if (OnPutPick){
-            Debug.Log(joystick.OnJoystickUp);
-        }
-    }
+    // private void Update() {
+    //     if (OnPutPick){
+    //         Debug.Log(joystick.OnJoystickUp);
+    //     }
+    // }
 }
