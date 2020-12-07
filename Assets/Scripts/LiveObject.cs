@@ -30,9 +30,9 @@ public class LiveObject : AnimateObject, IStatistic, IDamageable, IMoveable
     }
 
     // Update is called once per frame
-    protected virtual void Update()
+    protected override void Update()
     {
-
+        base.Update();
     }
     public virtual void Damage(float damage)
     {

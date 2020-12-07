@@ -404,7 +404,7 @@ GameObject:
   - component: {fileID: 530184270}
   - component: {fileID: 530184272}
   - component: {fileID: 530184271}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: Skin_Blue
   m_TagString: PutPickable
   m_Icon: {fileID: 0}
@@ -538,6 +538,7 @@ GameObject:
   - component: {fileID: 615435027}
   - component: {fileID: 615435026}
   - component: {fileID: 615435025}
+  - component: {fileID: 615435028}
   m_Layer: 14
   m_Name: Decorations
   m_TagString: Untagged
@@ -545,8 +546,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &615435022
-Transform:
+--- !u!224 &615435022
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -559,6 +560,11 @@ Transform:
   m_Father: {fileID: 2009642313}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!483693784 &615435023
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -1849,6 +1855,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &615435028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 615435021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowMaskGraphic: 1
 --- !u!1 &711597093
 GameObject:
   m_ObjectHideFlags: 0
@@ -21225,7 +21244,7 @@ GameObject:
   - component: {fileID: 1236722034}
   - component: {fileID: 1236722033}
   - component: {fileID: 1236722032}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Bridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21690,7 +21709,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281175219}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -21764,6 +21783,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86081aec5653c7747b7f7ed888c98bec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAlwaysVisible: 0
   anim: {fileID: 1141509912}
   hp: 10
   speed: 2
@@ -21971,7 +21991,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1478398790}
   - component: {fileID: 1478398791}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: Collider
   m_TagString: PutPickable
   m_Icon: {fileID: 0}
@@ -22250,7 +22270,7 @@ GameObject:
   - component: {fileID: 1720848375}
   - component: {fileID: 1720848377}
   - component: {fileID: 1720848376}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GroundRule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31360,7 +31380,7 @@ GameObject:
   - component: {fileID: 1824785652}
   - component: {fileID: 1824785651}
   - component: {fileID: 1824785650}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: PlayerGroundRule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33919,7 +33939,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2010580693}
   - component: {fileID: 2010580692}
-  m_Layer: 8
+  m_Layer: 15
   m_Name: 'Tower '
   m_TagString: PutPickable
   m_Icon: {fileID: 0}
@@ -33938,6 +33958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa42d05edbcd48d47b6cbf6b92536c64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAlwaysVisible: 0
   anim: {fileID: 0}
   damage: 0
   attackSpeed: 0

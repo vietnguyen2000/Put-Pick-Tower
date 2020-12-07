@@ -13,15 +13,15 @@ public class PutPickableObject : AnimateObject, IPutPickable{
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        
+        base.Update();
     }
     public void Pickup(Player player, float timePutup)
     {
         anim.SetFloat(Constants.PUTPICKSPEED,Constants.DEFAULTPUTPICKTIME/timePutup);
         transform.parent = player.transform;
-        transform.localPosition = Vector3.zero;
+        transform.localPosition = new Vector3(0,0.0001f,0);
         col.enabled = false;
         anim.Play(Constants.PICKUP,0);
     }

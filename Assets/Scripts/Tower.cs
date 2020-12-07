@@ -15,13 +15,15 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
     // Start is called before the first frame update
     protected override void Start()
     {
+        isAlwaysVisible = true;
         base.Start();
+        shadowVisible.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
-        
+        base.Update();
     }
     public void InflictDamage(IDamageable attackedObject)
     {

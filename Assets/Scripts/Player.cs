@@ -27,6 +27,7 @@ public class Player : LiveObject
     [SerializeField] private float distanceDetect;
     [SerializeField] private float highDetect;
     [SerializeField] private float pady;
+    private SpriteMask visibleMask;
     private Vector2 positionOfRectDetect{
         get {
             return new Vector2(transform.position.x + distanceDetect*(int)FaceDirection/2,
@@ -40,8 +41,16 @@ public class Player : LiveObject
     }
     protected override void Start()
     {
+        isAlwaysVisible = true;
         base.Start();
         if (controller == null) controller = GetComponentInChildren<JoystickController>();
+        visibleMask = shadowVisible.gameObject.AddComponent<SpriteMask>();
+        visibleMask.alphaCutoff = 1;
+    }
+    protected override void LateUpdate()
+    {
+        base.LateUpdate();
+        visibleMask.sprite = shadowVisible.sprite;
     }
     protected override void Update()
     {
