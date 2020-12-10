@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Monster : LiveObject
 {
+    //public enum State {InPool, OnMap};
     public Transform[] path;
+    //public St state = State.InPool;
     private Vector2 position;
     // Start is called before the first frame update
     private int currentPointIndex=1;
@@ -32,5 +34,23 @@ public class Monster : LiveObject
     // Move object by set velocity to direction*speed and play Walk animation
     {   
         rb.velocity = direction.normalized*speed;
+    }
+    public override void ReceiveDamage(float damage)
+    {
+        //Debug.Log("Hp: " + Hp.ToString() + " plus by " + damage.ToString());
+        this.hp -= damage;
+        if (this.hp <= 0f)
+        {
+            transform.position *= 100f;
+            LivingStatus = Status.Dead;
+        }
+    }
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Debug.Log("Hit");
+    }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        //Debug.Log("Hit");
     }
 }

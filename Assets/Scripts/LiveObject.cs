@@ -4,6 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class LiveObject : AnimateObject, IStatistic, IDamageable, IMoveable
 {
+    public enum Status {Alive, Dead};
+    public Status LivingStatus { get; set; }
     public float Hp{
         get => hp;
     }
@@ -38,7 +40,7 @@ public class LiveObject : AnimateObject, IStatistic, IDamageable, IMoveable
     {
 
     }
-    public virtual void Kill()
+    public virtual void ReceiveDamage(float damage)
     {
 
     }

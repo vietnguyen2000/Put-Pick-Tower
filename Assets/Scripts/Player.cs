@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Player : LiveObject
 {
-    const float CARRYSPEED = 3.0f;
-    const float NORMALSPEED = 2.0f;
+    public const float CARRYSPEED = 3.0f;
+    public const float NORMALSPEED = 2.0f;
     public JoystickController Controller{
         get => controller;
     }

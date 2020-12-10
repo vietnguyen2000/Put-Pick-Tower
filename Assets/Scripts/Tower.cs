@@ -4,18 +4,29 @@ using UnityEngine;
 
 public class Tower : PutPickableObject, IAttackable,IUpgradeable
 {
-    public float Damage{
-        get => damage;
-        set => damage = value;}
+
     [SerializeField] private float damage;
     [SerializeField] private float attackSpeed;
+    [SerializeField] private float attackRange;
+    private FiringController firepower;
+    public float Damage
+    {
+        get => damage;
+        set => damage = value;
+    }
     public float AttackSpeed{
         get => attackSpeed;
         set => attackSpeed = value;}
+    public float AttackRange
+    {
+        get => attackRange;
+        set => attackRange = value;
+    }
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
+        firepower = GetComponentInChildren<FiringController>();
     }
 
     // Update is called once per frame
@@ -25,7 +36,7 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
     }
     public void InflictDamage(IDamageable attackedObject)
     {
-
+        attackedObject.ReceiveDamage(Damage);
     }
     public void Upgrade()
     {
