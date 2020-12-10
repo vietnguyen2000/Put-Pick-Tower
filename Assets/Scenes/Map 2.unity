@@ -21675,6 +21675,50 @@ Transform:
   m_Father: {fileID: 89400829}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1448337556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1448337558}
+  - component: {fileID: 1448337557}
+  m_Layer: 0
+  m_Name: Object Pool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1448337557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448337556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f88232c9c4f596942a3f1734bf161ac5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pools: []
+--- !u!4 &1448337558
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448337556}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1478398789
 GameObject:
   m_ObjectHideFlags: 0
@@ -21863,23 +21907,12 @@ MonoBehaviour:
       type: 3}
     monsterGameObject: {fileID: 5962867140748486915, guid: e1adc10bcddcf7b458799af17ff76df5,
       type: 3}
-    count: 5
+    count: 3
     rate: 0.5
     path:
     - {fileID: 1663826735}
     - {fileID: 1177737935}
     option: 0
-  - name: 0
-    monster: {fileID: 753427591165382714, guid: e1adc10bcddcf7b458799af17ff76df5,
-      type: 3}
-    monsterGameObject: {fileID: 5962867140748486915, guid: e1adc10bcddcf7b458799af17ff76df5,
-      type: 3}
-    count: 5
-    rate: 0.5
-    path:
-    - {fileID: 1663826735}
-    - {fileID: 1177737935}
-    option: 1
   - name: 1
     monster: {fileID: 753427591165382714, guid: e1adc10bcddcf7b458799af17ff76df5,
       type: 3}
@@ -21890,54 +21923,6 @@ MonoBehaviour:
     path:
     - {fileID: 1373025443}
     - {fileID: 1065947788}
-    option: 1
-  - name: 2
-    monster: {fileID: 753427591165382714, guid: e1adc10bcddcf7b458799af17ff76df5,
-      type: 3}
-    monsterGameObject: {fileID: 5962867140748486915, guid: e1adc10bcddcf7b458799af17ff76df5,
-      type: 3}
-    count: 5
-    rate: 0.5
-    path:
-    - {fileID: 1583725383}
-    - {fileID: 304246486}
-    - {fileID: 111849508}
-    option: 0
-  - name: 3
-    monster: {fileID: 753427591165382714, guid: e1adc10bcddcf7b458799af17ff76df5,
-      type: 3}
-    monsterGameObject: {fileID: 5962867140748486915, guid: e1adc10bcddcf7b458799af17ff76df5,
-      type: 3}
-    count: 5
-    rate: 0.5
-    path:
-    - {fileID: 561718461}
-    - {fileID: 741288015}
-    - {fileID: 738844051}
-    option: 1
-  - name: 4
-    monster: {fileID: 753427591165382714, guid: e1adc10bcddcf7b458799af17ff76df5,
-      type: 3}
-    monsterGameObject: {fileID: 5962867140748486915, guid: e1adc10bcddcf7b458799af17ff76df5,
-      type: 3}
-    count: 5
-    rate: 0.5
-    path:
-    - {fileID: 2096490430}
-    - {fileID: 1940871394}
-    - {fileID: 811860563}
-    option: 1
-  - name: 
-    monster: {fileID: 753427591165382714, guid: e1adc10bcddcf7b458799af17ff76df5,
-      type: 3}
-    monsterGameObject: {fileID: 5962867140748486915, guid: e1adc10bcddcf7b458799af17ff76df5,
-      type: 3}
-    count: 5
-    rate: 0.5
-    path:
-    - {fileID: 503132872}
-    - {fileID: 996003142}
-    - {fileID: 1739995450}
     option: 0
   spawnPoints:
   - {fileID: 1663826735}
@@ -21945,6 +21930,7 @@ MonoBehaviour:
   timeBetweenWaves: 3
   waveCountDown: 1
   enemyTag: Enemy
+  ObjectPool: {fileID: 1448337557}
 --- !u!4 &1669283458
 Transform:
   m_ObjectHideFlags: 0
@@ -22143,47 +22129,3 @@ Transform:
   m_Father: {fileID: 711597095}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2109341429
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2109341430}
-  - component: {fileID: 2109341431}
-  m_Layer: 0
-  m_Name: ObjectPooler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2109341430
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2109341429}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.8631673, y: 0.6142319, z: -4.711723}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2109341431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2109341429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f88232c9c4f596942a3f1734bf161ac5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pools: []

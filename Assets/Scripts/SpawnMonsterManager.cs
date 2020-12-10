@@ -30,7 +30,7 @@ public class SpawnMonsterManager : MonoBehaviour
 
     private float searchCountDown = 1f;
 
-    private Spawn_State state;
+    private Spawn_State state = Spawn_State.Counting;
 
 
 
@@ -67,7 +67,7 @@ public class SpawnMonsterManager : MonoBehaviour
     {
         if (state == Spawn_State.Waiting)
         {
-            if (!MonsterIsAlive())
+            if (!MonsterIsAlive(waves))
             {
                 WaveCompleted();
             }
@@ -155,14 +155,14 @@ public class SpawnMonsterManager : MonoBehaviour
     
     }
 
-    bool MonsterIsAlive()
+    bool MonsterIsAlive(Wave[] waves)
     {
         searchCountDown -= Time.deltaTime;
 
         if (searchCountDown <= 0)
         {
             searchCountDown = 1f;
-            //Use tag Enemy, if it is other tag then change this part in the code -> Fucking fix this shit. -> Search by gameobject prefab
+            //Find by tag or by gameobjects? If GameObjects then have to use a dictionary
             if (GameObject.FindGameObjectWithTag(enemyTag) == null)
             {
                 return false;
@@ -195,17 +195,18 @@ public class SpawnMonsterManager : MonoBehaviour
     //ObjectPool.pools[i] -> i = 1 type of GameObject
     private void Awake()
     {
-        List<GameObject> temp = new List<GameObject>();
-        ObjectPool = new ObjectPooler();
-        ObjectPool.pools.Capacity = EnemyTypeSize(waves,temp);
-        int[] sized = EnemySize(waves, temp);
-        for (int i = 0; i < ObjectPool.pools.Capacity; i++)
-        {
-            ObjectPool.pools[i].tag = temp[i].name;
-            Debug.Log(temp[i].name);
-            ObjectPool.pools[i].prefab = temp[i];
-            ObjectPool.pools[i].size = sized[i];
-        }
+        Debug.Log("Awake is called");
+        //List<GameObject> temp = new List<GameObject>();
+        //ObjectPool = new ObjectPooler();
+        //ObjectPool.pools.Capacity = EnemyTypeSize(waves,temp);
+        //int[] sized = EnemySize(waves, temp);
+        //for (int i = 0; i < ObjectPool.pools.Capacity; i++)
+        //{
+        //    ObjectPool.pools[i].tag = temp[i].name;
+        //    Debug.Log(temp[i].name);
+        //    ObjectPool.pools[i].prefab = temp[i];
+        //    ObjectPool.pools[i].size = sized[i];
+        //}
 
     }
 

@@ -18,6 +18,13 @@ public class ObjectPooler : MonoBehaviour
 
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
+    public static ObjectPooler SharedInstance;
+
+    private void Awake()
+    {
+        SharedInstance = this;
+    }
+
     void Start()
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
