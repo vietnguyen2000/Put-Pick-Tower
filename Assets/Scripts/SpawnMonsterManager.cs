@@ -148,7 +148,7 @@ public class SpawnMonsterManager : MonoBehaviour
     {
         Debug.Log("Spawning Enemy: " + _monster.name);
         //Need to be fixed to use the ObjectPooler
-        GameObject _mons = GameObject.Instantiate(_monster, position.position, new Quaternion());
+        GameObject _mons = ObjectPooler.SharedInstance.SpawnFromPool(_monster.name, position.position, new Quaternion());
         //
         Monster m = _mons.GetComponent<Monster>();
         m.path = path;
@@ -196,18 +196,18 @@ public class SpawnMonsterManager : MonoBehaviour
     private void Awake()
     {
         Debug.Log("Awake is called");
-        //List<GameObject> temp = new List<GameObject>();
-        //ObjectPool = new ObjectPooler();
-        //ObjectPool.pools.Capacity = EnemyTypeSize(waves,temp);
-        //int[] sized = EnemySize(waves, temp);
-        //for (int i = 0; i < ObjectPool.pools.Capacity; i++)
-        //{
-        //    ObjectPool.pools[i].tag = temp[i].name;
-        //    Debug.Log(temp[i].name);
-        //    ObjectPool.pools[i].prefab = temp[i];
-        //    ObjectPool.pools[i].size = sized[i];
-        //}
-
+        List<GameObject> temp = new List<GameObject>();
+        //Debug.Log(ObjectPooler.SharedInstance.pools.Capacity);
+        ObjectPooler.SharedInstance.pools.Capacity = EnemyTypeSize(waves, temp);
+        //Debug.Log(ObjectPooler.SharedInstance.pools.Capacity);
+        int[] sized = EnemySize(waves, temp);
+        for (int i = 0; i < ObjectPooler.SharedInstance.pools.Capacity; i++)
+        {
+            ObjectPooler.Pool newPool = new ObjectPooler.Pool(temp[i].name, temp[i], sized[i]);
+            ObjectPooler.SharedInstance.pools.Add(newPool);
+            Debug.Log("Count: " + ObjectPooler.SharedInstance.pools.Count);
+            Debug.Log("Enemy pooled: " + temp[i].name);
+        }
     }
 
     //Get the size of List<ObjectPool> ObjectPool.pools

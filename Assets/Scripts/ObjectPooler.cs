@@ -12,18 +12,26 @@ public class ObjectPooler : MonoBehaviour
         public string tag;
         public GameObject prefab;
         public int size;
+
+        public Pool(string tag, GameObject prefab, int size)
+        {
+            this.tag = tag;
+            this.prefab = prefab;
+            this.size = size;
+        }
     }
 
     public List<Pool> pools;
 
     public Dictionary<string, Queue<GameObject>> poolDictionary;
 
+    //Can dc fix
     public static ObjectPooler SharedInstance;
-
     private void Awake()
     {
         SharedInstance = this;
     }
+    //
 
     void Start()
     {
