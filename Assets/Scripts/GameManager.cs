@@ -35,20 +35,32 @@ public class GameManager : MonoBehaviour
             TowerIcon.sprite = towerIcon;
         }
     }
+    [System.Serializable]
+    public class WinMenu{
+        public GameObject Canvas;
+        public Text totalTime;
+        public Text totalCoins;
+        public Text totalCoinsExtra;
+        public Text totalpoints;
+    }
     public GUIStats guiStats;
+    public WinMenu winMenu;
     void Awake()
     {
         player.CollectCoin = CollectCoin;
     }
     public void changeSFX(Toggle toggle){
         bool isOn = toggle.isOn;
-        
+
     }
     public void changeSound(Toggle toggle){
         bool isOn = toggle.isOn;
 
     }
     public void exit(){
+
+    }
+    public void win(){
 
     }
 
