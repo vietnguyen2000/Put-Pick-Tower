@@ -4,8 +4,24 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class LiveObject : AnimateObject, IStatistic, IDamageable, IMoveable
 {
+    public float MaxHp{
+        get => maxHp;
+        set{
+            if (value >= maxHp){
+                hp += value - maxHp;
+                maxHp = value;
+            }
+            else{
+                maxHp = value;
+                if (hp>maxHp){
+                    hp = maxHp;
+                }
+            }
+        }
+    }
     public float Hp{
         get => hp;
+        set => hp = Mathf.Clamp(value,0,maxHp);
     }
     public float Speed{
         get => speed;
@@ -16,7 +32,7 @@ public class LiveObject : AnimateObject, IStatistic, IDamageable, IMoveable
     public Rigidbody2D Rigidbody{
         get => rb;
     }
-
+    [SerializeField] protected float maxHp;        
     [SerializeField] protected float hp;        
     [SerializeField] protected float speed;    
     [SerializeField] protected Rigidbody2D rb;

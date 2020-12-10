@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     public Tower currentTower;
     public Player player;
     public SpawnMonsterManager spawnMonsterManager;
-    private int numOfCoins;
+    public UpgradeStage UpgradeStage;
+    public int numOfCoins;
     [System.Serializable]
     public class GUIStats{
         public Text PlayerHP;
@@ -33,6 +34,9 @@ public class GameManager : MonoBehaviour
             TowerAttackSpeed.text = attackSpeed.ToString("F1");
             TowerRange.text = range.ToString("F1");
             TowerIcon.sprite = towerIcon;
+        }
+        public void UpdateCoin(int coins, int require){
+            Coin.text = coins.ToString() + "/" + require.ToString();
         }
     }
     [System.Serializable]
@@ -66,12 +70,12 @@ public class GameManager : MonoBehaviour
 
     void CollectCoin(){
         numOfCoins +=1;
-        guiStats.Coin.text = numOfCoins.ToString();
     }
     // Update is called once per frame
     void Update()
     {
         guiStats.UpdatePlayerStats(player.Hp,player.Speed,player.TimePutPick);
         guiStats.UpdateTowerStats(currentTower.towerIcon,currentTower.Damage,currentTower.AttackSpeed,currentTower.Range);
+        guiStats.UpdateCoin(numOfCoins,UpgradeStage.CoinRequire);
     }
 }

@@ -13,6 +13,10 @@ public class MyObject : MonoBehaviour, ISpriteRenderer, ICollider
     public SpriteRenderer SpriteRenderer{
         get => spriteRenderer;
     }
+    public GameManager GameManager{
+        get=>gameManager;
+    }
+    protected GameManager gameManager;
     public bool isAlwaysVisible = false;
     protected Collider2D col;
     protected SpriteRenderer spriteRenderer;
@@ -32,6 +36,7 @@ public class MyObject : MonoBehaviour, ISpriteRenderer, ICollider
     }
     protected SpriteRenderer shadowVisible;
     protected virtual  void Start() {
+        gameManager = (GameManager)FindObjectOfType<GameManager>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         col = GetComponentInChildren<Collider2D>();
         if (isAlwaysVisible){

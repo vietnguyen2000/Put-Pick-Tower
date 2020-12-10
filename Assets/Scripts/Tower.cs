@@ -17,6 +17,7 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
     }
     private float range=1f;
     public Sprite towerIcon;
+    private CapsuleCollider2D capsuleCol;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -24,12 +25,27 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
         base.Start();
         shadowVisible.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
         towerIcon = spriteRenderer.sprite;
+        capsuleCol = GetComponentInChildren<CapsuleCollider2D>();
     }
 
+    
     // Update is called once per frame
     protected override void Update()
     {
         base.Update();
+
+    }
+    protected virtual void FixedUpdate(){
+        if (!isOnBag){
+            RaycastHit2D[] hits = Physics2D.BoxCastAll((Vector2)transform.position+capsuleCol.offset,capsuleCol.size,0,Vector2.zero);
+            foreach(RaycastHit2D hit in hits){
+                if(hit.transform.tag == "UpgradeStage"){
+                    Debug.Log("asdasd");
+                    UpgradeStage x = hit.collider.gameObject.GetComponentInParent<UpgradeStage>();
+                    x.Activate(gameManager.player,this);
+                }
+            }
+        }
     }
     public void InflictDamage(IDamageable attackedObject)
     {
@@ -39,4 +55,5 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
     {
 
     }
+
 }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PutPickableObject : AnimateObject, IPutPickable{
 
-    const float distancePutdown = 0.5f;
+    const float DISTANCEPUTDOWN = 0.5f;
+    protected bool isOnBag;
     
     // Start is called before the first frame update
     protected override void Start()
@@ -24,6 +25,7 @@ public class PutPickableObject : AnimateObject, IPutPickable{
         transform.localPosition = new Vector3(0,0.0001f,0);
         col.enabled = false;
         anim.Play(Constants.PICKUP,0);
+        isOnBag = true;
     }
     public void Putdown(float timePutdown)
     {
@@ -34,9 +36,10 @@ public class PutPickableObject : AnimateObject, IPutPickable{
     }
     IEnumerator PutdownDelay(){
         yield return new WaitForSeconds(Constants.DEFAULTPUTPICKTIME/anim.GetFloat(Constants.PUTPICKSPEED));
-        transform.localPosition = new Vector3(distancePutdown,0f,0f) ;
+        transform.localPosition = new Vector3(DISTANCEPUTDOWN,0f,0f) ;
         transform.parent = null;
         col.enabled = true;
+        isOnBag = false;
         yield return null;
     }
 }

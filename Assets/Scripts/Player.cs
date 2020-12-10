@@ -5,8 +5,8 @@ using System;
 public class Player : LiveObject
 {
     public Action CollectCoin;
-    const float CARRYSPEED = 3.0f;
-    const float NORMALSPEED = 2.0f;
+    public float CarrySpeed = 3.0f;
+    public float NormalSpeed = 2.0f;
     public JoystickController Controller{
         get => controller;
     }
@@ -111,11 +111,11 @@ public class Player : LiveObject
             pickupableObject.Putdown(putpickTime);
             anim.Play(Constants.PUTDOWN,0);
             pickupableObject = null;
-            speed = NORMALSPEED;
+            speed = NormalSpeed;
         }
         else Debug.Log("NuLL object to put down!!!!");
     }
-    protected void PickObjectUp(PutPickableObject o){
+    public void PickObjectUp(PutPickableObject o){
         if (pickupableObject == null){
             Stop();
             pickupableObject = o;
@@ -123,14 +123,11 @@ public class Player : LiveObject
             countPutPickTime = putpickTime;
             anim.Play(Constants.PICKUP,0);
             o.Pickup(this, putpickTime);
-            speed = CARRYSPEED;
+            speed = CarrySpeed;
         }
         else Debug.Log("Null object to pick up!!!");
         
 
-    }
-    private void OnTriggerStay2D(Collider2D other) {
-        
     }
     
     private void OnDrawGizmosSelected() {
