@@ -51,6 +51,9 @@ public class GameManager : MonoBehaviour
     public WinMenu winMenu;
     void Awake()
     {
+        player = (Player)FindObjectOfType<Player>();
+        listOfTower = FindObjectsOfType<Tower>();
+        currentTower = listOfTower[0];
         player.CollectCoin = CollectCoin;
     }
     public void changeSFX(Toggle toggle){

@@ -45,11 +45,13 @@ public class UpgradeStage : MyObject
             if (_AttackRangelevel==maxAttackRange) buttonAttackRange.interactable = false;
             currentTimeScale = Time.timeScale;
             Time.timeScale = 0f;
+            Debug.Log("set time scale");
             isActive = true;
         }
     }
     public void Deactivate(){
         UpgradeCanvas.gameObject.SetActive(false);
+        Debug.Log("reset time scale");
         isActive = false;
         Time.timeScale = currentTimeScale;
         CurrentPlayer.PickObjectUp(CurrentTower);
