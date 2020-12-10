@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
     {
         player = (Player)FindObjectOfType<Player>();
         listOfTower = FindObjectsOfType<Tower>();
+        UpgradeStage= FindObjectOfType<UpgradeStage>();
         currentTower = listOfTower[0];
         player.CollectCoin = CollectCoin;
     }
