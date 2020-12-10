@@ -40,6 +40,17 @@ public class GameManager : MonoBehaviour
     {
         player.CollectCoin = CollectCoin;
     }
+    public void changeSFX(Toggle toggle){
+        bool isOn = toggle.isOn;
+        
+    }
+    public void changeSound(Toggle toggle){
+        bool isOn = toggle.isOn;
+
+    }
+    public void exit(){
+
+    }
 
     void CollectCoin(){
         numOfCoins +=1;

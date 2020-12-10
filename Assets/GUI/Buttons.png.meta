@@ -1,52 +1,25 @@
 fileFormatVersion: 2
-guid: efd52687b7ce1dd4297fc7473fb3098e
+guid: d10e4c07dbf7cce4c8451db428a079ab
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6857276005833881615
-    second: IconGUI_0
+      213: 8894201953851282084
+    second: Buttons_0
   - first:
-      213: 3374223986997987275
-    second: IconGUI_1
+      213: -7887183776597284541
+    second: Buttons_0
   - first:
-      213: 3901837653925595076
-    second: IconGUI_0
+      213: 7664807735657788756
+    second: Buttons_1
   - first:
-      213: -5846278253245582503
-    second: IconGUI_1
+      213: -6412192284368429627
+    second: Buttons_1
   - first:
-      213: -3344026289281461349
-    second: IconGUI_2
+      213: -5402412272178277761
+    second: Buttons_2
   - first:
-      213: 2736423083315625937
-    second: IconGUI_2
-  - first:
-      213: 3183105354315452153
-    second: IconGUI_3
-  - first:
-      213: 5142206592812710851
-    second: IconGUI_3
-  - first:
-      213: -6545652055248005667
-    second: IconGUI_4
-  - first:
-      213: -5083362054231862244
-    second: IconGUI_5
-  - first:
-      213: -7672023775207942222
-    second: IconGUI_6
-  - first:
-      213: 740257663470607225
-    second: IconGUI_4
-  - first:
-      213: 3822493965890449754
-    second: IconGUI_5
-  - first:
-      213: 1764877541509773726
-    second: IconGUI_6
-  - first:
-      213: -1649567036664968316
-    second: IconGUI_7
+      213: 2013261503205373015
+    second: Buttons_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -143,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IconGUI_0
+      name: Buttons_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 48
-        width: 16
-        height: 16
+        x: 2
+        y: 50
+        width: 12
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c78a756cac162630800000000000000
-      internalID: 3901837653925595076
+      spriteID: 349e1bda4281b8290800000000000000
+      internalID: -7887183776597284541
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IconGUI_1
+      name: Buttons_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 48
-        width: 16
-        height: 16
+        x: 18
+        y: 50
+        width: 27
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,20 +151,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 953b43157e8dddea0800000000000000
-      internalID: -5846278253245582503
+      spriteID: 5cd18b237115307a0800000000000000
+      internalID: -6412192284368429627
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IconGUI_2
+      name: Buttons_2
       rect:
         serializedVersion: 2
-        x: 32
-        y: 48
-        width: 16
-        height: 16
+        x: 2
+        y: 34
+        width: 12
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -199,20 +172,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1dff43ccb4ab9f520800000000000000
-      internalID: 2736423083315625937
+      spriteID: f725a9269a6c605b0800000000000000
+      internalID: -5402412272178277761
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IconGUI_3
+      name: Buttons_3
       rect:
         serializedVersion: 2
-        x: 48
-        y: 48
-        width: 16
-        height: 16
+        x: 19
+        y: 36
+        width: 9
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -220,71 +193,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3cbf54ec6a9cc5740800000000000000
-      internalID: 5142206592812710851
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IconGUI_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 97b1d614c6ce54a00800000000000000
-      internalID: 740257663470607225
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IconGUI_5
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a5179f0720a3c0530800000000000000
-      internalID: 3822493965890449754
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: IconGUI_6
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 32
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e9931c5f5ca1e7810800000000000000
-      internalID: 1764877541509773726
+      spriteID: 7547682abaa80fb10800000000000000
+      internalID: 2013261503205373015
       vertices: []
       indices: 
       edges: []
