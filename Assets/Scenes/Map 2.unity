@@ -208,6 +208,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tower (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7194752828784001883, guid: dada7234a190c134e8fb8299c405948f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7194752828784001884, guid: dada7234a190c134e8fb8299c405948f,
         type: 3}
       propertyPath: damage
@@ -273,6 +278,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7194752830023430110, guid: dada7234a190c134e8fb8299c405948f,
+        type: 3}
+      propertyPath: endPoint
+      value: 
+      objectReference: {fileID: 1831590076}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dada7234a190c134e8fb8299c405948f, type: 3}
 --- !u!1 &184718907
@@ -22065,7 +22075,7 @@ PrefabInstance:
     - target: {fileID: 7194752828784001884, guid: dada7234a190c134e8fb8299c405948f,
         type: 3}
       propertyPath: damage
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7194752828784001884, guid: dada7234a190c134e8fb8299c405948f,
         type: 3}
@@ -22127,10 +22137,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7194752828832421929, guid: dada7234a190c134e8fb8299c405948f,
+        type: 3}
+      propertyPath: m_Name
+      value: Demo Hitbox
+      objectReference: {fileID: 0}
     - target: {fileID: 7194752830023430110, guid: dada7234a190c134e8fb8299c405948f,
         type: 3}
       propertyPath: endPoint
       value: 
       objectReference: {fileID: 1831590076}
+    - target: {fileID: 7194752830023430110, guid: dada7234a190c134e8fb8299c405948f,
+        type: 3}
+      propertyPath: projectileSpeed
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dada7234a190c134e8fb8299c405948f, type: 3}

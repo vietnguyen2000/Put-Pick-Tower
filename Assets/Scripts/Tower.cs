@@ -8,7 +8,6 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
     [SerializeField] private float damage;
     [SerializeField] private float attackSpeed;
     [SerializeField] private float attackRange;
-    private FiringController firepower;
     public float Damage
     {
         get => damage;
@@ -26,7 +25,6 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
     protected override void Start()
     {
         base.Start();
-        firepower = GetComponentInChildren<FiringController>();
     }
 
     // Update is called once per frame

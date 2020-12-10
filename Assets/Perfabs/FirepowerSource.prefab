@@ -128,7 +128,8 @@ MonoBehaviour:
   pfProjectile: {fileID: 2171862727146511497, guid: 6b0681701d2b9ab47a284e4b6499a239,
     type: 3}
   poolingCoefficient: 5
-  projectileSpeed: 1
+  projectileSpeed: 6
   monsterLayer:
     serializedVersion: 2
     m_Bits: 2048
+  endPoint: {fileID: 0}

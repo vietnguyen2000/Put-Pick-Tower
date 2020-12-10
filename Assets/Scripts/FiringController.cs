@@ -5,73 +5,66 @@ using UnityEngine;
 
 public class FiringController : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField] Transform pfProjectile;    // Prefab of the projectile
     [SerializeField] float poolingCoefficient;  // Coefficient of the projectile pool
     [SerializeField] float projectileSpeed; // Moving speed of the projectile
-    [SerializeField] LayerMask monsterLayer;
-    [SerializeField] Transform endPoint;
-    public Vector3 poolPosition { get; set; }   // Position of the pool
-    public Queue<Transform> projectilePool { get; set; }    // A queue contains all the created projectiles 
+    [SerializeField] LayerMask monsterLayer; // Monster layer to detect monster around its attack range
+    [SerializeField] Transform endPoint; // The point to which all monsters are coming
+    public Vector3 poolPosition { get; set; }   // Position of the projectile pool
+    public Queue<Transform> projectilePool { get; set; }    // A queue contains all the projectile pool 
 
-    Queue<GameObject> detectedEnemies;
-    int numberOfProjectiles;
+
+    int numberOfProjectiles; // number of projectile in pool
     Tower tower;
-    Player player;
-    float cooldown; // Delay between attacks
-    int projectileNeeded; // Calculate the projectile needed to kill a monster
+    float cooldown; // Delay between attacks, equal to 1/AttackSpeed
+    int projectileNeeded; // Calculate the projectile needed to kill a monster, equal to Hp/Damage
     LiveObject target;
-    //Vector2 firepointPos, enemyPos;
-    void Awake()
+    void Start()
     {
         tower = GetComponentInParent<Tower>();
-        player = FindObjectOfType<Player>();
         projectilePool = new Queue<Transform>();
-        detectedEnemies = new Queue<GameObject>();
         poolPosition = transform.position * 100f;
         cooldown = 0;
 
         SetUpProjectilePool();
-
-        //firepointPos = new Vector2(transform.position.x, transform.position.y);
-        //enemyPos = new Vector2(0, 0);
     }
     // Update is called once per frame
     void Update()
     {
         if (tower.PutPickStatus == PutPickableObject.PutPickState.Put)
             ScanAndAttack();
+        else
+            target = null;
+    }
+    void SetUpProjectilePool()
+    {
+        numberOfProjectiles = (int)(tower.AttackSpeed * poolingCoefficient);
+
+        for (int i = 0; i < numberOfProjectiles; i++)
+        {
+            projectilePool.Enqueue(Instantiate(pfProjectile, poolPosition, Quaternion.identity));
+        }
     }
     void ScanAndAttack()
     {
         // If there's no target at the moment
+        // Detect all monsters in attack range and attack the one which is closest to the end point.
         if (target == null || projectileNeeded <= 0 || target.LivingStatus == LiveObject.Status.Dead)
         {
-
-            /*            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, tower.AttackRange, monsterLayer);
-                        colliders.OrderBy(x => Vector3.Distance(endPoint.position, x.transform.position));
-                        for (int i = 0; i < colliders.Length; i++)
-                        {
-                            if (colliders[i].gameObject.GetComponentInParent<Monster>() != null)
-                            {
-                                target = colliders[i].gameObject.GetComponentInParent<Monster>();
-                                //Debug.Log("Aimed");
-                                break;
-                            }
-                        }*/
-
-            // Then scan for a target, we can use the OverlapCircleAll and sort to target the one that is
-            // closest to the end point.
-
-            Collider2D collider = Physics2D.OverlapCircle(transform.position, tower.AttackRange, monsterLayer);
-
-            if (collider != null)
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, tower.AttackRange, monsterLayer);
+            // Order by distance to the end point
+            var orderedColliders = colliders.OrderBy(x => Vector3.Distance(endPoint.position, x.transform.position)).ToArray();
+            
+            for (int i = 0; i < orderedColliders.Length; i++)
             {
-                target = collider.gameObject.GetComponentInParent<Monster>();
-                if (target != null)
-                    projectileNeeded = (int)Mathf.Ceil(target.Hp / tower.Damage);
+                if (orderedColliders[i].gameObject.GetComponentInParent<Monster>() != null)
+                {
+                    target = orderedColliders[i].gameObject.GetComponentInParent<Monster>();
+                    if (target != null)
+                        projectileNeeded = (int)Mathf.Ceil(target.Hp / tower.Damage);
+                    break;
+                }
             }
-
         }
         else
         {
@@ -81,40 +74,31 @@ public class FiringController : MonoBehaviour
             }
             else
             {
-                Shoot(target);
+                Attack(target);
                 projectileNeeded--;
+                // After attacking the target with enough projectiles or the target is out of attack range, stop attacking
                 if (projectileNeeded <= 0 || Vector2.Distance(new Vector2(transform.position.x, transform.position.y),
                     new Vector2(target.transform.position.x, target.transform.position.y)) > tower.AttackRange)
+                {
                     target = null;
+                }
                 cooldown = 1 / tower.AttackSpeed;
             }
         }
     }
-    void SetUpProjectilePool()
+    void Attack(LiveObject target)
     {
-        numberOfProjectiles = (int)(tower.AttackSpeed * poolingCoefficient);
-        //numberOfProjectiles = 5;
-
-        for (int i = 0; i < numberOfProjectiles; i++)
-        {
-            projectilePool.Enqueue(Instantiate(pfProjectile, poolPosition, Quaternion.identity));
-        }
-    }
-    /*Transform CreateNewProjectile()
-    {
-        return Instantiate(pfProjectile, poolPosition, Quaternion.identity);
-    }*/
-    void Shoot(LiveObject target)
-    {
+        // In case we run out of projectiles in pool :))
         if (projectilePool.Count <= 0)
             projectilePool.Enqueue(Instantiate(pfProjectile, poolPosition, Quaternion.identity));
 
+        // Get projectile from the object pool and set its position to the firing point
         Transform projectile = projectilePool.Dequeue();
         projectile.position = transform.position;
         projectile.GetComponent<Projectile>().SetupTarget(this, target, projectileSpeed);
 
-        cooldown = 1f;
     }
+    // When get informed that the projectile has reached the target
     public void TargetReached(LiveObject target)
     {
         tower.InflictDamage(target);

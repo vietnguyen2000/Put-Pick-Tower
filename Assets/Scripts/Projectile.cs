@@ -5,19 +5,13 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     // Start is called before the first frame update
-    LiveObject target;
-    float projectileSpeed;
-    Rigidbody2D rb;
-    FiringController source;
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-    }
+    LiveObject target; // target to which the projectile will fly
+    float projectileSpeed; // moving speed of the projectile
+    FiringController source; // The source which sends the projectile to the target
     public void SetupTarget(FiringController source, LiveObject tg, float speed)
     {
         this.target = tg;
         this.source = source;
-        //transform.eulerAngles = new Vector3(0, 0)
         projectileSpeed = speed;
     }
 
@@ -26,38 +20,32 @@ public class Projectile : MonoBehaviour
     {
         if (target != null)
         {
-
+            // Only move toward the target if it's alive
             if (target.LivingStatus == LiveObject.Status.Alive)
             {
                 Vector3 dir = (target.transform.position - transform.position).normalized;
-                transform.position = Vector3.MoveTowards(transform.position, target.transform.position, 0.1f);
+                transform.position = Vector3.MoveTowards(transform.position, target.transform.position, projectileSpeed*Time.deltaTime);
                 //rb.velocity = dir * projectileSpeed;
+
+                // If the projectile reaches the target
                 if (Vector2.Distance(new Vector2(transform.position.x, transform.position.y),
                     new Vector2(target.transform.position.x, target.transform.position.y)) <= 0.1f)
                 {
-                    //Debug.Log("Reach target");
-                    transform.position = source.poolPosition;
+                    // Bring the projectile back to the pool
+                    transform.position = source.poolPosition; 
                     source.projectilePool.Enqueue(gameObject.transform);
+                    // Inform FiringController that it has reached the target
                     source.TargetReached(target);
                 }
             }
             else
             {
+                // Bring the projectile back to the pool
                 target = null;
                 transform.position = source.poolPosition;
                 source.projectilePool.Enqueue(gameObject.transform);
             }
         }
 
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //Debug.Log("Hit enemy" + collision.gameObject.name);
-        target = null;
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        
     }
 }
