@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class Player : LiveObject
 {
+    public Action CollectCoin;
     const float CARRYSPEED = 3.0f;
     const float NORMALSPEED = 2.0f;
     public JoystickController Controller{
