@@ -16,6 +16,7 @@ public class SpawnMonsterManager : MonoBehaviour
         public int count;
         public float rate;
         public Transform[] path;
+        public Option option = Option.MonsterDead;
     }
 
     public Wave[] waves;
@@ -30,7 +31,8 @@ public class SpawnMonsterManager : MonoBehaviour
     private float searchCountDown = 1f;
 
     private Spawn_State state;
-    public Option option = Option.MonsterDead;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -45,7 +47,7 @@ public class SpawnMonsterManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(option)
+        switch(waves[nextWave].option)
         {
             case Option.MonsterDead:
                 SpawnAfterMonsterDead();
@@ -145,8 +147,9 @@ public class SpawnMonsterManager : MonoBehaviour
     void SpawnMonster (GameObject _monster, Transform position, Transform[] path)
     {
         Debug.Log("Spawning Enemy: " + _monster.name);
-        
+        //Need to be fixed to use the ObjectPooler
         GameObject _mons = GameObject.Instantiate(_monster, position.position, new Quaternion());
+        //
         Monster m = _mons.GetComponent<Monster>();
         m.path = path;
     
@@ -159,7 +162,7 @@ public class SpawnMonsterManager : MonoBehaviour
         if (searchCountDown <= 0)
         {
             searchCountDown = 1f;
-            //Use tag Enemy, if it is other tag then change this part in the code
+            //Use tag Enemy, if it is other tag then change this part in the code -> Fucking fix this shit. -> Search by gameobject prefab
             if (GameObject.FindGameObjectWithTag(enemyTag) == null)
             {
                 return false;
@@ -184,4 +187,59 @@ public class SpawnMonsterManager : MonoBehaviour
             nextWave++;
 
     }
+
+    //Code for ObjectPool
+
+    public ObjectPooler ObjectPool;
+
+    //ObjectPool.pools[i] -> i = 1 type of GameObject
+    private void Awake()
+    {
+        List<GameObject> temp = new List<GameObject>();
+        ObjectPool = new ObjectPooler();
+        ObjectPool.pools.Capacity = EnemyTypeSize(waves,temp);
+        int[] sized = EnemySize(waves, temp);
+        for (int i = 0; i < ObjectPool.pools.Capacity; i++)
+        {
+            ObjectPool.pools[i].tag = temp[i].name;
+            Debug.Log(temp[i].name);
+            ObjectPool.pools[i].prefab = temp[i];
+            ObjectPool.pools[i].size = sized[i];
+        }
+
+    }
+
+    //Get the size of List<ObjectPool> ObjectPool.pools
+    //Count each type of GameObject
+    private int EnemyTypeSize(Wave[] waves, List<GameObject> temp)
+    {
+        if (waves[0].monsterGameObject != null)
+        {
+            for (int i = 0; i < waves.Length;i++)
+            {
+                if (!temp.Contains(waves[i].monsterGameObject))
+                {
+                    temp.Add(waves[i].monsterGameObject);
+                }
+            }
+            return temp.Count;
+        }
+        return 0;
+    }
+
+    //Get amount for each GameObject
+    private int[] EnemySize(Wave[] waves, List<GameObject> temp)
+    {
+        int[] sized = new int[temp.Count];
+        for (int i = 0; i< temp.Count;i++)
+        {
+            for (int j = 0; j < waves.Length; j++)
+            {
+                if (temp[i] == waves[j].monsterGameObject) 
+                    sized[i] += waves[j].count;
+            }
+        }
+        return sized;
+    }
+
 }
