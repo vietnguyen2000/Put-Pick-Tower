@@ -34,7 +34,7 @@ public class Monster : LiveObject
             Move(path[currentPointIndex].position-transform.position,speed);
         }
         else{
-            GameObject.Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         
         
