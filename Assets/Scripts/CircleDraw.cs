@@ -10,7 +10,7 @@ public class CircleDraw : MonoBehaviour
     public float width = 0.05f;
     public Color color;
     public float radius = 2f;
-    LineRenderer lineRenderer;
+    public LineRenderer lineRenderer;
  
     void Awake()
     {

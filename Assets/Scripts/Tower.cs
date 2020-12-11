@@ -28,7 +28,14 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
         get => attackRange;
         set => attackRange = value;
     }
-    private  LineRenderer circleDrawRange;
+    private  CircleDraw circleDrawRange;
+    [Header("Maximum level")]
+    public float[] DamageLevel;
+    public float[] AttackSpeedLevel;
+    public float[] AttackRangeLevel;
+    public int currentDamageLevel=0,
+                currentAttackSpeedLevel=0,
+                currentAttackRangeLevel=0;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -37,7 +44,7 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
         shadowVisible.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
         towerIcon = spriteRenderer.sprite;
         capsuleCol = GetComponentInChildren<CapsuleCollider2D>();
-        circleDrawRange = GetComponentInChildren<LineRenderer>();
+        circleDrawRange = GetComponentInChildren<CircleDraw>();
     }
 
     
@@ -45,7 +52,7 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
     protected override void Update()
     {
         base.Update();
-
+        circleDrawRange.radius = attackRange;
     }
     protected virtual void FixedUpdate(){
         if (PutPickStatus== PutPickState.Put){
@@ -71,13 +78,25 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
     {
         base.Pickup(player, timePutup);
         firePowerSource.gameObject.SetActive(false);
-        circleDrawRange.enabled = false;
+        circleDrawRange.lineRenderer.enabled = false;
     }
     protected override void afterPutdown()
     {
         base.afterPutdown();
         firePowerSource.gameObject.SetActive(true);
-        circleDrawRange.enabled = true;
+        circleDrawRange.lineRenderer.enabled = true;
+    }
+    public void UpgradeDamage(){
+        currentDamageLevel+=1;
+        Damage = DamageLevel[currentDamageLevel];
+    }
+    public void UpgradeAttackRate(){
+        currentAttackSpeedLevel+=1;
+        AttackSpeed = AttackSpeedLevel[currentAttackSpeedLevel];
+    }
+    public void UpgradeAttackRange(){
+        currentAttackRangeLevel+=1;
+        AttackRange = AttackRangeLevel[currentAttackRangeLevel];
     }
     private void OnDrawGizmosSelected() {
         Gizmos.DrawWireSphere(transform.position,AttackRange);

@@ -5,7 +5,9 @@ using System;
 public class Player : LiveObject
 {
     public Action CollectCoin;
-    public float CarrySpeed = 3.0f;
+    public float CarrySpeed{
+        get => NormalSpeed*1.5f;
+    }
     public float NormalSpeed = 2.0f;
     public JoystickController Controller{
         get => controller;
@@ -40,6 +42,13 @@ public class Player : LiveObject
             return new Vector2(distanceDetect,highDetect);
         }
     }
+    [Header("Maximum level")]
+    public float[] HPLevel;
+    public float[] SpeedLevel;
+    public float[] PutpickSpeedLevel;
+    public int currentHPLevel=0,
+                currentSpeedLevel=0,
+                currentPutpickSpeedLevel=0;
     protected override void Start()
     {
         isAlwaysVisible = true;
@@ -129,7 +138,18 @@ public class Player : LiveObject
         
 
     }
-    
+    public void UpgradeHP(){
+        currentHPLevel+=1;
+        MaxHp = HPLevel[currentHPLevel];
+    }
+    public void UpgradeSpeed(){
+        currentSpeedLevel+=1;
+        NormalSpeed = SpeedLevel[currentSpeedLevel];
+    }
+    public void UpgradePutpickSpeed(){
+        currentPutpickSpeedLevel+=1;
+        TimePutPick = PutpickSpeedLevel[currentPutpickSpeedLevel];
+    }
     private void OnDrawGizmosSelected() {
         Gizmos.DrawWireCube(new Vector3(positionOfRectDetect.x,positionOfRectDetect.y, transform.position.z),
                                         new Vector3(sizeOfRectDetect.x,sizeOfRectDetect.y,0));

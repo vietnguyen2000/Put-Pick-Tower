@@ -155,7 +155,6 @@ MonoBehaviour:
   hp: 10
   speed: 2
   rb: {fileID: 7515945263734378549}
-  CarrySpeed: 3
   NormalSpeed: 2
   putpickTime: 0.5
   countPutPickTime: 0
@@ -164,6 +163,26 @@ MonoBehaviour:
   distanceDetect: 0.5
   highDetect: 0.35
   pady: 0.1
+  HPLevel:
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  SpeedLevel:
+  - 2
+  - 2.3
+  - 2.6
+  - 3
+  PutpickSpeedLevel:
+  - 0.5
+  - 0.4
+  - 0.3
+  - 0.2
+  currentHPLevel: 0
+  currentSpeedLevel: 0
+  currentPutpickSpeedLevel: 0
 --- !u!50 &7515945263734378549
 Rigidbody2D:
   serializedVersion: 4

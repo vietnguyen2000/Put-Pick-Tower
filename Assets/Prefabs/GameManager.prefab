@@ -3544,8 +3544,8 @@ MonoBehaviour:
     PlayerSpeed: {fileID: 7779089747194235431}
     PlayerPutpickSpeed: {fileID: 7779089746326312366}
     TowerDamage: {fileID: 7779089747067705256}
-    TowerAttackSpeed: {fileID: 7779089745680089941}
-    TowerRange: {fileID: 7779089747174225421}
+    TowerAttackSpeed: {fileID: 7779089747174225421}
+    TowerRange: {fileID: 7779089745680089941}
     Coin: {fileID: 7779089746634281305}
     Round: {fileID: 7779089746171885976}
     PlayerIcon: {fileID: 7779089745669106134}
