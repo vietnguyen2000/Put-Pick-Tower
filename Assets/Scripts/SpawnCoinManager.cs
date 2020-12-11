@@ -7,11 +7,9 @@ public class SpawnCoinManager : MonoBehaviour
 {
 
     // Start is called before the first frame update
-    public Tilemap tileMap;
+    [HideInInspector]public Tilemap tileMap;
 
-    public List<Vector3> availablePlaces;
-
-    public List<Vector3> CoinPos;
+    [HideInInspector]public List<Vector3> availablePlaces;
 
     public GameObject coinObject;
 
@@ -53,9 +51,6 @@ public class SpawnCoinManager : MonoBehaviour
             coins[i] = GameObject.Instantiate(coinObject).GetComponent<Coin>();
             coins[i].availablePlace = availablePlaces.ToArray();
         }
-
-        CoinPos = new List<Vector3>();
-
     }
 
     // Update is called once per frame
