@@ -8,11 +8,14 @@ public class Projectile : MyObject
     LiveObject target; // target to which the projectile will fly
     float projectileSpeed; // moving speed of the projectile
     FiringController source; // The source which sends the projectile to the target
+    public ParticleSystem die;
     public void SetupTarget(FiringController source, LiveObject tg, float speed)
     {
         this.target = tg;
         this.source = source;
         projectileSpeed = speed;
+        die.transform.parent = transform;
+        die.transform.localPosition = Vector3.zero;
     }
 
     // Update is called once per frame
@@ -33,8 +36,7 @@ public class Projectile : MyObject
                     new Vector2(target.transform.position.x, target.transform.position.y)) <= 0.1f)
                 {
                     // Bring the projectile back to the pool
-                    gameObject.SetActive(false);
-                    source.projectilePool.Enqueue(gameObject.transform);
+                    breakProjecttile();
                     // Inform FiringController that it has reached the target
                     source.TargetReached(target);
                 }
@@ -43,10 +45,15 @@ public class Projectile : MyObject
             {
                 // Bring the projectile back to the pool
                 target = null;
-                gameObject.SetActive(false);
-                source.projectilePool.Enqueue(gameObject.transform);
+                breakProjecttile();
             }
         }
 
+    }
+    public void breakProjecttile(){
+        gameObject.SetActive(false);
+        source.projectilePool.Enqueue(gameObject.transform);
+        die.transform.parent = null;
+        die.Play();
     }
 }
