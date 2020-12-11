@@ -22025,7 +22025,7 @@ MonoBehaviour:
     - {fileID: 1177737935}
     option: 0
     spawnAfterTime: 0
-  - name: 0
+  - name: 1
     monster: {fileID: 753427591165382714, guid: e1adc10bcddcf7b458799af17ff76df5,
       type: 3}
     monsterGameObject: {fileID: 5962867140748486915, guid: e1adc10bcddcf7b458799af17ff76df5,
@@ -22037,7 +22037,7 @@ MonoBehaviour:
     - {fileID: 1177737935}
     option: 0
     spawnAfterTime: 0
-  - name: 0
+  - name: 2
     monster: {fileID: 753427591165382714, guid: e1adc10bcddcf7b458799af17ff76df5,
       type: 3}
     monsterGameObject: {fileID: 5962867140748486915, guid: e1adc10bcddcf7b458799af17ff76df5,
@@ -22049,7 +22049,7 @@ MonoBehaviour:
     - {fileID: 1177737935}
     option: 0
     spawnAfterTime: 0
-  - name: 0
+  - name: 3
     monster: {fileID: 753427591165382714, guid: e1adc10bcddcf7b458799af17ff76df5,
       type: 3}
     monsterGameObject: {fileID: 5962867140748486915, guid: e1adc10bcddcf7b458799af17ff76df5,
@@ -22061,7 +22061,7 @@ MonoBehaviour:
     - {fileID: 1177737935}
     option: 0
     spawnAfterTime: 0
-  - name: 0
+  - name: 4
     monster: {fileID: 753427591165382714, guid: e1adc10bcddcf7b458799af17ff76df5,
       type: 3}
     monsterGameObject: {fileID: 5962867140748486915, guid: e1adc10bcddcf7b458799af17ff76df5,
