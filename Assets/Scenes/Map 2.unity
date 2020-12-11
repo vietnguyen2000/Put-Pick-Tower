@@ -21993,6 +21993,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1669283458}
   - component: {fileID: 1669283457}
+  - component: {fileID: 1669283459}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -22092,6 +22093,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1669283459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669283456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948818113495b5641b62658162f168ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileMap: {fileID: 0}
+  availablePlaces: []
+  CoinPos: []
+  coinObject: {fileID: 9034350227544961660, guid: 8007f53c3cf7a2745a5f83b46ac9e2e8,
+    type: 3}
+  originalAmount: 2
 --- !u!1 &1739995449
 GameObject:
   m_ObjectHideFlags: 0
