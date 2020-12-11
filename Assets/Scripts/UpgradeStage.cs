@@ -22,7 +22,6 @@ public class UpgradeStage : MyObject
     // Start is called before the first frame update
     public void Activate(Player player, Tower tower){
         if (gameManager.numOfCoins>=CoinRequire && isActive == false){
-            UpgradeCanvas.gameObject.SetActive(true);
             CurrentPlayer = player;
             CurrentTower = tower;
             if (CurrentPlayer.currentHPLevel +1 == CurrentPlayer.HPLevel.Length) buttonHP.interactable = false;
@@ -31,6 +30,9 @@ public class UpgradeStage : MyObject
             if (CurrentTower.currentDamageLevel +1 == CurrentTower.DamageLevel.Length) buttonDamage.interactable = false;
             if (CurrentTower.currentAttackSpeedLevel +1 == CurrentTower.AttackSpeedLevel.Length) buttonAttackRate.interactable = false;
             if (CurrentTower.currentAttackRangeLevel +1 == CurrentTower.AttackRangeLevel.Length) buttonAttackRange.interactable = false;
+            if (!(buttonHP.interactable || buttonSpeed.interactable || buttonPutpickSpeed.interactable || buttonDamage.interactable || buttonAttackRate.interactable || buttonAttackRange.interactable))
+                return;
+            UpgradeCanvas.gameObject.SetActive(true);
             currentTimeScale = Time.timeScale;
             Time.timeScale = 0f;
             Debug.Log("set time scale");

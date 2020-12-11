@@ -59,7 +59,6 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
             RaycastHit2D[] hits = Physics2D.BoxCastAll((Vector2)transform.position+capsuleCol.offset,capsuleCol.size,0,Vector2.zero);
             foreach(RaycastHit2D hit in hits){
                 if(hit.transform.tag == "UpgradeStage"){
-                    Debug.Log("asdasd");
                     UpgradeStage x = hit.collider.gameObject.GetComponentInParent<UpgradeStage>();
                     x.Activate(gameManager.player,this);
                 }
