@@ -17,21 +17,20 @@ public class SpawnMonsterManager : MonoBehaviour
         public float rate;
         public Transform[] path;
         public Option option = Option.MonsterDead;
+        public float spawnAfterTime = 3f;
     }
 
     public Wave[] waves;
     private int nextWave = 0;
 
     public Transform[] spawnPoints;
-
-    public float timeBetweenWaves = 5f;
     public float waveCountDown;
     public string enemyTag = "Enemy";
 
     private float searchCountDown = 1f;
 
     private Spawn_State state = Spawn_State.Counting;
-
+    protected GameManager gameManager;
 
 
     // Start is called before the first frame update
@@ -41,25 +40,27 @@ public class SpawnMonsterManager : MonoBehaviour
         {
             Debug.LogError("No spawn points referenced.");
         }
-        waveCountDown = timeBetweenWaves;
+        waveCountDown = waves[0].spawnAfterTime;
+        gameManager = (GameManager)FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch(waves[nextWave].option)
-        {
-            case Option.MonsterDead:
-                SpawnAfterMonsterDead();
-                break;
-            case Option.AfterFirstSpawn:
-                SpawnAfterFirstSpawn();
-                break;
-            case Option.AfterLastSpawn:
-                SpawnAfterLastSpawn();
-                break;
+        if (nextWave != -1){
+            switch(waves[nextWave].option)
+            {
+                case Option.MonsterDead:
+                    SpawnAfterMonsterDead();
+                    break;
+                case Option.AfterFirstSpawn:
+                    SpawnAfterFirstSpawn();
+                    break;
+                case Option.AfterLastSpawn:
+                    SpawnAfterLastSpawn();
+                    break;
+            }
         }
-
     }
 
     //Spawn monster after they are killed.
@@ -76,6 +77,9 @@ public class SpawnMonsterManager : MonoBehaviour
                 return;
             }
         }
+
+        if (nextWave == -1) //win the game
+            return;
 
         if (waveCountDown <= 0)
         {
@@ -99,6 +103,8 @@ public class SpawnMonsterManager : MonoBehaviour
             {
                 StartCoroutine(SpawnWave(waves[nextWave]));
                 WaveCompleted();
+                if (nextWave == -1) //win the game
+                    return;
             }
         }
         else
@@ -112,13 +118,12 @@ public class SpawnMonsterManager : MonoBehaviour
     {
         if (state == Spawn_State.Waiting)
             WaveCompleted();
-        if (waveCountDown <= 0)
+        if (nextWave == -1) //win the game
+            return;
+        if (state != Spawn_State.Spawning)
         {
-            if (state != Spawn_State.Spawning)
-            {
-                StartCoroutine(SpawnWave(waves[nextWave]));
-                waveCountDown = timeBetweenWaves;
-            }
+            StartCoroutine(SpawnWave(waves[nextWave]));
+            waveCountDown = waves[nextWave].spawnAfterTime;
         }
         else
         {
@@ -176,21 +181,22 @@ public class SpawnMonsterManager : MonoBehaviour
         Debug.Log("Wave " + nextWave + " Completed");
 
         state = Spawn_State.Counting;
-        waveCountDown = timeBetweenWaves;
         
-        if (nextWave + 1 > waves.Length - 1)
-        {
-            nextWave = 0;
-            Debug.Log("All waves completed");
+        if (nextWave != -1){
+            if (nextWave + 1 > waves.Length - 1)
+            {
+                Debug.Log("All waves completed");
+                gameManager.win();
+                nextWave = -1;
+                this.enabled = false;
+            }
+            else{
+                nextWave++;
+                waveCountDown = waves[nextWave].spawnAfterTime;
+            }
         }
-        else
-            nextWave++;
 
     }
-
-    //Code for ObjectPool
-
-    public ObjectPooler ObjectPool;
 
     //ObjectPool.pools[i] -> i = 1 type of GameObject
     private void Awake()

@@ -50,7 +50,7 @@ public class Monster : LiveObject
         this.hp -= damage;
         if (this.hp <= 0f)
         {
-            transform.position *= 100f;
+            gameObject.SetActive(false);
             LivingStatus = Status.Dead;
         }
     }

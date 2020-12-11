@@ -19,7 +19,7 @@ public class PutPickableObject : AnimateObject, IPutPickable{
     {
         base.Update();
     }
-    public void Pickup(Player player, float timePutup)
+    public virtual void Pickup(Player player, float timePutup)
     {
         anim.SetFloat(Constants.PUTPICKSPEED,Constants.DEFAULTPUTPICKTIME/timePutup);
         transform.parent = player.transform;
@@ -28,7 +28,7 @@ public class PutPickableObject : AnimateObject, IPutPickable{
         anim.Play(Constants.PICKUP,0);
         PutPickStatus = PutPickState.Picked;
     }
-    public void Putdown(float timePutdown)
+    public virtual void Putdown(float timePutdown)
     {
         
         anim.SetFloat(Constants.PUTPICKSPEED,Constants.DEFAULTPUTPICKTIME/timePutdown);
@@ -42,6 +42,10 @@ public class PutPickableObject : AnimateObject, IPutPickable{
         transform.parent = null;
         col.enabled = true;
         PutPickStatus = PutPickState.Put;
+        afterPutdown();
         yield return null;
+    }
+    protected virtual void afterPutdown(){
+
     }
 }

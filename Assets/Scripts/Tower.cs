@@ -8,6 +8,7 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
     [SerializeField] private float damage;
     [SerializeField] private float attackSpeed;
     [SerializeField] private float attackRange;
+    public FiringController firePowerSource;
     public float Damage
     {
         get => damage;
@@ -64,5 +65,14 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
     {
 
     }
-
+    public override void Pickup(Player player, float timePutup)
+    {
+        base.Pickup(player, timePutup);
+        firePowerSource.gameObject.SetActive(false);
+    }
+    protected override void afterPutdown()
+    {
+        base.afterPutdown();
+        firePowerSource.gameObject.SetActive(true);
+    }
 }

@@ -53,7 +53,7 @@ public class FiringController : MonoBehaviour
         // Detect all monsters in attack range and attack the one which is closest to the end point.
         if (target == null || projectileNeeded <= 0 || target.LivingStatus == LiveObject.Status.Dead)
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, tower.AttackRange, monsterLayer);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(tower.transform.position, tower.AttackRange, monsterLayer);
             Monster[] targets = new Monster[colliders.Length];
             for (int i = 0; i < colliders.Length; i++)
             {
@@ -108,5 +108,9 @@ public class FiringController : MonoBehaviour
     public void TargetReached(LiveObject target)
     {
         tower.InflictDamage(target);
+    }
+    private void OnDrawGizmosSelected() {
+        var x = gameObject.GetComponentInParent<Tower>();
+        Gizmos.DrawWireSphere(x.transform.position,x.AttackRange);
     }
 }

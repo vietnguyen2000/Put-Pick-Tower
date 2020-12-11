@@ -69,7 +69,8 @@ public class GameManager : MonoBehaviour
 
     }
     public void win(){
-
+        winMenu.Canvas.SetActive(true);
+        
     }
 
     void CollectCoin(){
