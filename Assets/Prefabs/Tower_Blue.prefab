@@ -211,17 +211,17 @@ PrefabInstance:
     - target: {fileID: 6618767657497268890, guid: 6595b96348985e1489c22dabfd80908f,
         type: 3}
       propertyPath: m_Name
-      value: FirepowerSource
+      value: FirepowerSource_Blue
       objectReference: {fileID: 0}
     - target: {fileID: 6618767657497268891, guid: 6595b96348985e1489c22dabfd80908f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.03
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6618767657497268891, guid: 6595b96348985e1489c22dabfd80908f,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: 1.149
       objectReference: {fileID: 0}
     - target: {fileID: 6618767657497268891, guid: 6595b96348985e1489c22dabfd80908f,
         type: 3}

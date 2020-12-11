@@ -109,8 +109,4 @@ public class FiringController : MonoBehaviour
     {
         tower.InflictDamage(target);
     }
-    private void OnDrawGizmosSelected() {
-        var x = gameObject.GetComponentInParent<Tower>();
-        Gizmos.DrawWireSphere(x.transform.position,x.AttackRange);
-    }
 }

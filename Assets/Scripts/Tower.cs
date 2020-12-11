@@ -75,4 +75,7 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
         base.afterPutdown();
         firePowerSource.gameObject.SetActive(true);
     }
+    private void OnDrawGizmosSelected() {
+        Gizmos.DrawWireSphere(transform.position,AttackRange);
+    }
 }
