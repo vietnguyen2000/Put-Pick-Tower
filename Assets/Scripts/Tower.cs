@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Tower : PutPickableObject, IAttackable,IUpgradeable
 {
-    public float Damage{
-        get => damage;
-        set => damage = value;}
+
     [SerializeField] private float damage;
     [SerializeField] private float attackSpeed;
+    [SerializeField] private float attackRange;
+    public float Damage
+    {
+        get => damage;
+        set => damage = value;
+    }
     public float AttackSpeed{
         get => attackSpeed;
         set => attackSpeed = value;}
@@ -18,6 +22,11 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
     private float range=1f;
     public Sprite towerIcon;
     private CapsuleCollider2D capsuleCol;
+    public float AttackRange
+    {
+        get => attackRange;
+        set => attackRange = value;
+    }
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -49,7 +58,7 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
     }
     public void InflictDamage(IDamageable attackedObject)
     {
-
+        attackedObject.ReceiveDamage(Damage);
     }
     public void Upgrade()
     {

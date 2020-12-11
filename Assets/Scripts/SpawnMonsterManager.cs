@@ -147,9 +147,11 @@ public class SpawnMonsterManager : MonoBehaviour
         Debug.Log("Spawning Enemy: " + _monster.name);
         
         GameObject _mons = GameObject.Instantiate(_monster, position.position, new Quaternion());
+        _mons.tag = enemyTag;
+        //_mons.layer = LayerMask.NameToLayer("Monster");
         Monster m = _mons.GetComponent<Monster>();
         m.path = path;
-    
+        m.LivingStatus = LiveObject.Status.Alive;
     }
 
     bool MonsterIsAlive()

@@ -6,11 +6,14 @@ public class PutPickableObject : AnimateObject, IPutPickable{
 
     const float DISTANCEPUTDOWN = 0.5f;
     protected bool isOnBag;
-    
+    const float distancePutdown = 0.5f;
+    public enum PutPickState { Picked, Put };
+    public PutPickState PutPickStatus { get; set; }
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
+        PutPickStatus = PutPickState.Put;
     }
 
     // Update is called once per frame
@@ -26,6 +29,7 @@ public class PutPickableObject : AnimateObject, IPutPickable{
         col.enabled = false;
         anim.Play(Constants.PICKUP,0);
         isOnBag = true;
+        PutPickStatus = PutPickState.Picked;
     }
     public void Putdown(float timePutdown)
     {
@@ -33,6 +37,7 @@ public class PutPickableObject : AnimateObject, IPutPickable{
         anim.SetFloat(Constants.PUTPICKSPEED,Constants.DEFAULTPUTPICKTIME/timePutdown);
         anim.Play(Constants.PUTDOWN,0);
         StartCoroutine(PutdownDelay());
+        
     }
     IEnumerator PutdownDelay(){
         yield return new WaitForSeconds(Constants.DEFAULTPUTPICKTIME/anim.GetFloat(Constants.PUTPICKSPEED));
@@ -40,6 +45,7 @@ public class PutPickableObject : AnimateObject, IPutPickable{
         transform.parent = null;
         col.enabled = true;
         isOnBag = false;
+        PutPickStatus = PutPickState.Put;
         yield return null;
     }
 }

@@ -11,8 +11,8 @@ public interface IStatistic{
     float Speed{get;}
 }
 public interface IDamageable{
-    void Damage(float damage);
-    void Kill();
+    //void Damage(float damage);
+    void ReceiveDamage(float Damage);
 }
 public interface IMoveable{
     Vector2 Direction{get;}
@@ -34,6 +34,7 @@ public interface ICollider{
 public interface IAttackable{
     float Damage{get;set;}
     float AttackSpeed{get;set;}
+    float AttackRange { get; set; }
     void InflictDamage(IDamageable attackedObject);
 }
 public interface IUpgradeable{
