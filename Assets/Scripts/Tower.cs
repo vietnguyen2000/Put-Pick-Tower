@@ -28,6 +28,7 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
         get => attackRange;
         set => attackRange = value;
     }
+    private  LineRenderer circleDrawRange;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -36,6 +37,7 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
         shadowVisible.maskInteraction = SpriteMaskInteraction.VisibleOutsideMask;
         towerIcon = spriteRenderer.sprite;
         capsuleCol = GetComponentInChildren<CapsuleCollider2D>();
+        circleDrawRange = GetComponentInChildren<LineRenderer>();
     }
 
     
@@ -69,11 +71,13 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
     {
         base.Pickup(player, timePutup);
         firePowerSource.gameObject.SetActive(false);
+        circleDrawRange.enabled = false;
     }
     protected override void afterPutdown()
     {
         base.afterPutdown();
         firePowerSource.gameObject.SetActive(true);
+        circleDrawRange.enabled = true;
     }
     private void OnDrawGizmosSelected() {
         Gizmos.DrawWireSphere(transform.position,AttackRange);
