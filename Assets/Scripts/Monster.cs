@@ -4,8 +4,19 @@ using UnityEngine;
 
 public class Monster : LiveObject
 {
+    //public enum State {InPool, OnMap};
     public Transform[] path;
+    //public St state = State.InPool;
     private Vector2 position;
+    public float DistanceToEnd{
+        get{
+            float res = Vector2.Distance(transform.position,path[currentPointIndex].position);
+            for (int i = currentPointIndex; i < currentPointIndex-1; i++){
+                res += Vector2.Distance(path[i].position,path[i+1].position);
+            }
+            return res;
+        }
+    }
     // Start is called before the first frame update
     private int currentPointIndex=1;
     protected override void Start()
@@ -23,7 +34,7 @@ public class Monster : LiveObject
             Move(path[currentPointIndex].position-transform.position,speed);
         }
         else{
-            GameObject.Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         
         
@@ -32,5 +43,23 @@ public class Monster : LiveObject
     // Move object by set velocity to direction*speed and play Walk animation
     {   
         rb.velocity = direction.normalized*speed;
+    }
+    public override void ReceiveDamage(float damage)
+    {
+        //Debug.Log("Hp: " + Hp.ToString() + " plus by " + damage.ToString());
+        this.hp -= damage;
+        if (this.hp <= 0f)
+        {
+            gameObject.SetActive(false);
+            LivingStatus = Status.Dead;
+        }
+    }
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        //Debug.Log("Hit");
+    }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        //Debug.Log("Hit");
     }
 }

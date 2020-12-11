@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class Player : LiveObject
 {
-    const float CARRYSPEED = 3.0f;
-    const float NORMALSPEED = 2.0f;
+    public Action CollectCoin;
+    public float CarrySpeed = 3.0f;
+    public float NormalSpeed = 2.0f;
     public JoystickController Controller{
         get => controller;
     }
@@ -27,6 +28,7 @@ public class Player : LiveObject
     [SerializeField] private float distanceDetect;
     [SerializeField] private float highDetect;
     [SerializeField] private float pady;
+    private SpriteMask visibleMask;
     private Vector2 positionOfRectDetect{
         get {
             return new Vector2(transform.position.x + distanceDetect*(int)FaceDirection/2,
@@ -40,8 +42,16 @@ public class Player : LiveObject
     }
     protected override void Start()
     {
+        isAlwaysVisible = true;
         base.Start();
         if (controller == null) controller = GetComponentInChildren<JoystickController>();
+        visibleMask = shadowVisible.gameObject.AddComponent<SpriteMask>();
+        visibleMask.alphaCutoff = 1;
+    }
+    protected override void LateUpdate()
+    {
+        base.LateUpdate();
+        visibleMask.sprite = shadowVisible.sprite;
     }
     protected override void Update()
     {
@@ -101,11 +111,11 @@ public class Player : LiveObject
             pickupableObject.Putdown(putpickTime);
             anim.Play(Constants.PUTDOWN,0);
             pickupableObject = null;
-            speed = NORMALSPEED;
+            speed = NormalSpeed;
         }
         else Debug.Log("NuLL object to put down!!!!");
     }
-    protected void PickObjectUp(PutPickableObject o){
+    public void PickObjectUp(PutPickableObject o){
         if (pickupableObject == null){
             Stop();
             pickupableObject = o;
@@ -113,14 +123,11 @@ public class Player : LiveObject
             countPutPickTime = putpickTime;
             anim.Play(Constants.PICKUP,0);
             o.Pickup(this, putpickTime);
-            speed = CARRYSPEED;
+            speed = CarrySpeed;
         }
         else Debug.Log("Null object to pick up!!!");
         
 
-    }
-    private void OnTriggerStay2D(Collider2D other) {
-        
     }
     
     private void OnDrawGizmosSelected() {

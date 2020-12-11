@@ -4,8 +4,26 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class LiveObject : AnimateObject, IStatistic, IDamageable, IMoveable
 {
+    public float MaxHp{
+        get => maxHp;
+        set{
+            if (value >= maxHp){
+                hp += value - maxHp;
+                maxHp = value;
+            }
+            else{
+                maxHp = value;
+                if (hp>maxHp){
+                    hp = maxHp;
+                }
+            }
+        }
+    }
+    public enum Status {Alive, Dead};
+    public Status LivingStatus { get; set; }
     public float Hp{
         get => hp;
+        set => hp = Mathf.Clamp(value,0,maxHp);
     }
     public float Speed{
         get => speed;
@@ -16,7 +34,7 @@ public class LiveObject : AnimateObject, IStatistic, IDamageable, IMoveable
     public Rigidbody2D Rigidbody{
         get => rb;
     }
-
+    [SerializeField] protected float maxHp;        
     [SerializeField] protected float hp;        
     [SerializeField] protected float speed;    
     [SerializeField] protected Rigidbody2D rb;
@@ -30,15 +48,15 @@ public class LiveObject : AnimateObject, IStatistic, IDamageable, IMoveable
     }
 
     // Update is called once per frame
-    protected virtual void Update()
+    protected override void Update()
     {
-
+        base.Update();
     }
     public virtual void Damage(float damage)
     {
 
     }
-    public virtual void Kill()
+    public virtual void ReceiveDamage(float damage)
     {
 
     }

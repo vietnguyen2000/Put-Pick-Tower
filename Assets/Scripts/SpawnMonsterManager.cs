@@ -16,21 +16,22 @@ public class SpawnMonsterManager : MonoBehaviour
         public int count;
         public float rate;
         public Transform[] path;
+        public Option option = Option.MonsterDead;
+        public float spawnAfterTime = 3f;
     }
 
     public Wave[] waves;
     private int nextWave = 0;
 
     public Transform[] spawnPoints;
-
-    public float timeBetweenWaves = 5f;
     public float waveCountDown;
     public string enemyTag = "Enemy";
 
     private float searchCountDown = 1f;
 
-    private Spawn_State state;
-    public Option option = Option.MonsterDead;
+    private Spawn_State state = Spawn_State.Counting;
+    protected GameManager gameManager;
+
 
     // Start is called before the first frame update
     void Start()
@@ -39,25 +40,27 @@ public class SpawnMonsterManager : MonoBehaviour
         {
             Debug.LogError("No spawn points referenced.");
         }
-        waveCountDown = timeBetweenWaves;
+        waveCountDown = waves[0].spawnAfterTime;
+        gameManager = (GameManager)FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        switch(option)
-        {
-            case Option.MonsterDead:
-                SpawnAfterMonsterDead();
-                break;
-            case Option.AfterFirstSpawn:
-                SpawnAfterFirstSpawn();
-                break;
-            case Option.AfterLastSpawn:
-                SpawnAfterLastSpawn();
-                break;
+        if (nextWave != -1){
+            switch(waves[nextWave].option)
+            {
+                case Option.MonsterDead:
+                    SpawnAfterMonsterDead();
+                    break;
+                case Option.AfterFirstSpawn:
+                    SpawnAfterFirstSpawn();
+                    break;
+                case Option.AfterLastSpawn:
+                    SpawnAfterLastSpawn();
+                    break;
+            }
         }
-
     }
 
     //Spawn monster after they are killed.
@@ -65,7 +68,7 @@ public class SpawnMonsterManager : MonoBehaviour
     {
         if (state == Spawn_State.Waiting)
         {
-            if (!MonsterIsAlive())
+            if (!MonsterIsAlive(waves))
             {
                 WaveCompleted();
             }
@@ -74,6 +77,9 @@ public class SpawnMonsterManager : MonoBehaviour
                 return;
             }
         }
+
+        if (nextWave == -1) //win the game
+            return;
 
         if (waveCountDown <= 0)
         {
@@ -97,6 +103,8 @@ public class SpawnMonsterManager : MonoBehaviour
             {
                 StartCoroutine(SpawnWave(waves[nextWave]));
                 WaveCompleted();
+                if (nextWave == -1) //win the game
+                    return;
             }
         }
         else
@@ -110,13 +118,12 @@ public class SpawnMonsterManager : MonoBehaviour
     {
         if (state == Spawn_State.Waiting)
             WaveCompleted();
-        if (waveCountDown <= 0)
+        if (nextWave == -1) //win the game
+            return;
+        if (state != Spawn_State.Spawning)
         {
-            if (state != Spawn_State.Spawning)
-            {
-                StartCoroutine(SpawnWave(waves[nextWave]));
-                waveCountDown = timeBetweenWaves;
-            }
+            StartCoroutine(SpawnWave(waves[nextWave]));
+            waveCountDown = waves[nextWave].spawnAfterTime;
         }
         else
         {
@@ -145,21 +152,22 @@ public class SpawnMonsterManager : MonoBehaviour
     void SpawnMonster (GameObject _monster, Transform position, Transform[] path)
     {
         Debug.Log("Spawning Enemy: " + _monster.name);
-        
-        GameObject _mons = GameObject.Instantiate(_monster, position.position, new Quaternion());
+        //Need to be fixed to use the ObjectPooler
+        GameObject _mons = ObjectPooler.SharedInstance.SpawnFromPool(_monster.name, position.position, new Quaternion());
+        //
         Monster m = _mons.GetComponent<Monster>();
         m.path = path;
-    
+        m.LivingStatus = LiveObject.Status.Alive;
     }
 
-    bool MonsterIsAlive()
+    bool MonsterIsAlive(Wave[] waves)
     {
         searchCountDown -= Time.deltaTime;
 
         if (searchCountDown <= 0)
         {
             searchCountDown = 1f;
-            //Use tag Enemy, if it is other tag then change this part in the code
+            //Find by tag or by gameobjects? If GameObjects then have to use a dictionary
             if (GameObject.FindGameObjectWithTag(enemyTag) == null)
             {
                 return false;
@@ -173,15 +181,72 @@ public class SpawnMonsterManager : MonoBehaviour
         Debug.Log("Wave " + nextWave + " Completed");
 
         state = Spawn_State.Counting;
-        waveCountDown = timeBetweenWaves;
         
-        if (nextWave + 1 > waves.Length - 1)
-        {
-            nextWave = 0;
-            Debug.Log("All waves completed");
+        if (nextWave != -1){
+            if (nextWave + 1 > waves.Length - 1)
+            {
+                Debug.Log("All waves completed");
+                gameManager.win();
+                nextWave = -1;
+                this.enabled = false;
+            }
+            else{
+                nextWave++;
+                waveCountDown = waves[nextWave].spawnAfterTime;
+            }
         }
-        else
-            nextWave++;
 
     }
+
+    //ObjectPool.pools[i] -> i = 1 type of GameObject
+    private void Awake()
+    {
+        Debug.Log("Awake is called");
+        List<GameObject> temp = new List<GameObject>();
+        //Debug.Log(ObjectPooler.SharedInstance.pools.Capacity);
+        ObjectPooler.SharedInstance.pools.Capacity = EnemyTypeSize(waves, temp);
+        //Debug.Log(ObjectPooler.SharedInstance.pools.Capacity);
+        int[] sized = EnemySize(waves, temp);
+        for (int i = 0; i < ObjectPooler.SharedInstance.pools.Capacity; i++)
+        {
+            ObjectPooler.Pool newPool = new ObjectPooler.Pool(temp[i].name, temp[i], sized[i]);
+            ObjectPooler.SharedInstance.pools.Add(newPool);
+            Debug.Log("Count: " + ObjectPooler.SharedInstance.pools.Count);
+            Debug.Log("Enemy pooled: " + temp[i].name);
+        }
+    }
+
+    //Get the size of List<ObjectPool> ObjectPool.pools
+    //Count each type of GameObject
+    private int EnemyTypeSize(Wave[] waves, List<GameObject> temp)
+    {
+        if (waves[0].monsterGameObject != null)
+        {
+            for (int i = 0; i < waves.Length;i++)
+            {
+                if (!temp.Contains(waves[i].monsterGameObject))
+                {
+                    temp.Add(waves[i].monsterGameObject);
+                }
+            }
+            return temp.Count;
+        }
+        return 0;
+    }
+
+    //Get amount for each GameObject
+    private int[] EnemySize(Wave[] waves, List<GameObject> temp)
+    {
+        int[] sized = new int[temp.Count];
+        for (int i = 0; i< temp.Count;i++)
+        {
+            for (int j = 0; j < waves.Length; j++)
+            {
+                if (temp[i] == waves[j].monsterGameObject) 
+                    sized[i] += waves[j].count;
+            }
+        }
+        return sized;
+    }
+
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - PutPickable
+  - UpgradeStage
   layers:
   - Default
   - TransparentFX
@@ -54,4 +55,7 @@ TagManager:
     locked: 0
   - name: NormalObject
     uniqueID: 1746026351
+    locked: 0
+  - name: Top
+    uniqueID: 2935988901
     locked: 0
