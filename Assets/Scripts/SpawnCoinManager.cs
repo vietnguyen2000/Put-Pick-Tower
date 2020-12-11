@@ -16,14 +16,18 @@ public class SpawnCoinManager : MonoBehaviour
     public GameObject coinObject;
 
     public int originalAmount;
-    
+    private Coin[] coins;
     int count;
-
-
     void Start()
     {
         //Get tileMap -> parent or playerGround?
-
+        Tilemap[] tileMaps = (Tilemap[])FindObjectsOfType<Tilemap>();
+        foreach( var x in tileMaps){
+            if (x.gameObject.layer == LayerMask.NameToLayer("Player Ground")){
+                tileMap = x;
+                break;
+            }
+        }
         ///Buggy script -> Bi lap vo han o dau do
         
         //tileMap = transform.GetComponent<Tilemap>(); //-> Code khong lay duoc tileMap -> PlayerGround
@@ -42,25 +46,16 @@ public class SpawnCoinManager : MonoBehaviour
                     //Tile at "place"
                     availablePlaces.Add(place);
                 }
-                else
-                {
-                    //No tile at "place"
-                }
             }
         }
-
-        ///
+        coins = new Coin[originalAmount];
+        for (int i = 0 ; i < originalAmount; i++){
+            coins[i] = GameObject.Instantiate(coinObject).GetComponent<Coin>();
+            coins[i].availablePlace = availablePlaces.ToArray();
+        }
 
         CoinPos = new List<Vector3>();
-        GetCoinPosition();
 
-        ObjectPooler.Pool coinPool = new ObjectPooler.Pool(coinObject.name, coinObject, originalAmount);
-        ObjectPooler.SharedInstance.pools.Add(coinPool);
-
-        for (int i = 0; i < originalAmount;i++)
-        {
-            SpawnCoin(CoinPos[i]);
-        }
     }
 
     // Update is called once per frame
@@ -70,41 +65,5 @@ public class SpawnCoinManager : MonoBehaviour
         {
 
         }
-    }
-
-    //Random vi tri cua tung coin luc khoi tao
-    void GetCoinPosition()
-    {
-        int i = 0;
-        while (i < originalAmount)
-        {
-            int index = Random.Range(0,availablePlaces.Count);
-            if (CheckLayer(availablePlaces[index]))
-            {
-                CoinPos.Add(availablePlaces[index]);
-                i++;
-            }
-        }
-    }
-    
-    //Raycast xuong de check xem co dung cai layermask ko?
-    bool CheckLayer(Vector3 pos)
-    {
-        LayerMask playerground = LayerMask.GetMask("PlayerGround");
-        if (Physics.Raycast(pos, new Vector3(0, 0, 1), 20.0f, playerground))
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    //SpawnCoin tu ObjectPooler
-    void SpawnCoin(Vector3 position)
-    {
-        Debug.Log("Spawning Coins");
-        //Spawning coin from ObjectPooler
-        GameObject coins = ObjectPooler.SharedInstance.SpawnFromPool(coinObject.name, position, new Quaternion());
-        //
     }
 }
