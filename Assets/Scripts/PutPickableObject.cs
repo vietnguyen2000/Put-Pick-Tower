@@ -5,8 +5,6 @@ using UnityEngine;
 public class PutPickableObject : AnimateObject, IPutPickable{
 
     const float DISTANCEPUTDOWN = 0.5f;
-    protected bool isOnBag;
-    const float distancePutdown = 0.5f;
     public enum PutPickState { Picked, Put };
     public PutPickState PutPickStatus { get; set; }
     // Start is called before the first frame update
@@ -28,7 +26,6 @@ public class PutPickableObject : AnimateObject, IPutPickable{
         transform.localPosition = new Vector3(0,0.0001f,0);
         col.enabled = false;
         anim.Play(Constants.PICKUP,0);
-        isOnBag = true;
         PutPickStatus = PutPickState.Picked;
     }
     public void Putdown(float timePutdown)
@@ -44,7 +41,6 @@ public class PutPickableObject : AnimateObject, IPutPickable{
         transform.localPosition = new Vector3(DISTANCEPUTDOWN,0f,0f) ;
         transform.parent = null;
         col.enabled = true;
-        isOnBag = false;
         PutPickStatus = PutPickState.Put;
         yield return null;
     }

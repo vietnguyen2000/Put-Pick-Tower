@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         guiStats.UpdatePlayerStats(player.Hp,player.Speed,player.TimePutPick);
-        guiStats.UpdateTowerStats(currentTower.towerIcon,currentTower.Damage,currentTower.AttackSpeed,currentTower.Range);
+        guiStats.UpdateTowerStats(currentTower.towerIcon,currentTower.Damage,currentTower.AttackSpeed,currentTower.AttackRange);
         guiStats.UpdateCoin(numOfCoins,UpgradeStage.CoinRequire);
     }
 }

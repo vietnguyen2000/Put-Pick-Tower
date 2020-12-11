@@ -42,7 +42,7 @@ public class Projectile : MonoBehaviour
             {
                 // Bring the projectile back to the pool
                 target = null;
-                transform.position = source.poolPosition;
+                gameObject.SetActive(false);
                 source.projectilePool.Enqueue(gameObject.transform);
             }
         }

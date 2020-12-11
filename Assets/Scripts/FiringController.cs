@@ -18,7 +18,7 @@ public class FiringController : MonoBehaviour
     Tower tower;
     float cooldown; // Delay between attacks, equal to 1/AttackSpeed
     int projectileNeeded; // Calculate the projectile needed to kill a monster, equal to Hp/Damage
-    LiveObject target;
+    Monster target;
     void Start()
     {
         tower = GetComponentInParent<Tower>();
@@ -42,7 +42,9 @@ public class FiringController : MonoBehaviour
 
         for (int i = 0; i < numberOfProjectiles; i++)
         {
-            projectilePool.Enqueue(Instantiate(pfProjectile, poolPosition, Quaternion.identity));
+            var x = Instantiate(pfProjectile, poolPosition, Quaternion.identity);
+            x.gameObject.SetActive(false);
+            projectilePool.Enqueue(x);
         }
     }
     void ScanAndAttack()
@@ -52,19 +54,19 @@ public class FiringController : MonoBehaviour
         if (target == null || projectileNeeded <= 0 || target.LivingStatus == LiveObject.Status.Dead)
         {
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, tower.AttackRange, monsterLayer);
-            // Order by distance to the end point
-            var orderedColliders = colliders.OrderBy(x => Vector3.Distance(endPoint.position, x.transform.position)).ToArray();
-            
-            for (int i = 0; i < orderedColliders.Length; i++)
+            Monster[] targets = new Monster[colliders.Length];
+            for (int i = 0; i < colliders.Length; i++)
             {
-                if (orderedColliders[i].gameObject.GetComponentInParent<Monster>() != null)
-                {
-                    target = orderedColliders[i].gameObject.GetComponentInParent<Monster>();
-                    if (target != null)
-                        projectileNeeded = (int)Mathf.Ceil(target.Hp / tower.Damage);
-                    break;
-                }
+                targets[i] = colliders[i].gameObject.GetComponentInParent<Monster>();
             }
+            // Debug.Log(targets);
+            // Order by distance to the end point
+            targets = targets.OrderBy(x => x.DistanceToEnd).ToArray();
+            if (targets.Length>0){
+                target = targets[0];
+                projectileNeeded = (int)Mathf.Ceil(target.Hp / tower.Damage);
+            }
+            
         }
         else
         {
@@ -89,11 +91,15 @@ public class FiringController : MonoBehaviour
     void Attack(LiveObject target)
     {
         // In case we run out of projectiles in pool :))
-        if (projectilePool.Count <= 0)
-            projectilePool.Enqueue(Instantiate(pfProjectile, poolPosition, Quaternion.identity));
+        if (projectilePool.Count <= 0){
+            var x = Instantiate(pfProjectile, poolPosition, Quaternion.identity);
+            x.gameObject.SetActive(false);
+            projectilePool.Enqueue(x);
+        }
 
         // Get projectile from the object pool and set its position to the firing point
         Transform projectile = projectilePool.Dequeue();
+        projectile.gameObject.SetActive(true);
         projectile.position = transform.position;
         projectile.GetComponent<Projectile>().SetupTarget(this, target, projectileSpeed);
 

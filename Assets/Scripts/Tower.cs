@@ -16,10 +16,10 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
     public float AttackSpeed{
         get => attackSpeed;
         set => attackSpeed = value;}
-    public float Range{
-        get => range;
-    }
-    private float range=1f;
+    // public float Range{
+    //     get => range;
+    // }
+    // private float range=1f;
     public Sprite towerIcon;
     private CapsuleCollider2D capsuleCol;
     public float AttackRange
@@ -45,7 +45,7 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
 
     }
     protected virtual void FixedUpdate(){
-        if (!isOnBag){
+        if (PutPickStatus== PutPickState.Put){
             RaycastHit2D[] hits = Physics2D.BoxCastAll((Vector2)transform.position+capsuleCol.offset,capsuleCol.size,0,Vector2.zero);
             foreach(RaycastHit2D hit in hits){
                 if(hit.transform.tag == "UpgradeStage"){

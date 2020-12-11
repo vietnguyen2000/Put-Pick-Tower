@@ -8,6 +8,15 @@ public class Monster : LiveObject
     public Transform[] path;
     //public St state = State.InPool;
     private Vector2 position;
+    public float DistanceToEnd{
+        get{
+            float res = Vector2.Distance(transform.position,path[currentPointIndex].position);
+            for (int i = currentPointIndex; i < currentPointIndex-1; i++){
+                res += Vector2.Distance(path[i].position,path[i+1].position);
+            }
+            return res;
+        }
+    }
     // Start is called before the first frame update
     private int currentPointIndex=1;
     protected override void Start()
