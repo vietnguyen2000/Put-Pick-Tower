@@ -133,6 +133,9 @@ public class Player : LiveObject
             anim.Play(Constants.PICKUP,0);
             o.Pickup(this, putpickTime);
             speed = CarrySpeed;
+            if (o.gameObject.layer == LayerMask.NameToLayer("Tower")){
+                gameManager.currentTower = o.gameObject.GetComponent<Tower>();
+            }
         }
         else Debug.Log("Null object to pick up!!!");
         

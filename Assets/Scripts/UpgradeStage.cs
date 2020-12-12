@@ -24,6 +24,11 @@ public class UpgradeStage : MyObject
         if (gameManager.numOfCoins>=CoinRequire && isActive == false){
             CurrentPlayer = player;
             CurrentTower = tower;
+            buttonHP.interactable = true;
+            buttonSpeed.interactable = true;
+            buttonPutpickSpeed.interactable = true;
+            buttonDamage.interactable = true;
+            buttonAttackRange.interactable = true;
             if (CurrentPlayer.currentHPLevel +1 == CurrentPlayer.HPLevel.Length) buttonHP.interactable = false;
             if (CurrentPlayer.currentSpeedLevel +1 == CurrentPlayer.SpeedLevel.Length) buttonSpeed.interactable = false;
             if (CurrentPlayer.currentPutpickSpeedLevel +1 == CurrentPlayer.PutpickSpeedLevel.Length) buttonPutpickSpeed.interactable = false;
