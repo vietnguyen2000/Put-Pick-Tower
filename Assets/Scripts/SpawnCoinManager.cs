@@ -7,8 +7,6 @@ public class SpawnCoinManager : MonoBehaviour
 {
 
     // Start is called before the first frame update
-    [HideInInspector]public Tilemap tileMap;
-
     [HideInInspector]public List<Vector3> availablePlaces;
 
     public GameObject coinObject;
@@ -18,31 +16,23 @@ public class SpawnCoinManager : MonoBehaviour
     int count;
     void Start()
     {
+        availablePlaces = new List<Vector3>();
         //Get tileMap -> parent or playerGround?
         Tilemap[] tileMaps = (Tilemap[])FindObjectsOfType<Tilemap>();
-        foreach( var x in tileMaps){
-            if (x.gameObject.layer == LayerMask.NameToLayer("Player Ground")){
-                tileMap = x;
-                break;
-            }
-        }
-        ///Buggy script -> Bi lap vo han o dau do
-        
-        //tileMap = transform.GetComponent<Tilemap>(); //-> Code khong lay duoc tileMap -> PlayerGround
-        if (tileMap == null)
-            Debug.Log("tileMap is null");
-        availablePlaces = new List<Vector3>();
-
-        for (int n = tileMap.cellBounds.xMin; n < tileMap.cellBounds.xMax; n++)
-        {
-            for (int p = tileMap.cellBounds.yMin; p < tileMap.cellBounds.yMax; p++)
-            {
-                Vector3Int localPlace = (new Vector3Int(n, p, (int)tileMap.transform.position.y));
-                Vector3 place = tileMap.CellToWorld(localPlace);
-                if (tileMap.HasTile(localPlace))
+        foreach( var tileMap in tileMaps){
+            if (tileMap.gameObject.layer == LayerMask.NameToLayer("Player Ground")){
+                for (int n = tileMap.cellBounds.xMin; n < tileMap.cellBounds.xMax; n++)
                 {
-                    //Tile at "place"
-                    availablePlaces.Add(place);
+                    for (int p = tileMap.cellBounds.yMin; p < tileMap.cellBounds.yMax; p++)
+                    {
+                        Vector3Int localPlace = (new Vector3Int(n, p, (int)tileMap.transform.position.y));
+                        Vector3 place = tileMap.CellToWorld(localPlace);
+                        if (tileMap.HasTile(localPlace))
+                        {
+                            //Tile at "place"
+                            availablePlaces.Add(place);
+                        }
+                    }
                 }
             }
         }
