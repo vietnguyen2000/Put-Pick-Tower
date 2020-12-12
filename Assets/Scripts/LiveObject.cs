@@ -35,7 +35,7 @@ public class LiveObject : AnimateObject, IStatistic, IDamageable, IMoveable
         get => rb;
     }
     [SerializeField] protected float maxHp;        
-    [SerializeField] protected float hp;        
+    protected float hp;        
     [SerializeField] protected float speed;    
     [SerializeField] protected Rigidbody2D rb;
 
@@ -44,6 +44,7 @@ public class LiveObject : AnimateObject, IStatistic, IDamageable, IMoveable
     {
         base.Start();
         if (rb == null) rb= GetComponent<Rigidbody2D>();
+        hp = maxHp;
         
     }
 

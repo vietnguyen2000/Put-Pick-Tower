@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MyObject
 {
     // Start is called before the first frame update
     LiveObject target; // target to which the projectile will fly
     float projectileSpeed; // moving speed of the projectile
     FiringController source; // The source which sends the projectile to the target
+    public ParticleSystem die;
     public void SetupTarget(FiringController source, LiveObject tg, float speed)
     {
         this.target = tg;
         this.source = source;
         projectileSpeed = speed;
+        die.transform.parent = transform;
+        die.transform.localPosition = Vector3.zero;
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         if (target != null)
         {
@@ -24,6 +27,7 @@ public class Projectile : MonoBehaviour
             if (target.LivingStatus == LiveObject.Status.Alive)
             {
                 Vector3 dir = (target.transform.position - transform.position).normalized;
+                transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(dir.y,dir.x)*Mathf.Rad2Deg, Vector3.forward);
                 transform.position = Vector3.MoveTowards(transform.position, target.transform.position, projectileSpeed*Time.deltaTime);
                 //rb.velocity = dir * projectileSpeed;
 
@@ -32,8 +36,7 @@ public class Projectile : MonoBehaviour
                     new Vector2(target.transform.position.x, target.transform.position.y)) <= 0.1f)
                 {
                     // Bring the projectile back to the pool
-                    transform.position = source.poolPosition; 
-                    source.projectilePool.Enqueue(gameObject.transform);
+                    breakProjecttile();
                     // Inform FiringController that it has reached the target
                     source.TargetReached(target);
                 }
@@ -42,10 +45,15 @@ public class Projectile : MonoBehaviour
             {
                 // Bring the projectile back to the pool
                 target = null;
-                gameObject.SetActive(false);
-                source.projectilePool.Enqueue(gameObject.transform);
+                breakProjecttile();
             }
         }
 
+    }
+    public void breakProjecttile(){
+        gameObject.SetActive(false);
+        source.projectilePool.Enqueue(gameObject.transform);
+        die.transform.parent = null;
+        die.Play();
     }
 }

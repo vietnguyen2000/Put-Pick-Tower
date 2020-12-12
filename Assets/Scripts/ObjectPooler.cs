@@ -29,6 +29,7 @@ public class ObjectPooler : MonoBehaviour
     public static ObjectPooler SharedInstance;
     private void Awake()
     {
+        Debug.Log("Awake ObjectPooler is called");
         SharedInstance = this;
     }
     //

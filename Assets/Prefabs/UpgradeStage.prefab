@@ -209,7 +209,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1503719600003227865}
-        m_MethodName: UpdateAttackRate
+        m_MethodName: UpgradeAttackRate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -579,7 +579,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1503719600003227865}
-        m_MethodName: UpdateSpeed
+        m_MethodName: UpgradeSpeed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -721,7 +721,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1503719600003227865}
-        m_MethodName: UpdateHP
+        m_MethodName: UpgradeHP
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -939,7 +939,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1503719600003227865}
-        m_MethodName: UpdatePutpickSpeed
+        m_MethodName: UpgradePutpickSpeed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1074,12 +1074,6 @@ MonoBehaviour:
   CoinRequire: 0
   UpgradeCanvas: {fileID: 1503719600314628829}
   isActive: 0
-  maxHP: 5
-  maxSpeed: 3
-  maxPutpickSpeed: 3
-  maxDamage: 5
-  maxAttackRate: 5
-  maxAttackRange: 5
   buttonHP: {fileID: 1503719599477867023}
   buttonSpeed: {fileID: 1503719599290718596}
   buttonPutpickSpeed: {fileID: 1503719599952603115}
@@ -1880,7 +1874,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1503719600003227865}
-        m_MethodName: UpdateDamage
+        m_MethodName: UpgradeDamage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2022,7 +2016,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1503719600003227865}
-        m_MethodName: UpdateAttackRange
+        m_MethodName: UpgradeAttackRange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

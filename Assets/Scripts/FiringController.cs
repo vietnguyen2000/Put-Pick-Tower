@@ -9,7 +9,6 @@ public class FiringController : MonoBehaviour
     [SerializeField] float poolingCoefficient;  // Coefficient of the projectile pool
     [SerializeField] float projectileSpeed; // Moving speed of the projectile
     [SerializeField] LayerMask monsterLayer; // Monster layer to detect monster around its attack range
-    [SerializeField] Transform endPoint; // The point to which all monsters are coming
     public Vector3 poolPosition { get; set; }   // Position of the projectile pool
     public Queue<Transform> projectilePool { get; set; }    // A queue contains all the projectile pool 
 
@@ -108,9 +107,5 @@ public class FiringController : MonoBehaviour
     public void TargetReached(LiveObject target)
     {
         tower.InflictDamage(target);
-    }
-    private void OnDrawGizmosSelected() {
-        var x = gameObject.GetComponentInParent<Tower>();
-        Gizmos.DrawWireSphere(x.transform.position,x.AttackRange);
     }
 }

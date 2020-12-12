@@ -201,7 +201,7 @@ public class SpawnMonsterManager : MonoBehaviour
     //ObjectPool.pools[i] -> i = 1 type of GameObject
     private void Awake()
     {
-        Debug.Log("Awake is called");
+        Debug.Log("Awake SpawnMonsterManager is called");
         List<GameObject> temp = new List<GameObject>();
         //Debug.Log(ObjectPooler.SharedInstance.pools.Capacity);
         ObjectPooler.SharedInstance.pools.Capacity = EnemyTypeSize(waves, temp);
