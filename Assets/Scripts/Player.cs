@@ -22,6 +22,7 @@ public class Player : LiveObject
         get => putpickTime;
         set => putpickTime = Mathf.Clamp(value,0.2f,0.5f);
     }
+    public GameObject foodPrint;
     [SerializeField]private float putpickTime = 0.5f;
     [SerializeField]private float countPutPickTime;
     [SerializeField] protected JoystickController controller;
@@ -121,6 +122,7 @@ public class Player : LiveObject
             anim.Play(Constants.PUTDOWN,0);
             pickupableObject = null;
             speed = NormalSpeed;
+            foodPrint.SetActive(false);
         }
         else Debug.Log("NuLL object to put down!!!!");
     }
@@ -136,6 +138,7 @@ public class Player : LiveObject
             if (o.gameObject.layer == LayerMask.NameToLayer("Tower")){
                 gameManager.currentTower = o.gameObject.GetComponent<Tower>();
             }
+            foodPrint.SetActive(true);
         }
         else Debug.Log("Null object to pick up!!!");
         
