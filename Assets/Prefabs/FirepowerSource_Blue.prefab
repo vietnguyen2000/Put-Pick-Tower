@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4797911436432509561}
   - component: {fileID: 4737761906302446086}
   m_Layer: 0
-  m_Name: FirepowerSource
+  m_Name: FirepowerSource_Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,7 +52,6 @@ MonoBehaviour:
   monsterLayer:
     serializedVersion: 2
     m_Bits: 2048
-  endPoint: {fileID: 0}
 --- !u!212 &4797911436432509561
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -91,7 +90,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1358978395
   m_SortingLayer: 5
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -4100465979464573075, guid: 195684122d9d99947a2f3d9aa8f808dd,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
