@@ -12,11 +12,12 @@ public class CircleDraw : MonoBehaviour
     public float radius = 2f;
     public LineRenderer lineRenderer;
  
-    void Awake()
+    void Start()
     {
         float sizeValue = (2.0f * Mathf.PI) / theta_scale;
         size = (int)sizeValue;
         size++;
+        lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
         lineRenderer.material.color = color;
         lineRenderer.startWidth = width;

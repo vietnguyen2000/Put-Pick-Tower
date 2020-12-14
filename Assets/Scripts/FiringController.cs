@@ -107,5 +107,6 @@ public class FiringController : MonoBehaviour
     public void TargetReached(LiveObject target)
     {
         tower.InflictDamage(target);
+        MyCamera.Shake(0.05f,0.05f);
     }
 }

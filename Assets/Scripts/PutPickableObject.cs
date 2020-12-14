@@ -59,7 +59,7 @@ public class PutPickableObject : AnimateObject, IPutPickable{
         yield return null;
     }
     protected virtual void afterPutdown(){
-
+        MyCamera.Shake(0.05f,0.1f);
     }
     Vector3 calPositionPutDown(Vector3 playerPos){
         return playerPos + new Vector3(0.5f*player.transform.localScale.x,0,0);

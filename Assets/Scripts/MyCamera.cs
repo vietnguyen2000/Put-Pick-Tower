@@ -4,6 +4,28 @@ using UnityEngine;
 
 public class MyCamera : MonoBehaviour {
     public SpriteRenderer rink;
+    private Vector3 _originalPos;
+    public static MyCamera _instance;
+
+    public static void Shake (float duration, float amount) {
+        _instance.StopAllCoroutines();
+        _instance.StartCoroutine(_instance.cShake(duration, amount));
+    }
+
+    public IEnumerator cShake (float duration, float amount) {
+        float startTime = Time.time;
+        float endTime = startTime + duration;
+
+        while (startTime < endTime && Time.timeScale > 0f) {
+            transform.localPosition = _originalPos + Random.insideUnitSphere * amount;
+
+            startTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+    transform.localPosition = _originalPos;
+}
 
 	// Use this for initialization
 	void Start () {
@@ -21,6 +43,8 @@ public class MyCamera : MonoBehaviour {
             Debug.Log((Camera.main.orthographicSize/2f - rink.bounds.size.y / 4f)/2f);
             transform.position = transform.position + new Vector3(0f,Camera.main.orthographicSize - rink.bounds.size.y / 2f,0f);
         }
+        _originalPos = transform.localPosition;
+        _instance = this;
 
 	}
     private void OnDrawGizmos() {
