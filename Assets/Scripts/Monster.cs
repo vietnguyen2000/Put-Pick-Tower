@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Monster : LiveObject
 {
-    //public enum State {InPool, OnMap};
+    public float damage;
     public Transform[] path;
     //public St state = State.InPool;
     private Vector2 position;
@@ -27,13 +27,14 @@ public class Monster : LiveObject
     {
         base.Update();
         if (currentPointIndex <= path.Length -1) {
+            Move(path[currentPointIndex].position-transform.position,speed);
             if (Vector2.Distance(transform.position, path[currentPointIndex].position) < 0.005f) {
                 currentPointIndex +=1;
-                if (currentPointIndex > path.Length-1) return;
             }
-            Move(path[currentPointIndex].position-transform.position,speed);
+
         }
         else{
+            gameManager.player.ReceiveDamage(damage);
             gameObject.SetActive(false);
         }
         
@@ -44,16 +45,7 @@ public class Monster : LiveObject
     {   
         rb.velocity = direction.normalized*speed;
     }
-    public override void ReceiveDamage(float damage)
-    {
-        //Debug.Log("Hp: " + Hp.ToString() + " plus by " + damage.ToString());
-        this.hp -= damage;
-        if (this.hp <= 0f)
-        {
-            gameObject.SetActive(false);
-            LivingStatus = Status.Dead;
-        }
-    }
+
     public void OnCollisionEnter2D(Collision2D collision)
     {
         //Debug.Log("Hit");

@@ -126,9 +126,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAlwaysVisible: 0
   anim: {fileID: 0}
-  maxHp: 16
+  maxHp: 32
   speed: 0.5
   rb: {fileID: 0}
+  damage: 2
   path: []
 --- !u!1 &9045874185424364074
 GameObject:

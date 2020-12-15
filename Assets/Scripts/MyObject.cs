@@ -40,7 +40,7 @@ public class MyObject : MonoBehaviour, ISpriteRenderer, ICollider
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         col = GetComponentInChildren<Collider2D>();
         if (isAlwaysVisible){
-            GameObject shadowGameObject = new GameObject("ShadowOf"+gameObject.name);
+            GameObject shadowGameObject = new GameObject("Shadow");
             shadowGameObject.transform.parent = spriteRenderer.transform;
             shadowGameObject.transform.localPosition = Vector3.zero;
             shadowVisible = shadowGameObject.AddComponent<SpriteRenderer>();
@@ -52,7 +52,10 @@ public class MyObject : MonoBehaviour, ISpriteRenderer, ICollider
         
     }
     protected virtual void LateUpdate(){
-        if (isAlwaysVisible) shadowVisible.sprite = spriteRenderer.sprite;
+        if (isAlwaysVisible){
+            shadowVisible.sprite = spriteRenderer.sprite;
+            shadowVisible.material = spriteRenderer.material;
+        }
     }
 
 }
