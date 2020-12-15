@@ -4,9 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 public class UpgradeStage : MyObject
 {
-    public Tower CurrentTower;
-    public Player CurrentPlayer;
-    public int CoinRequire;
+    public Sprite enable;
+    public Sprite disnable;
+    [HideInInspector]public Tower CurrentTower;
+    [HideInInspector]public Player CurrentPlayer;
+    public int CoinRequire{
+        get => coinRequireLevel[coinRequireIndex];
+    }
+    public int[] coinRequireLevel;
+    private int coinRequireIndex;
+    
     public Canvas UpgradeCanvas;
     public bool isActive;
 
@@ -19,7 +26,10 @@ public class UpgradeStage : MyObject
     public Button   buttonAttackRange;
 
     private float currentTimeScale;
-    // Start is called before the first frame update
+    protected override void Update() {
+        if (gameManager.numOfCoins>=CoinRequire) spriteRenderer.sprite = enable;
+        else spriteRenderer.sprite = disnable;
+    }
     public void Activate(Player player, Tower tower){
         if (gameManager.numOfCoins>=CoinRequire && isActive == false){
             CurrentPlayer = player;
@@ -44,6 +54,11 @@ public class UpgradeStage : MyObject
             isActive = true;
         }
     }
+    private void updateLevel(){
+        gameManager.numOfCoins -= CoinRequire;
+        if (coinRequireIndex< coinRequireLevel.Length-1)
+            coinRequireIndex +=1;
+    }
     public void Deactivate(){
         UpgradeCanvas.gameObject.SetActive(false);
         Debug.Log("reset time scale");
@@ -53,26 +68,32 @@ public class UpgradeStage : MyObject
     }
     public void UpgradeHP(){
         CurrentPlayer.UpgradeHP();
+        updateLevel();
         Deactivate();
     }
     public void UpgradeSpeed(){
         CurrentPlayer.UpgradeSpeed();
+        updateLevel();
         Deactivate();
     }
     public void UpgradePutpickSpeed(){
         CurrentPlayer.UpgradePutpickSpeed();
+        updateLevel();
         Deactivate();
     }
     public void UpgradeDamage(){
         CurrentTower.UpgradeDamage();
+        updateLevel();
         Deactivate();
     }
     public void UpgradeAttackRate(){
         CurrentTower.UpgradeAttackRate();
+        updateLevel();
         Deactivate();
     }
     public void UpgradeAttackRange(){
         CurrentTower.UpgradeAttackRange();
+        updateLevel();
         Deactivate();
     }
 }

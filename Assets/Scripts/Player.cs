@@ -22,10 +22,11 @@ public class Player : LiveObject
         get => putpickTime;
         set => putpickTime = Mathf.Clamp(value,0.2f,0.5f);
     }
+    public GameObject foodPrint;
     [SerializeField]private float putpickTime = 0.5f;
     [SerializeField]private float countPutPickTime;
     [SerializeField] protected JoystickController controller;
-    [SerializeField] protected PutPickableObject pickupableObject;
+    [SerializeField] protected PutPickableObject putpickableObject;
     [Header("Detect Tower")]
     [SerializeField] private float distanceDetect;
     [SerializeField] private float highDetect;
@@ -53,6 +54,7 @@ public class Player : LiveObject
     {
         isAlwaysVisible = true;
         base.Start();
+        controller = (JoystickController)FindObjectOfType<JoystickController>();
         if (controller == null) controller = GetComponentInChildren<JoystickController>();
         visibleMask = shadowVisible.gameObject.AddComponent<SpriteMask>();
         visibleMask.alphaCutoff = 1;
@@ -64,6 +66,7 @@ public class Player : LiveObject
     }
     protected override void Update()
     {
+        if (LivingStatus == Status.Dead) return;
         base.Update();
         if (countPutPickTime > 0){
             countPutPickTime -= Time.deltaTime;
@@ -74,14 +77,14 @@ public class Player : LiveObject
                 RaycastHit2D hit = hits[i];
                 Collider2D other = hit.collider;
                 if (other.tag == Constants.PUTPICKABLE){
-                    if (pickupableObject == null)
+                    if (putpickableObject == null)
                         if (controller.OnPutPick){
                             PickObjectUp(other.GetComponentInParent<Tower>());
                             return;
                         }
                 }
             }
-            if(pickupableObject != null){
+            if(putpickableObject != null){
                 if (controller.OnPutPick){
                     PutObjectdown();
                     return;
@@ -92,43 +95,44 @@ public class Player : LiveObject
         }
     }
     public override void Move(Vector2 direction, float speed){
-        if (pickupableObject == null){
+        if (putpickableObject == null){
             base.Move(direction,speed);
         }
         else{
             anim.Play(Constants.RUN,0);
             if (direction.x > 0) FaceDirection = FaceDirectionType.Right;
             else if (direction.x <0) FaceDirection = FaceDirectionType.Left;
-            pickupableObject.Anim.Play(Constants.RUNONBAG);
+            putpickableObject.Anim.Play(Constants.RUNONBAG);
             rb.velocity = direction*speed;
         }
     }
     public override void Stop()
     {
         base.Stop();
-        if (pickupableObject != null){
-            pickupableObject.Anim.Play(Constants.IDLEONBAG);
+        if (putpickableObject != null){
+            putpickableObject.Anim.Play(Constants.IDLEONBAG);
         }
         
 
     }
     protected void PutObjectdown()
     {
-        if (pickupableObject != null){
+        if (putpickableObject != null){
             Stop();
             countPutPickTime = putpickTime;
-            pickupableObject.Putdown(putpickTime);
+            putpickableObject.Putdown(putpickTime);
             anim.Play(Constants.PUTDOWN,0);
-            pickupableObject = null;
+            putpickableObject = null;
             speed = NormalSpeed;
+            foodPrint.SetActive(false);
         }
         else Debug.Log("NuLL object to put down!!!!");
     }
     public void PickObjectUp(PutPickableObject o){
-        if (pickupableObject == null){
+        if (putpickableObject == null){
             Stop();
-            pickupableObject = o;
-            pickupableObject.FaceDirection = FaceDirection;
+            putpickableObject = o;
+            putpickableObject.FaceDirection = FaceDirection;
             countPutPickTime = putpickTime;
             anim.Play(Constants.PICKUP,0);
             o.Pickup(this, putpickTime);
@@ -136,10 +140,24 @@ public class Player : LiveObject
             if (o.gameObject.layer == LayerMask.NameToLayer("Tower")){
                 gameManager.currentTower = o.gameObject.GetComponent<Tower>();
             }
+            foodPrint.SetActive(true);
         }
         else Debug.Log("Null object to pick up!!!");
         
 
+    }
+    public override void ReceiveDamage(float damage)
+    {
+        this.hp -= damage;
+        if (this.hp <= 0f)
+        {
+            this.hp = 0f;
+            LivingStatus = Status.Dead;
+            if(putpickableObject != null) putpickableObject.Putdown(putpickTime);
+            anim.Play("Deadth",0);
+        }
+        anim.Play("Hurt",1);
+        MyCamera.Shake(0.05f,0.15f);
     }
     public void UpgradeHP(){
         currentHPLevel+=1;

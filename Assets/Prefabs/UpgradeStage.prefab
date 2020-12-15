@@ -1069,9 +1069,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAlwaysVisible: 0
+  enable: {fileID: 21300000, guid: 25b4c2e7ec1a2a447953e935dfa40f9b, type: 3}
+  disnable: {fileID: 21300000, guid: 62a54cace40015f4faa78ea73804708d, type: 3}
   CurrentTower: {fileID: 0}
   CurrentPlayer: {fileID: 0}
-  CoinRequire: 0
+  coinRequireLevel: 0a0000000f00000014000000190000001e00000023000000
   UpgradeCanvas: {fileID: 1503719600314628829}
   isActive: 0
   buttonHP: {fileID: 1503719599477867023}
@@ -1358,7 +1360,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1379,7 +1381,7 @@ SpriteRenderer:
   m_SortingLayerID: 829060989
   m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 25b4c2e7ec1a2a447953e935dfa40f9b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 62a54cace40015f4faa78ea73804708d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

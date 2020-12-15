@@ -59,7 +59,13 @@ public class LiveObject : AnimateObject, IStatistic, IDamageable, IMoveable
     }
     public virtual void ReceiveDamage(float damage)
     {
-
+        this.hp -= damage;
+        if (this.hp <= 0f)
+        {
+            gameObject.SetActive(false);
+            LivingStatus = Status.Dead;
+        }
+        anim.Play("Hurt",1);
     }
     public virtual void Move(Vector2 direction, float speed)
     // Move object by set velocity to direction*speed and play Walk animation
