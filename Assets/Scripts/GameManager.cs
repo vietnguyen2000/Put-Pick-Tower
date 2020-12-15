@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     private Tower[] listOfTower;
     public Tower currentTower;
     public Player player;
-    public MyCamera myCamera;
     public SpawnMonsterManager spawnMonsterManager;
     public UpgradeStage UpgradeStage;
     public int numOfCoins;
@@ -55,7 +54,6 @@ public class GameManager : MonoBehaviour
         player = (Player)FindObjectOfType<Player>();
         listOfTower = FindObjectsOfType<Tower>();
         UpgradeStage= FindObjectOfType<UpgradeStage>();
-        myCamera = FindObjectOfType<MyCamera>();
         currentTower = listOfTower[0];
         player.CollectCoin = CollectCoin;
     }
