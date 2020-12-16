@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public Player player;
     public SpawnMonsterManager spawnMonsterManager;
     public UpgradeStage UpgradeStage;
+    public SaveLoadManager saveLoadManager;
     public int numOfCoins;
     public int scaleOfCoinPoint;
     public int scaleOfMonsterPoint;
@@ -63,6 +64,7 @@ public class GameManager : MonoBehaviour
         player = (Player)FindObjectOfType<Player>();
         listOfTower = FindObjectsOfType<Tower>();
         UpgradeStage= FindObjectOfType<UpgradeStage>();
+        saveLoadManager = FindObjectOfType<SaveLoadManager>();
         currentTower = listOfTower[0];
         player.CollectCoin = CollectCoin;
     }
@@ -84,6 +86,8 @@ public class GameManager : MonoBehaviour
                       totalTimePlayed * scaleOfTimePoint;
         winMenu.totalpoints.text = totalPoints.ToString();
         winMenu.Canvas.SetActive(true);
+        saveLoadManager.AddCoins(numOfCoins);
+        saveLoadManager.WriteNewPlayerData();
     }
 
     void CollectCoin(){
@@ -96,10 +100,23 @@ public class GameManager : MonoBehaviour
         totalMonsterPoints += score;
     }
     // Update is called once per frame
+    public void BackDoor()
+    {
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+            win();
+            saveLoadManager.AddCoins(15);
+            saveLoadManager.PassNewLevel();
+            saveLoadManager.AddNewlyUnlockedSkin("Green");
+            saveLoadManager.AddNewlyUnlockedTower("Shjt");
+            saveLoadManager.WriteNewPlayerData();
+        }
+    }
     void Update()
     {
         guiStats.UpdatePlayerStats(player.Hp,player.Speed,player.TimePutPick);
         guiStats.UpdateTowerStats(currentTower.towerIcon,currentTower.Damage,currentTower.AttackSpeed,currentTower.AttackRange);
         guiStats.UpdateCoin(numOfCoins,UpgradeStage.CoinRequire);
+        BackDoor();
     }
 }
