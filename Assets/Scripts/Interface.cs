@@ -13,6 +13,7 @@ public interface IStatistic{
 public interface IDamageable{
     //void Damage(float damage);
     void ReceiveDamage(float Damage);
+    void Die();
 }
 public interface IMoveable{
     Vector2 Direction{get;}

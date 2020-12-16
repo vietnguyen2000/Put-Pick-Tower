@@ -11,6 +11,15 @@ public class GameManager : MonoBehaviour
     public SpawnMonsterManager spawnMonsterManager;
     public UpgradeStage UpgradeStage;
     public int numOfCoins;
+    public int scaleOfCoinPoint;
+    public int scaleOfMonsterPoint;
+    public int scaleOfTimePoint;
+
+    private int totalPoints;
+    private int totalCoinsCollected;
+    private int totalTimePlayed;
+
+    private int totalMonsterPoints;
     [System.Serializable]
     public class GUIStats{
         public Text PlayerHP;
@@ -68,13 +77,23 @@ public class GameManager : MonoBehaviour
     public void exit(){
 
     }
-    public void win(){
+    public void win() {
+        winMenu.totalCoins.text = totalCoinsCollected.ToString();
+        winMenu.totalCoinsExtra.text = numOfCoins.ToString();
+        totalPoints = totalCoinsCollected * scaleOfCoinPoint + totalMonsterPoints * scaleOfMonsterPoint + 
+                      totalTimePlayed * scaleOfTimePoint;
+        winMenu.totalpoints.text = totalPoints.ToString();
         winMenu.Canvas.SetActive(true);
-        
     }
 
     void CollectCoin(){
         numOfCoins +=1;
+        totalCoinsCollected += 1;
+    }
+
+    public void MonsterKillScore(int score)
+    {
+        totalMonsterPoints += score;
     }
     // Update is called once per frame
     void Update()
