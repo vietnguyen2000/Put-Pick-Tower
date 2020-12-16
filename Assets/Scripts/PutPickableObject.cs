@@ -30,6 +30,7 @@ public class PutPickableObject : AnimateObject, IPutPickable{
         anim.Play(Constants.PICKUP,0);
         PutPickStatus = PutPickState.Picked;
         this.player = player;
+        FindObjectOfType<AudioManager>().Play("PlayerPickup");
     }
     public virtual void Putdown(float timePutdown)
     {
@@ -37,7 +38,8 @@ public class PutPickableObject : AnimateObject, IPutPickable{
         anim.SetFloat(Constants.PUTPICKSPEED,Constants.DEFAULTPUTPICKTIME/timePutdown);
         anim.Play(Constants.PUTDOWN,0);
         StartCoroutine(PutdownDelay());
-        
+        FindObjectOfType<AudioManager>().Play("PlayerDrop");
+
     }
     IEnumerator PutdownDelay(){
         yield return new WaitForSeconds(Constants.DEFAULTPUTPICKTIME/anim.GetFloat(Constants.PUTPICKSPEED));
@@ -56,6 +58,8 @@ public class PutPickableObject : AnimateObject, IPutPickable{
         PutPickStatus = PutPickState.Put;
         afterPutdown();
         player = null;
+
+
         yield return null;
     }
     protected virtual void afterPutdown(){

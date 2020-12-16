@@ -64,6 +64,8 @@ public class LiveObject : AnimateObject, IStatistic, IDamageable, IMoveable
         {
             gameObject.SetActive(false);
             LivingStatus = Status.Dead;
+
+            FindObjectOfType<AudioManager>().Play("SkeletonDeath");
         }
         anim.Play("Hurt",1);
     }

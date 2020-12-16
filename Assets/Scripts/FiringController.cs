@@ -102,6 +102,8 @@ public class FiringController : MonoBehaviour
         projectile.position = transform.position;
         projectile.GetComponent<Projectile>().SetupTarget(this, target, projectileSpeed);
 
+        FindObjectOfType<AudioManager>().Play("Shoot");
+
     }
     // When get informed that the projectile has reached the target
     public void TargetReached(LiveObject target)

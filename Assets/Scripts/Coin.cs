@@ -11,6 +11,7 @@ public class Coin :CollectableObject
     }
     protected override void Collected(Player player){
         player.CollectCoin();
+        FindObjectOfType<AudioManager>().Play("CollectCoin");
         randomPosition();
     }
 }
