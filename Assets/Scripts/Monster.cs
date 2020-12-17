@@ -6,6 +6,7 @@ public class Monster : LiveObject
 {
     public float damage;
     public Transform[] path;
+    public int killScore;
     //public St state = State.InPool;
     private Vector2 position;
     public float DistanceToEnd{
@@ -45,7 +46,11 @@ public class Monster : LiveObject
     {   
         rb.velocity = direction.normalized*speed;
     }
-
+    public override void Die()
+    {
+        base.Die();
+        gameManager.MonsterKillScore(killScore);
+    }
     public void OnCollisionEnter2D(Collision2D collision)
     {
         //Debug.Log("Hit");

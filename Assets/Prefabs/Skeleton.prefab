@@ -131,6 +131,7 @@ MonoBehaviour:
   rb: {fileID: 0}
   damage: 2
   path: []
+  killScore: 100
 --- !u!1 &9045874185424364074
 GameObject:
   m_ObjectHideFlags: 0

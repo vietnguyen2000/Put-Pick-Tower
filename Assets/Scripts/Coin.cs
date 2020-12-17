@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin :CollectableObject
+public class Coin : CollectableObject
 {
     protected override void Start()
     {
