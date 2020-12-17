@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -51,8 +52,13 @@ public class GameManager : MonoBehaviour
     public WinMenu winMenu;
     void Awake()
     {
-        player = (Player)FindObjectOfType<Player>();
-        listOfTower = FindObjectsOfType<Tower>();
+        GameObject p = GameObject.Instantiate(Resources.Load(GameData.skinChosen),Vector3.zero,new Quaternion()) as GameObject;
+        player = p.GetComponent<Player>();
+        listOfTower = new Tower[GameData.numofTower];
+        for (var i = 0; i < GameData.numofTower; i++){
+            p= GameObject.Instantiate(Resources.Load(GameData.towerChosen[i]),new Vector3(0,0.5f*(i+1),0),new Quaternion()) as GameObject;
+            listOfTower[i] = p.GetComponent<Tower>();
+        }
         UpgradeStage= FindObjectOfType<UpgradeStage>();
         currentTower = listOfTower[0];
         player.CollectCoin = CollectCoin;
@@ -66,7 +72,8 @@ public class GameManager : MonoBehaviour
 
     }
     public void exit(){
-
+        SceneManager.LoadScene("Menu Start",LoadSceneMode.Single);
+        Time.timeScale = 1;
     }
     public void win(){
         winMenu.Canvas.SetActive(true);

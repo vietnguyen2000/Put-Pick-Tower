@@ -6,7 +6,7 @@ using System;
 public class MenuStart : MonoBehaviour
 {
     public RectTransform panel;
-    public RectTransform equipment;
+    public RectTransform skinpanel;
     [System.Serializable]
     public class Map{
         public int numOfTower;
@@ -27,7 +27,7 @@ public class MenuStart : MonoBehaviour
         Vector3 firstPos = new Vector3(-panel.sizeDelta.x/2 + paddingBetweenButton + button.GetComponent<RectTransform>().sizeDelta.x , pady,0);
         GameObject lastButton = GameObject.Instantiate(button,Vector3.zero,new Quaternion(),panel.transform);
         lastButton.transform.localPosition = firstPos;
-        lastButton.GetComponent<Button>().onClick.AddListener(()=>ButtonLevelClicked(0));
+        lastButton.GetComponent<Button>().onClick.AddListener(()=>ButtonLevelClicked(1));
         for (int i = 2; i < maps.Length+1;i++){
             Vector3 position = lastButton.transform.localPosition + new Vector3(button.GetComponent<RectTransform>().sizeDelta.x+paddingBetweenButton,0,0);
             if(i%numOfElementOneLine==1){
@@ -35,17 +35,30 @@ public class MenuStart : MonoBehaviour
             }
             GameObject curButton =  GameObject.Instantiate(button,Vector3.zero,new Quaternion(),panel.transform);
             curButton.transform.localPosition = position;
-            curButton.GetComponent<Button>().onClick.AddListener(()=>ButtonLevelClicked(i));
+            int num = i;
+            curButton.GetComponent<Button>().onClick.AddListener(()=>ButtonLevelClicked(num));
             curButton.GetComponentInChildren<Text>().text = i.ToString();
             lastButton = curButton;
         }
     }
-    void ButtonLevelClicked(int level){
-        levelChosen = level;
-        equipment.gameObject.SetActive(true);
+    public void ButtonLevelClicked(int level){
+        Debug.Log(level);
+        GameData.levelChosen = level;
+        GameData.numofTower = maps[level-1].numOfTower;
+        skinpanel.gameObject.SetActive(true);
+        panel.gameObject.SetActive(false);
     }
+
 
 
     // Update is called once per frame
     
+}
+
+public class GameData{
+    public static int levelChosen;
+    public static int numofTower;
+    public static string skinChosen;
+    public static string[] towerChosen;
+
 }
