@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine;
 
-public class SaveLoadManager : MonoBehaviour
+public class SaveLoadManager
 {
     public class PlayerData
     {
@@ -13,19 +13,25 @@ public class SaveLoadManager : MonoBehaviour
     }
     // Start is called before the first frame update
     public PlayerData SavedData { get; set; }
-
-    string path;
-    void Start()
-    {
-
-        path = "Assets/Resources/player_data.json"; // Change later
+    private SaveLoadManager(){
+        path = Application.persistentDataPath + "player_data.json"; 
         SavedData = new PlayerData();
         if (File.Exists(path))
             ReadSavedData();
         else
             WriteDefaultData();
-
     }
+    private static SaveLoadManager instance = null;
+    public static SaveLoadManager Instance{
+        get{
+            if (instance == null)  
+            {  
+                instance = new SaveLoadManager();  
+            }  
+            return instance;  
+        }
+    }
+    string path;
     public void WriteDefaultData()
     {
         SavedData.skins = new List<string>

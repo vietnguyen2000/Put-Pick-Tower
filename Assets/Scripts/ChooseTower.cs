@@ -15,6 +15,18 @@ public class ChooseTower : MonoBehaviour
         numofTower = GameData.numofTower;
         countText.text = "0/"+numofTower.ToString();
         GameData.towerChosen = new string[numofTower];
+        foreach (var tower in towers)
+        {
+            Image[] images = tower.GetComponentsInChildren<Image>();
+            if (!SaveLoadManager.Instance.SavedData.towers.Contains(tower.gameObject.name)){
+                images[images.Length-1].color = Color.black;
+                tower.interactable = false;
+            }
+            else{
+                images[images.Length-1].color = Color.white;
+                tower.interactable = true;
+            }
+        }
     }
     public void chooseTower(string name){
         GameData.towerChosen[currentCount] = name;

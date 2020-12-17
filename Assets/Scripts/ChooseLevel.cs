@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-public class MenuStart : MonoBehaviour
+public class ChooseLevel : MonoBehaviour
 {
     public RectTransform panel;
     public RectTransform skinpanel;

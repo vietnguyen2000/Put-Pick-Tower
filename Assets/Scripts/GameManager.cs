@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
             listOfTower[i] = p.GetComponent<Tower>();
         }
         UpgradeStage= FindObjectOfType<UpgradeStage>();
-        saveLoadManager = FindObjectOfType<SaveLoadManager>();
+        saveLoadManager = SaveLoadManager.Instance;
         currentTower = listOfTower[0];
         player.CollectCoin = CollectCoin;
     }
