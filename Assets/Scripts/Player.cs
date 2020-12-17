@@ -105,9 +105,9 @@ public class Player : LiveObject
             else if (direction.x <0) FaceDirection = FaceDirectionType.Left;
             putpickableObject.Anim.Play(Constants.RUNONBAG);
             rb.velocity = direction*speed;
-        }
 
-        FindObjectOfType<AudioManager>().Play("PlayerMove");
+            //FindObjectOfType<AudioManager>().Play("PlayerMove");
+        }
     }
     public override void Stop()
     {

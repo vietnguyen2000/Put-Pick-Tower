@@ -2960,7 +2960,7 @@ PrefabInstance:
     - target: {fileID: 152006932091273617, guid: 0969320996b83f342ab52ba5bc6ceea5,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 152006932091273618, guid: 0969320996b83f342ab52ba5bc6ceea5,
         type: 3}
@@ -3204,75 +3204,6 @@ Transform:
   m_Father: {fileID: 1501005390}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1599968104
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1599968105}
-  - component: {fileID: 1599968106}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1599968105
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1599968104}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2112500112}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1599968106
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1599968104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd027478f5498f84c80895e8abf8bb41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sounds:
-  - name: PlayerDrop
-    clip: {fileID: 8300000, guid: d3e7e05c1db4d864e85f6bc89d3c4868, type: 3}
-    volume: 0.78
-    pitch: 1
-    source: {fileID: 0}
-  - name: PlayerPickup
-    clip: {fileID: 8300000, guid: 44dfd9d52c93fb242b1dc105a90c631c, type: 3}
-    volume: 0.78
-    pitch: 1
-    source: {fileID: 0}
-  - name: Shoot
-    clip: {fileID: 8300000, guid: 1544c8af94514c94b90917dafbaa621b, type: 3}
-    volume: 0.78
-    pitch: 1
-    source: {fileID: 0}
-  - name: CollectCoin
-    clip: {fileID: 8300000, guid: f706e29ba0d813c45809b658776cdad2, type: 3}
-    volume: 0.78
-    pitch: 1
-    source: {fileID: 0}
-  - name: SkeletonDeath
-    clip: {fileID: 8300000, guid: 16b553b3baae1af4c90d933bf64cd3c4, type: 3}
-    volume: 0
-    pitch: 0
-    source: {fileID: 0}
 --- !u!1 &1663826734
 GameObject:
   m_ObjectHideFlags: 0
@@ -14564,6 +14495,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8018466720133185070, guid: 8c8ddd721eaddf849bbcae08880d1a39,
+        type: 3}
+      propertyPath: sounds.Array.data[4].volume
+      value: 0.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 8018466720133185070, guid: 8c8ddd721eaddf849bbcae08880d1a39,
+        type: 3}
+      propertyPath: sounds.Array.data[4].pitch
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9140175959566939392, guid: 8c8ddd721eaddf849bbcae08880d1a39,
         type: 3}
       propertyPath: m_Enabled
@@ -14571,12 +14512,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c8ddd721eaddf849bbcae08880d1a39, type: 3}
---- !u!4 &2112500112 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7779089746833055163, guid: 8c8ddd721eaddf849bbcae08880d1a39,
-    type: 3}
-  m_PrefabInstance: {fileID: 2112500111}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1503719599939610278
 PrefabInstance:
   m_ObjectHideFlags: 0
