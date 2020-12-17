@@ -20,9 +20,13 @@ public class SaveLoadManager : MonoBehaviour
 
         path = "Assets/Resources/player_data.json"; // Change later
         SavedData = new PlayerData();
-        ReadSavedData();
+        if (File.Exists(path))
+            ReadSavedData();
+        else
+            WriteDefaultData();
+
     }
-    public void WriteDefault()
+    public void WriteDefaultData()
     {
         SavedData.skins = new List<string>
         {
