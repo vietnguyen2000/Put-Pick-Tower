@@ -6,7 +6,7 @@ using System;
 using UnityEngine.SceneManagement;
 public class ChooseTower : MonoBehaviour
 {
-    public Button[] towers;
+    public ButtonNeedToBuy[] towers;
     public Text countText;
     private int currentCount = 0;
     private int numofTower = 1;
@@ -15,16 +15,15 @@ public class ChooseTower : MonoBehaviour
         numofTower = GameData.numofTower;
         countText.text = "0/"+numofTower.ToString();
         GameData.towerChosen = new string[numofTower];
-        foreach (var tower in towers)
+        for( int i= 0 ; i < towers.Length; i++)
         {
-            Image[] images = tower.GetComponentsInChildren<Image>();
-            if (!SaveLoadManager.Instance.SavedData.towers.Contains(tower.gameObject.name)){
-                images[images.Length-1].color = Color.black;
-                tower.interactable = false;
+            var index = i;
+            if (!SaveLoadManager.Instance.SavedData.towers.Contains(towers[index].button.gameObject.name)){
+                ButtonControl.disableAllActionOnClick(towers[index].button);
+                ButtonControl.addBuyRequireButton(towers[index].button,towers[index].cost,()=>SaveLoadManager.Instance.AddNewlyUnlockedTower(towers[index].button.gameObject.name));
             }
             else{
-                images[images.Length-1].color = Color.white;
-                tower.interactable = true;
+                ButtonControl.enableAllActionOnClick(towers[index].button);
             }
         }
     }

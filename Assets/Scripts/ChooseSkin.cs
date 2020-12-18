@@ -5,18 +5,20 @@ using UnityEngine.UI;
 using System;
 public class ChooseSkin : MonoBehaviour
 {
-    public Button[] skins;
+    public ButtonNeedToBuy[] skins;
+    private Button.ButtonClickedEvent[] defaultClicked;
+
     private void OnEnable() {
-        foreach (var skin in skins)
+
+        for( int i= 0 ; i < skins.Length; i++)
         {
-            Image[] images = skin.GetComponentsInChildren<Image>();
-            if (!SaveLoadManager.Instance.SavedData.skins.Contains(skin.gameObject.name)){
-                images[images.Length-1].color = Color.black;
-                skin.interactable = false;
+            var index = i;
+            if (!SaveLoadManager.Instance.SavedData.skins.Contains(skins[index].button.gameObject.name)){
+                ButtonControl.disableAllActionOnClick(skins[index].button);
+                ButtonControl.addBuyRequireButton(skins[index].button,skins[index].cost,()=>SaveLoadManager.Instance.AddNewlyUnlockedSkin(skins[index].button.gameObject.name));
             }
             else{
-                images[images.Length-1].color = Color.white;
-                skin.interactable = true;
+                ButtonControl.enableAllActionOnClick(skins[index].button);
             }
         }
     }

@@ -39,6 +39,9 @@ public class ChooseLevel : MonoBehaviour
             curButton.GetComponent<Button>().onClick.AddListener(()=>ButtonLevelClicked(num));
             curButton.GetComponentInChildren<Text>().text = i.ToString();
             lastButton = curButton;
+            if (i>SaveLoadManager.Instance.SavedData.passedLevel+1){
+                lastButton.GetComponent<Button>().interactable = false;
+            }
         }
     }
     public void ButtonLevelClicked(int level){
