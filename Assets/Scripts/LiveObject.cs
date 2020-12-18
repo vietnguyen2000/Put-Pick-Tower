@@ -63,6 +63,7 @@ public class LiveObject : AnimateObject, IStatistic, IDamageable, IMoveable
         if (this.hp <= 0f)
         {
             Die();
+            FindObjectOfType<AudioManager>().Play("SkeletonDeath");
         }
         anim.Play("Hurt",1);
     }

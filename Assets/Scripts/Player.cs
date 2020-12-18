@@ -32,6 +32,7 @@ public class Player : LiveObject
     [SerializeField] private float highDetect;
     [SerializeField] private float pady;
     private SpriteMask visibleMask;
+
     private Vector2 positionOfRectDetect{
         get {
             return new Vector2(transform.position.x + distanceDetect*(int)FaceDirection/2,
@@ -104,6 +105,8 @@ public class Player : LiveObject
             else if (direction.x <0) FaceDirection = FaceDirectionType.Left;
             putpickableObject.Anim.Play(Constants.RUNONBAG);
             rb.velocity = direction*speed;
+
+            //FindObjectOfType<AudioManager>().Play("PlayerMove");
         }
     }
     public override void Stop()
@@ -122,6 +125,7 @@ public class Player : LiveObject
             countPutPickTime = putpickTime;
             putpickableObject.Putdown(putpickTime);
             anim.Play(Constants.PUTDOWN,0);
+
             putpickableObject = null;
             speed = NormalSpeed;
             foodPrint.SetActive(false);
@@ -135,6 +139,7 @@ public class Player : LiveObject
             putpickableObject.FaceDirection = FaceDirection;
             countPutPickTime = putpickTime;
             anim.Play(Constants.PICKUP,0);
+            
             o.Pickup(this, putpickTime);
             speed = CarrySpeed;
             if (o.gameObject.layer == LayerMask.NameToLayer("Tower")){
