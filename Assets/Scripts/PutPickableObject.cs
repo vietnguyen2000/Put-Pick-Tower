@@ -38,7 +38,6 @@ public class PutPickableObject : AnimateObject, IPutPickable{
         anim.SetFloat(Constants.PUTPICKSPEED,Constants.DEFAULTPUTPICKTIME/timePutdown);
         anim.Play(Constants.PUTDOWN,0);
         StartCoroutine(PutdownDelay());
-        FindObjectOfType<AudioManager>().Play("PlayerDrop");
 
     }
     IEnumerator PutdownDelay(){
@@ -64,6 +63,7 @@ public class PutPickableObject : AnimateObject, IPutPickable{
     }
     protected virtual void afterPutdown(){
         MyCamera.Shake(0.05f,0.1f);
+        FindObjectOfType<AudioManager>().Play("PlayerDrop");
     }
     Vector3 calPositionPutDown(Vector3 playerPos){
         return playerPos + new Vector3(0.5f*player.transform.localScale.x,0,0);
