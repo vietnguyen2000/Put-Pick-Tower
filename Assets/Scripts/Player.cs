@@ -154,7 +154,10 @@ public class Player : LiveObject
             this.hp = 0f;
             LivingStatus = Status.Dead;
             if(putpickableObject != null) putpickableObject.Putdown(putpickTime);
+            Stop();
             anim.Play("Deadth",0);
+            gameManager.lose();
+            gameManager.spawnMonsterManager.enabled=false;
         }
         anim.Play("Hurt",1);
         MyCamera.Shake(0.05f,0.15f);

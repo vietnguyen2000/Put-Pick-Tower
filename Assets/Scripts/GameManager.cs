@@ -51,15 +51,16 @@ public class GameManager : MonoBehaviour
         }
     }
     [System.Serializable]
-    public class WinMenu{
+    public class GameOverMenu{
         public GameObject Canvas;
+        public Text title;
         public Text totalTime;
         public Text totalCoins;
         public Text totalCoinsExtra;
         public Text totalpoints;
     }
     public GUIStats guiStats;
-    public WinMenu winMenu;
+    public GameOverMenu gameOverMenu;
     void Awake()
     {
         GameObject p = GameObject.Instantiate(Resources.Load(GameData.skinChosen),Vector3.zero,new Quaternion()) as GameObject;
@@ -70,6 +71,7 @@ public class GameManager : MonoBehaviour
             listOfTower[i] = p.GetComponent<Tower>();
         }
         UpgradeStage= FindObjectOfType<UpgradeStage>();
+        spawnMonsterManager = FindObjectOfType<SpawnMonsterManager>();
         saveLoadManager = SaveLoadManager.Instance;
         currentTower = listOfTower[0];
         player.CollectCoin = CollectCoin;
@@ -87,14 +89,25 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
     }
     public void win() {
-        winMenu.totalCoins.text = totalCoinsCollected.ToString();
-        winMenu.totalCoinsExtra.text = numOfCoins.ToString();
+        gameOverMenu.title.text="WIN";
+        gameOverMenu.totalCoins.text = totalCoinsCollected.ToString();
+        gameOverMenu.totalCoinsExtra.text = numOfCoins.ToString();
         totalPoints = totalCoinsCollected * scaleOfCoinPoint + totalMonsterPoints * scaleOfMonsterPoint + 
                       totalTimePlayed * scaleOfTimePoint;
-        winMenu.totalpoints.text = totalPoints.ToString();
-        winMenu.Canvas.SetActive(true);
+        gameOverMenu.totalpoints.text = totalPoints.ToString();
+        gameOverMenu.Canvas.SetActive(true);
         saveLoadManager.AddCoins(numOfCoins);
-        saveLoadManager.WriteNewPlayerData();
+        saveLoadManager.PassNewLevel();
+        // saveLoadManager.WriteNewPlayerData();
+    }
+    public void lose(){
+        gameOverMenu.title.text="LOSE";
+        gameOverMenu.totalCoins.text = totalCoinsCollected.ToString();
+        gameOverMenu.totalCoinsExtra.text = numOfCoins.ToString();
+        totalPoints = totalCoinsCollected * scaleOfCoinPoint + totalMonsterPoints * scaleOfMonsterPoint + 
+                      totalTimePlayed * scaleOfTimePoint;
+        gameOverMenu.totalpoints.text = totalPoints.ToString();
+        gameOverMenu.Canvas.SetActive(true);
     }
 
     void CollectCoin(){
@@ -107,23 +120,23 @@ public class GameManager : MonoBehaviour
         totalMonsterPoints += score;
     }
     // Update is called once per frame
-    public void BackDoor()
-    {
-        if (Input.GetKeyDown(KeyCode.F12))
-        {
-            win();
-            saveLoadManager.AddCoins(15);
-            saveLoadManager.PassNewLevel();
-            saveLoadManager.AddNewlyUnlockedSkin("Green");
-            saveLoadManager.AddNewlyUnlockedTower("Shjt");
-            saveLoadManager.WriteNewPlayerData();
-        }
-    }
+    // public void BackDoor()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.F12))
+    //     {
+    //         win();
+    //         saveLoadManager.AddCoins(15);
+    //         saveLoadManager.PassNewLevel();
+    //         saveLoadManager.AddNewlyUnlockedSkin("Green");
+    //         saveLoadManager.AddNewlyUnlockedTower("Shjt");
+    //         saveLoadManager.WriteNewPlayerData();
+    //     }
+    // }
     void Update()
     {
         guiStats.UpdatePlayerStats(player.Hp,player.Speed,player.TimePutPick);
         guiStats.UpdateTowerStats(currentTower.towerIcon,currentTower.Damage,currentTower.AttackSpeed,currentTower.AttackRange);
         guiStats.UpdateCoin(numOfCoins,UpgradeStage.CoinRequire);
-        BackDoor();
+        // BackDoor();
     }
 }

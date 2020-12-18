@@ -1360,9 +1360,9 @@ MonoBehaviour:
   - button: {fileID: 4501533740358003330}
     cost: 0
   - button: {fileID: 658638323726785907}
-    cost: 0
+    cost: 50
   - button: {fileID: 658638323754447145}
-    cost: 0
+    cost: 100
 --- !u!1 &658638322765876691
 GameObject:
   m_ObjectHideFlags: 0
@@ -3698,7 +3698,7 @@ MonoBehaviour:
   - button: {fileID: 658638322330890453}
     cost: 0
   - button: {fileID: 658638322528127884}
-    cost: 0
+    cost: 200
   countText: {fileID: 658638322523995660}
 --- !u!1 &658638324312969865
 GameObject:
