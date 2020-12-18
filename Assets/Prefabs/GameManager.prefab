@@ -1496,22 +1496,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: PlayerDrop
-    clip: {fileID: 8300000, guid: d3e7e05c1db4d864e85f6bc89d3c4868, type: 3}
+    clip: {fileID: 8300000, guid: 07a6ff94a5b860f43ad29797905b7afa, type: 3}
     volume: 0.78
     pitch: 1
     source: {fileID: 0}
   - name: PlayerPickup
-    clip: {fileID: 8300000, guid: 44dfd9d52c93fb242b1dc105a90c631c, type: 3}
+    clip: {fileID: 8300000, guid: 14b5fcb03c45d4c40ac76b700c666824, type: 3}
     volume: 0.78
     pitch: 1
     source: {fileID: 0}
   - name: Shoot
-    clip: {fileID: 8300000, guid: 1544c8af94514c94b90917dafbaa621b, type: 3}
+    clip: {fileID: 8300000, guid: 7411bfa2379b88e43bc53f827ff958cf, type: 3}
     volume: 0.78
     pitch: 1
     source: {fileID: 0}
   - name: CollectCoin
-    clip: {fileID: 8300000, guid: f706e29ba0d813c45809b658776cdad2, type: 3}
+    clip: {fileID: 8300000, guid: ab595097113c47b4186efe4de1532d2a, type: 3}
     volume: 0.78
     pitch: 1
     source: {fileID: 0}
