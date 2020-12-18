@@ -9,7 +9,7 @@ public class CircleDraw : MonoBehaviour
     int size; //Total number of points in circle
     public float width = 0.05f;
     public Color color;
-    public float radius = 2f;
+    public float radius;
     public LineRenderer lineRenderer;
  
     void Start()

@@ -385,7 +385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 0.05
   color: {r: 0, g: 0.58431375, b: 0.91372555, a: 0.49803922}
-  radius: 2
+  radius: 1.5
   lineRenderer: {fileID: 0}
 --- !u!1 &4343943043588788753
 GameObject:

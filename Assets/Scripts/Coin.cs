@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Coin :CollectableObject
+public class Coin : CollectableObject
 {
     protected override void Start()
     {
@@ -11,6 +11,7 @@ public class Coin :CollectableObject
     }
     protected override void Collected(Player player){
         player.CollectCoin();
+        FindObjectOfType<AudioManager>().Play("CollectCoin");
         randomPosition();
     }
 }

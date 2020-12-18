@@ -22,8 +22,6 @@ public class SpawnMonsterManager : MonoBehaviour
 
     public Wave[] waves;
     private int nextWave = 0;
-
-    public Transform[] spawnPoints;
     public float waveCountDown;
     public string enemyTag = "Enemy";
 
@@ -31,15 +29,29 @@ public class SpawnMonsterManager : MonoBehaviour
 
     private Spawn_State state = Spawn_State.Counting;
     protected GameManager gameManager;
+    public GameObject Portal;
 
-
+    private void Awake()
+    {
+        Debug.Log("Awake SpawnMonsterManager is called");
+        List<GameObject> temp = new List<GameObject>();
+        //Debug.Log(ObjectPooler.SharedInstance.pools.Capacity);
+        ObjectPooler.SharedInstance.pools.Capacity = EnemyTypeSize(waves, temp);
+        //Debug.Log(ObjectPooler.SharedInstance.pools.Capacity);
+        int[] sized = EnemySize(waves, temp);
+        for (int i = 0; i < ObjectPooler.SharedInstance.pools.Capacity; i++)
+        {
+            ObjectPooler.Pool newPool = new ObjectPooler.Pool(temp[i].name, temp[i], sized[i]);
+            ObjectPooler.SharedInstance.pools.Add(newPool);
+            Debug.Log("Count: " + ObjectPooler.SharedInstance.pools.Count);
+            Debug.Log("Enemy pooled: " + temp[i].name);
+        }
+        ObjectPooler.Pool portalPool = new ObjectPooler.Pool(Portal.name,Portal,10);
+        ObjectPooler.SharedInstance.pools.Add(portalPool);
+    }
     // Start is called before the first frame update
     void Start()
     {
-        if (spawnPoints.Length == 0)
-        {
-            Debug.LogError("No spawn points referenced.");
-        }
         waveCountDown = waves[0].spawnAfterTime;
         gameManager = (GameManager)FindObjectOfType<GameManager>();
     }
@@ -135,7 +147,7 @@ public class SpawnMonsterManager : MonoBehaviour
     IEnumerator SpawnWave(Wave _wave)
     {
         Debug.Log("Spawning Wave: " + _wave.name);
-
+        GameObject portal = ObjectPooler.SharedInstance.SpawnFromPool(Portal.name, _wave.path[0].position, new Quaternion());
         state = Spawn_State.Spawning;
 
         for (int i = 0; i < _wave.count; i++)
@@ -145,7 +157,7 @@ public class SpawnMonsterManager : MonoBehaviour
         }
 
         state = Spawn_State.Waiting;
-
+        portal.gameObject.SetActive(false);
         yield break;
     }
 
@@ -199,22 +211,6 @@ public class SpawnMonsterManager : MonoBehaviour
     }
 
     //ObjectPool.pools[i] -> i = 1 type of GameObject
-    private void Awake()
-    {
-        Debug.Log("Awake SpawnMonsterManager is called");
-        List<GameObject> temp = new List<GameObject>();
-        //Debug.Log(ObjectPooler.SharedInstance.pools.Capacity);
-        ObjectPooler.SharedInstance.pools.Capacity = EnemyTypeSize(waves, temp);
-        //Debug.Log(ObjectPooler.SharedInstance.pools.Capacity);
-        int[] sized = EnemySize(waves, temp);
-        for (int i = 0; i < ObjectPooler.SharedInstance.pools.Capacity; i++)
-        {
-            ObjectPooler.Pool newPool = new ObjectPooler.Pool(temp[i].name, temp[i], sized[i]);
-            ObjectPooler.SharedInstance.pools.Add(newPool);
-            Debug.Log("Count: " + ObjectPooler.SharedInstance.pools.Count);
-            Debug.Log("Enemy pooled: " + temp[i].name);
-        }
-    }
 
     //Get the size of List<ObjectPool> ObjectPool.pools
     //Count each type of GameObject

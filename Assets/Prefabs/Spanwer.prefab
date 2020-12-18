@@ -57,11 +57,9 @@ MonoBehaviour:
     - {fileID: 0}
     option: 0
     spawnAfterTime: 3
-  spawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
   waveCountDown: 1
   enemyTag: Enemy
+  Portal: {fileID: 3450313362909981259, guid: 4a3c9d64785719b44a71db739c1a2212, type: 3}
 --- !u!114 &5718648120107384093
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,7 +72,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948818113495b5641b62658162f168ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileMap: {fileID: 0}
   availablePlaces: []
   coinObject: {fileID: 9034350227544961660, guid: 8007f53c3cf7a2745a5f83b46ac9e2e8,
     type: 3}

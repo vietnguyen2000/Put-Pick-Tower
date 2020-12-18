@@ -62,10 +62,15 @@ public class LiveObject : AnimateObject, IStatistic, IDamageable, IMoveable
         this.hp -= damage;
         if (this.hp <= 0f)
         {
-            gameObject.SetActive(false);
-            LivingStatus = Status.Dead;
+            Die();
+            FindObjectOfType<AudioManager>().Play("SkeletonDeath");
         }
         anim.Play("Hurt",1);
+    }
+    public virtual void Die()
+    {
+        gameObject.SetActive(false);
+        LivingStatus = Status.Dead;
     }
     public virtual void Move(Vector2 direction, float speed)
     // Move object by set velocity to direction*speed and play Walk animation

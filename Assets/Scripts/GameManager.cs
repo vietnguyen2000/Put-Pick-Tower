@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -10,7 +11,17 @@ public class GameManager : MonoBehaviour
     public Player player;
     public SpawnMonsterManager spawnMonsterManager;
     public UpgradeStage UpgradeStage;
+    public SaveLoadManager saveLoadManager;
     public int numOfCoins;
+    public int scaleOfCoinPoint;
+    public int scaleOfMonsterPoint;
+    public int scaleOfTimePoint;
+
+    private int totalPoints;
+    private int totalCoinsCollected;
+    private int totalTimePlayed;
+
+    private int totalMonsterPoints;
     [System.Serializable]
     public class GUIStats{
         public Text PlayerHP;
@@ -40,20 +51,28 @@ public class GameManager : MonoBehaviour
         }
     }
     [System.Serializable]
-    public class WinMenu{
+    public class GameOverMenu{
         public GameObject Canvas;
+        public Text title;
         public Text totalTime;
         public Text totalCoins;
         public Text totalCoinsExtra;
         public Text totalpoints;
     }
     public GUIStats guiStats;
-    public WinMenu winMenu;
+    public GameOverMenu gameOverMenu;
     void Awake()
     {
-        player = (Player)FindObjectOfType<Player>();
-        listOfTower = FindObjectsOfType<Tower>();
+        GameObject p = GameObject.Instantiate(Resources.Load(GameData.skinChosen),Vector3.zero,new Quaternion()) as GameObject;
+        player = p.GetComponent<Player>();
+        listOfTower = new Tower[GameData.numofTower];
+        for (var i = 0; i < GameData.numofTower; i++){
+            p= GameObject.Instantiate(Resources.Load(GameData.towerChosen[i]),new Vector3(0,0.5f*(i+1),0),new Quaternion()) as GameObject;
+            listOfTower[i] = p.GetComponent<Tower>();
+        }
         UpgradeStage= FindObjectOfType<UpgradeStage>();
+        spawnMonsterManager = FindObjectOfType<SpawnMonsterManager>();
+        saveLoadManager = SaveLoadManager.Instance;
         currentTower = listOfTower[0];
         player.CollectCoin = CollectCoin;
     }
@@ -66,21 +85,58 @@ public class GameManager : MonoBehaviour
 
     }
     public void exit(){
-
+        SceneManager.LoadScene("Menu Start",LoadSceneMode.Single);
+        Time.timeScale = 1;
     }
-    public void win(){
-        winMenu.Canvas.SetActive(true);
-        
+    public void win() {
+        gameOverMenu.title.text="WIN";
+        gameOverMenu.totalCoins.text = totalCoinsCollected.ToString();
+        gameOverMenu.totalCoinsExtra.text = numOfCoins.ToString();
+        totalPoints = totalCoinsCollected * scaleOfCoinPoint + totalMonsterPoints * scaleOfMonsterPoint + 
+                      totalTimePlayed * scaleOfTimePoint;
+        gameOverMenu.totalpoints.text = totalPoints.ToString();
+        gameOverMenu.Canvas.SetActive(true);
+        saveLoadManager.AddCoins(numOfCoins);
+        saveLoadManager.PassNewLevel();
+        // saveLoadManager.WriteNewPlayerData();
+    }
+    public void lose(){
+        gameOverMenu.title.text="LOSE";
+        gameOverMenu.totalCoins.text = totalCoinsCollected.ToString();
+        gameOverMenu.totalCoinsExtra.text = numOfCoins.ToString();
+        totalPoints = totalCoinsCollected * scaleOfCoinPoint + totalMonsterPoints * scaleOfMonsterPoint + 
+                      totalTimePlayed * scaleOfTimePoint;
+        gameOverMenu.totalpoints.text = totalPoints.ToString();
+        gameOverMenu.Canvas.SetActive(true);
     }
 
     void CollectCoin(){
         numOfCoins +=1;
+        totalCoinsCollected += 1;
+    }
+
+    public void MonsterKillScore(int score)
+    {
+        totalMonsterPoints += score;
     }
     // Update is called once per frame
+    // public void BackDoor()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.F12))
+    //     {
+    //         win();
+    //         saveLoadManager.AddCoins(15);
+    //         saveLoadManager.PassNewLevel();
+    //         saveLoadManager.AddNewlyUnlockedSkin("Green");
+    //         saveLoadManager.AddNewlyUnlockedTower("Shjt");
+    //         saveLoadManager.WriteNewPlayerData();
+    //     }
+    // }
     void Update()
     {
         guiStats.UpdatePlayerStats(player.Hp,player.Speed,player.TimePutPick);
         guiStats.UpdateTowerStats(currentTower.towerIcon,currentTower.Damage,currentTower.AttackSpeed,currentTower.AttackRange);
         guiStats.UpdateCoin(numOfCoins,UpgradeStage.CoinRequire);
+        // BackDoor();
     }
 }

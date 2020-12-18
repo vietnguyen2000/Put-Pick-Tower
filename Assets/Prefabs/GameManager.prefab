@@ -1365,7 +1365,7 @@ GameObject:
   - component: {fileID: 255797776497904156}
   - component: {fileID: 5675008109527267308}
   m_Layer: 0
-  m_Name: Win
+  m_Name: GameOverMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1386,9 +1386,9 @@ RectTransform:
   m_Father: {fileID: 4474892370684946128}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -199, y: -351.25}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!223 &2887513416463808658
@@ -1451,6 +1451,80 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &6357731632838344566
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6032592155357490380}
+  - component: {fileID: 8018466720133185070}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6032592155357490380
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6357731632838344566}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7779089746833055163}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8018466720133185070
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6357731632838344566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd027478f5498f84c80895e8abf8bb41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: PlayerDrop
+    clip: {fileID: 8300000, guid: 07a6ff94a5b860f43ad29797905b7afa, type: 3}
+    volume: 0.78
+    pitch: 1
+    source: {fileID: 0}
+  - name: PlayerPickup
+    clip: {fileID: 8300000, guid: 14b5fcb03c45d4c40ac76b700c666824, type: 3}
+    volume: 0.78
+    pitch: 1
+    source: {fileID: 0}
+  - name: Shoot
+    clip: {fileID: 8300000, guid: 7411bfa2379b88e43bc53f827ff958cf, type: 3}
+    volume: 0.78
+    pitch: 1
+    source: {fileID: 0}
+  - name: CollectCoin
+    clip: {fileID: 8300000, guid: ab595097113c47b4186efe4de1532d2a, type: 3}
+    volume: 0.78
+    pitch: 1
+    source: {fileID: 0}
+  - name: SkeletonDeath
+    clip: {fileID: 8300000, guid: 16b553b3baae1af4c90d933bf64cd3c4, type: 3}
+    volume: 0
+    pitch: 0
+    source: {fileID: 0}
+  - name: PlayerMove
+    clip: {fileID: 8300000, guid: e95f302025367d343848c0ba5b8c8903, type: 3}
+    volume: 0.78
+    pitch: 1
+    source: {fileID: 0}
 --- !u!1 &6583387303876497421
 GameObject:
   m_ObjectHideFlags: 0
@@ -3592,6 +3666,7 @@ Transform:
   - {fileID: 4474892370684946128}
   - {fileID: 7093573811987746147}
   - {fileID: 3905496448469943780}
+  - {fileID: 6032592155357490380}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3612,6 +3687,9 @@ MonoBehaviour:
   spawnMonsterManager: {fileID: 0}
   UpgradeStage: {fileID: 0}
   numOfCoins: 0
+  scaleOfCoinPoint: 20
+  scaleOfMonsterPoint: 20
+  scaleOfTimePoint: 1
   guiStats:
     PlayerHP: {fileID: 7779089746485287621}
     PlayerSpeed: {fileID: 7779089747194235431}
@@ -3623,8 +3701,9 @@ MonoBehaviour:
     Round: {fileID: 7779089746171885976}
     PlayerIcon: {fileID: 7779089745669106134}
     TowerIcon: {fileID: 7779089747373313914}
-  winMenu:
+  gameOverMenu:
     Canvas: {fileID: 8117309037014118881}
+    title: {fileID: 92575453917090064}
     totalTime: {fileID: 7755918897832125739}
     totalCoins: {fileID: 8671044590019718373}
     totalCoinsExtra: {fileID: 6710404891745432542}
@@ -5218,7 +5297,7 @@ GameObject:
   - component: {fileID: 4474892370684946128}
   - component: {fileID: 3594245268115945635}
   m_Layer: 5
-  m_Name: Win
+  m_Name: GameOver
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
