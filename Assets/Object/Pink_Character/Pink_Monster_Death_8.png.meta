@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: 9d9ce3af7b92b7d4aab665b7bbb820ca
+guid: 885f4536c9ab68243a8e7b6ece1f0378
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2222671339359911295
-    second: Pink_Monster_Idle_4_0
+      213: -415694796541141570
+    second: Pink_Monster_Death_8_0
   - first:
-      213: 2425431467501175809
-    second: Pink_Monster_Idle_4_1
+      213: 8354886380103956514
+    second: Pink_Monster_Death_8_1
   - first:
-      213: 6869693272701700846
-    second: Pink_Monster_Idle_4_2
+      213: -2651731702063500372
+    second: Pink_Monster_Death_8_2
   - first:
-      213: 2040477417508173474
-    second: Pink_Monster_Idle_4_3
+      213: -8177007171791698425
+    second: Pink_Monster_Death_8_3
   - first:
-      213: 1723333203795510872
-    second: Pink_Monster_Idle_4_0
+      213: -1282923075553524505
+    second: Pink_Monster_Death_8_4
   - first:
-      213: 2711752299455242883
-    second: Pink_Monster_Idle_4_1
+      213: 3644297655231199613
+    second: Pink_Monster_Death_8_5
   - first:
-      213: 1767364635256546064
-    second: Pink_Monster_Idle_4_2
+      213: 2752458482648294865
+    second: Pink_Monster_Death_8_6
   - first:
-      213: 2827651428915927098
-    second: Pink_Monster_Idle_4_3
+      213: -1722521565084019806
+    second: Pink_Monster_Death_8_7
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -71,7 +71,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -122,7 +122,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pink_Monster_Idle_4_0
+      name: Pink_Monster_Death_8_0
       rect:
         serializedVersion: 2
         x: 0
@@ -136,14 +136,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8560ed11b628ae710800000000000000
-      internalID: 1723333203795510872
+      spriteID: ebddf25f8c72b3af0800000000000000
+      internalID: -415694796541141570
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pink_Monster_Idle_4_1
+      name: Pink_Monster_Death_8_1
       rect:
         serializedVersion: 2
         x: 32
@@ -157,14 +157,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 382e0ef495412a520800000000000000
-      internalID: 2711752299455242883
+      spriteID: 22878d885e482f370800000000000000
+      internalID: 8354886380103956514
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pink_Monster_Idle_4_2
+      name: Pink_Monster_Death_8_2
       rect:
         serializedVersion: 2
         x: 64
@@ -178,14 +178,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 013ed0995c0f68810800000000000000
-      internalID: 1767364635256546064
+      spriteID: ca3fcd20118233bd0800000000000000
+      internalID: -2651731702063500372
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pink_Monster_Idle_4_3
+      name: Pink_Monster_Death_8_3
       rect:
         serializedVersion: 2
         x: 96
@@ -199,8 +199,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a38d8293ef5dd3720800000000000000
-      internalID: 2827651428915927098
+      spriteID: 706c8870d4f658e80800000000000000
+      internalID: -8177007171791698425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink_Monster_Death_8_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e40b7f8244223ee0800000000000000
+      internalID: -1282923075553524505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink_Monster_Death_8_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7938dbb865239230800000000000000
+      internalID: 3644297655231199613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink_Monster_Death_8_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d523452862b23620800000000000000
+      internalID: 2752458482648294865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink_Monster_Death_8_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a3973b43cf5818e0800000000000000
+      internalID: -1722521565084019806
       vertices: []
       indices: 
       edges: []

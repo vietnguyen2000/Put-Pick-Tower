@@ -1,31 +1,25 @@
 fileFormatVersion: 2
-guid: 9d9ce3af7b92b7d4aab665b7bbb820ca
+guid: dd124b2257e1971439370586bb7ef762
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2222671339359911295
-    second: Pink_Monster_Idle_4_0
+      213: 4988797014474009180
+    second: Pink_Monster_Walk_6_0
   - first:
-      213: 2425431467501175809
-    second: Pink_Monster_Idle_4_1
+      213: -4114854856959736440
+    second: Pink_Monster_Walk_6_1
   - first:
-      213: 6869693272701700846
-    second: Pink_Monster_Idle_4_2
+      213: 8852617987441630179
+    second: Pink_Monster_Walk_6_2
   - first:
-      213: 2040477417508173474
-    second: Pink_Monster_Idle_4_3
+      213: 2928625931318688351
+    second: Pink_Monster_Walk_6_3
   - first:
-      213: 1723333203795510872
-    second: Pink_Monster_Idle_4_0
+      213: 7152728969252384440
+    second: Pink_Monster_Walk_6_4
   - first:
-      213: 2711752299455242883
-    second: Pink_Monster_Idle_4_1
-  - first:
-      213: 1767364635256546064
-    second: Pink_Monster_Idle_4_2
-  - first:
-      213: 2827651428915927098
-    second: Pink_Monster_Idle_4_3
+      213: 1435900599014651832
+    second: Pink_Monster_Walk_6_5
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -71,7 +65,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -122,7 +116,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pink_Monster_Idle_4_0
+      name: Pink_Monster_Walk_6_0
       rect:
         serializedVersion: 2
         x: 0
@@ -136,14 +130,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8560ed11b628ae710800000000000000
-      internalID: 1723333203795510872
+      spriteID: c5aa040f374cb3540800000000000000
+      internalID: 4988797014474009180
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pink_Monster_Idle_4_1
+      name: Pink_Monster_Walk_6_1
       rect:
         serializedVersion: 2
         x: 32
@@ -157,14 +151,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 382e0ef495412a520800000000000000
-      internalID: 2711752299455242883
+      spriteID: 885cf9c1f4915e6c0800000000000000
+      internalID: -4114854856959736440
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pink_Monster_Idle_4_2
+      name: Pink_Monster_Walk_6_2
       rect:
         serializedVersion: 2
         x: 64
@@ -178,14 +172,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 013ed0995c0f68810800000000000000
-      internalID: 1767364635256546064
+      spriteID: 3eb11b90821dada70800000000000000
+      internalID: 8852617987441630179
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pink_Monster_Idle_4_3
+      name: Pink_Monster_Walk_6_3
       rect:
         serializedVersion: 2
         x: 96
@@ -199,8 +193,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a38d8293ef5dd3720800000000000000
-      internalID: 2827651428915927098
+      spriteID: f5a7f3c94c194a820800000000000000
+      internalID: 2928625931318688351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink_Monster_Walk_6_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8be2feac919934360800000000000000
+      internalID: 7152728969252384440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Pink_Monster_Walk_6_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b7f901bcf75de310800000000000000
+      internalID: 1435900599014651832
       vertices: []
       indices: 
       edges: []
