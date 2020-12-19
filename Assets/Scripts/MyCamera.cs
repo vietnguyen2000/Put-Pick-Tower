@@ -45,6 +45,8 @@ public class MyCamera : MonoBehaviour {
         }
         _originalPos = transform.localPosition;
         _instance = this;
+        Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 1;
 
 	}
     private void OnDrawGizmos() {
