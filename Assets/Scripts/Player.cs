@@ -22,6 +22,7 @@ public class Player : LiveObject
         get => putpickTime;
         set => putpickTime = Mathf.Clamp(value,0.2f,0.5f);
     }
+    public Sprite playerIcon;
     public GameObject foodPrint;
     [SerializeField]private float putpickTime = 0.5f;
     [SerializeField]private float countPutPickTime;

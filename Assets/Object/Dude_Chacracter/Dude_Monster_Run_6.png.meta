@@ -1,31 +1,25 @@
 fileFormatVersion: 2
-guid: e0f0e2b4ebfdd5e44bf5ab4cc8fb136e
+guid: aa8eaecf227944943a4821bd2990647d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8212814697626224067
-    second: Dude_Monster_Idle_4_0
+      213: 6350452448802780410
+    second: Dude_Monster_Run_6_0
   - first:
-      213: 9101964261480447885
-    second: Dude_Monster_Idle_4_1
+      213: -8528139597194303457
+    second: Dude_Monster_Run_6_1
   - first:
-      213: -6108086381256799122
-    second: Dude_Monster_Idle_4_2
+      213: -44119017470293146
+    second: Dude_Monster_Run_6_2
   - first:
-      213: -3108282994932266067
-    second: Dude_Monster_Idle_4_3
+      213: 2561259159778536049
+    second: Dude_Monster_Run_6_3
   - first:
-      213: 8054062542834138562
-    second: Dude_Monster_Idle_4_0
+      213: 601316478422015684
+    second: Dude_Monster_Run_6_4
   - first:
-      213: -743082824367830526
-    second: Dude_Monster_Idle_4_1
-  - first:
-      213: -1746379313454993197
-    second: Dude_Monster_Idle_4_2
-  - first:
-      213: 4803165150404850152
-    second: Dude_Monster_Idle_4_3
+      213: -3813411338940917255
+    second: Dude_Monster_Run_6_5
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -122,7 +116,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dude_Monster_Idle_4_0
+      name: Dude_Monster_Run_6_0
       rect:
         serializedVersion: 2
         x: 0
@@ -136,14 +130,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2cd7860e537c5cf60800000000000000
-      internalID: 8054062542834138562
+      spriteID: af436e52bd6512850800000000000000
+      internalID: 6350452448802780410
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dude_Monster_Idle_4_1
+      name: Dude_Monster_Run_6_1
       rect:
         serializedVersion: 2
         x: 32
@@ -157,14 +151,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 20a8cd6bb1a00b5f0800000000000000
-      internalID: -743082824367830526
+      spriteID: f186a4a6836f5a980800000000000000
+      internalID: -8528139597194303457
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dude_Monster_Idle_4_2
+      name: Dude_Monster_Run_6_2
       rect:
         serializedVersion: 2
         x: 64
@@ -178,14 +172,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d0bc62644d93c7e0800000000000000
-      internalID: -1746379313454993197
+      spriteID: 66b08d3ccf1436ff0800000000000000
+      internalID: -44119017470293146
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dude_Monster_Idle_4_3
+      name: Dude_Monster_Run_6_3
       rect:
         serializedVersion: 2
         x: 96
@@ -199,8 +193,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e1ba6b814548a240800000000000000
-      internalID: 4803165150404850152
+      spriteID: 17aa05cb2ab6b8320800000000000000
+      internalID: 2561259159778536049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dude_Monster_Run_6_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cedee5b62e485800800000000000000
+      internalID: 601316478422015684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dude_Monster_Run_6_5
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f9daff679a041bc0800000000000000
+      internalID: -3813411338940917255
       vertices: []
       indices: 
       edges: []

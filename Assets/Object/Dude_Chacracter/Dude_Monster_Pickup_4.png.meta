@@ -1,31 +1,22 @@
 fileFormatVersion: 2
-guid: e0f0e2b4ebfdd5e44bf5ab4cc8fb136e
+guid: 2ad44dd490cd7864daf78cb2b317223a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8212814697626224067
-    second: Dude_Monster_Idle_4_0
+      213: -500389288714841072
+    second: Dude_Monster_Pickup_4_0
   - first:
-      213: 9101964261480447885
-    second: Dude_Monster_Idle_4_1
+      213: -7656223967292396540
+    second: Dude_Monster_Pickup_4_1
   - first:
-      213: -6108086381256799122
-    second: Dude_Monster_Idle_4_2
+      213: -2069165781346156166
+    second: Dude_Monster_Pickup_4_2
   - first:
-      213: -3108282994932266067
-    second: Dude_Monster_Idle_4_3
+      213: -7077072738103675147
+    second: Dude_Monster_Pickup_4_3
   - first:
-      213: 8054062542834138562
-    second: Dude_Monster_Idle_4_0
-  - first:
-      213: -743082824367830526
-    second: Dude_Monster_Idle_4_1
-  - first:
-      213: -1746379313454993197
-    second: Dude_Monster_Idle_4_2
-  - first:
-      213: 4803165150404850152
-    second: Dude_Monster_Idle_4_3
+      213: -3131608037495950590
+    second: Dude_Monster_Pickup_4_4
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -122,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dude_Monster_Idle_4_0
+      name: Dude_Monster_Pickup_4_0
       rect:
         serializedVersion: 2
         x: 0
@@ -136,14 +127,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2cd7860e537c5cf60800000000000000
-      internalID: 8054062542834138562
+      spriteID: 014ddb4d7924e09f0800000000000000
+      internalID: -500389288714841072
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dude_Monster_Idle_4_1
+      name: Dude_Monster_Pickup_4_1
       rect:
         serializedVersion: 2
         x: 32
@@ -157,14 +148,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 20a8cd6bb1a00b5f0800000000000000
-      internalID: -743082824367830526
+      spriteID: 40c64bcbdd0afb590800000000000000
+      internalID: -7656223967292396540
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dude_Monster_Idle_4_2
+      name: Dude_Monster_Pickup_4_2
       rect:
         serializedVersion: 2
         x: 64
@@ -178,14 +169,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d0bc62644d93c7e0800000000000000
-      internalID: -1746379313454993197
+      spriteID: a71087d4fa8d843e0800000000000000
+      internalID: -2069165781346156166
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dude_Monster_Idle_4_3
+      name: Dude_Monster_Pickup_4_3
       rect:
         serializedVersion: 2
         x: 96
@@ -199,8 +190,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e1ba6b814548a240800000000000000
-      internalID: 4803165150404850152
+      spriteID: 5f6bab337df29cd90800000000000000
+      internalID: -7077072738103675147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dude_Monster_Pickup_4_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 203bb45f41b4a84d0800000000000000
+      internalID: -3131608037495950590
       vertices: []
       indices: 
       edges: []
