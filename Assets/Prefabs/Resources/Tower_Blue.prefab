@@ -236,7 +236,6 @@ GameObject:
   - component: {fileID: 8234443177623113364}
   - component: {fileID: 4471432560819456227}
   - component: {fileID: 3277237187341104611}
-  - component: {fileID: 8641429552501635322}
   m_Layer: 15
   m_Name: Range
   m_TagString: Untagged
@@ -371,22 +370,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &8641429552501635322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2926397793833112482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a87e008af11fad34597ae4afa1148e3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  width: 0.05
-  color: {r: 0, g: 0.58431375, b: 0.91372555, a: 0.49803922}
-  radius: 1.5
-  lineRenderer: {fileID: 0}
 --- !u!1 &4343943043588788753
 GameObject:
   m_ObjectHideFlags: 0

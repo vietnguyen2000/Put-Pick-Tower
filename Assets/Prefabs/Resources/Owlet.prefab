@@ -9726,7 +9726,7 @@ GameObject:
   - component: {fileID: 7515945263734378550}
   - component: {fileID: 7515945263734378549}
   m_Layer: 13
-  m_Name: Player
+  m_Name: Owlet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9768,6 +9768,7 @@ MonoBehaviour:
   speed: 2
   rb: {fileID: 7515945263734378549}
   NormalSpeed: 2
+  playerIcon: {fileID: 21300000, guid: 928b078ce50e1d146b7552807f0504ee, type: 3}
   foodPrint: {fileID: 3438014704209796791}
   putpickTime: 0.5
   countPutPickTime: 0

@@ -24,9 +24,10 @@ public class CircleDraw : MonoBehaviour
         lineRenderer.endWidth = width;
         lineRenderer.positionCount = size;
         lineRenderer.sortingLayerName= "Top";
+        UpdateCircle();
     }
  
-    void Update()
+    public void UpdateCircle()
     {
         if (lineRenderer!= null && lineRenderer.enabled == true){
             Vector3 pos;
