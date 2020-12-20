@@ -84,6 +84,7 @@ public class Tower : PutPickableObject, IAttackable,IUpgradeable
         base.afterPutdown();
         firePowerSource.gameObject.SetActive(true);
         circleDrawRange.lineRenderer.enabled = true;
+        circleDrawRange.UpdateCircle();
     }
     public void UpgradeDamage(){
         currentDamageLevel+=1;

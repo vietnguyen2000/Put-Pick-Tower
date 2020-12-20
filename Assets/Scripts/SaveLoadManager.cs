@@ -73,7 +73,7 @@ public class SaveLoadManager
     }
     public void PassNewLevel()
     {
-        SavedData.passedLevel += 1;
+        SavedData.passedLevel = Mathf.Max(GameData.levelChosen+1,SavedData.passedLevel);
         WriteNewPlayerData();
     }
 }

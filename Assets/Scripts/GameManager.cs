@@ -35,10 +35,11 @@ public class GameManager : MonoBehaviour
         public Image PlayerIcon;
         public Image TowerIcon;
 
-        public void UpdatePlayerStats(float HP, float speed, float PutpickSpeed){
+        public void UpdatePlayerStats(Sprite playerIcon, float HP, float speed, float PutpickSpeed){
             PlayerHP.text = HP.ToString("F1");
             PlayerSpeed.text = speed.ToString("F1");
             PlayerPutpickSpeed.text = PutpickSpeed.ToString("F1");
+            PlayerIcon.sprite = playerIcon;
         }
         public void UpdateTowerStats(Sprite towerIcon,float damage, float attackSpeed, float range){
             TowerDamage.text = damage.ToString("F1");
@@ -134,7 +135,7 @@ public class GameManager : MonoBehaviour
     // }
     void Update()
     {
-        guiStats.UpdatePlayerStats(player.Hp,player.Speed,player.TimePutPick);
+        guiStats.UpdatePlayerStats(player.playerIcon,player.Hp,player.Speed,player.TimePutPick);
         guiStats.UpdateTowerStats(currentTower.towerIcon,currentTower.Damage,currentTower.AttackSpeed,currentTower.AttackRange);
         guiStats.UpdateCoin(numOfCoins,UpgradeStage.CoinRequire);
         // BackDoor();
