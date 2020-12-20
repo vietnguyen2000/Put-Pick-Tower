@@ -3293,6 +3293,8 @@ MonoBehaviour:
   maps:
   - numOfTower: 1
   - numOfTower: 2
+  - numOfTower: 1
+  - numOfTower: 2
   paddingBetweenButton: 15
   pady: 75
 --- !u!1 &658638324167674840
