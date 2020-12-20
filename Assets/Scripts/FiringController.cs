@@ -18,6 +18,9 @@ public class FiringController : MonoBehaviour
     float cooldown; // Delay between attacks, equal to 1/AttackSpeed
     int projectileNeeded; // Calculate the projectile needed to kill a monster, equal to Hp/Damage
     Monster target;
+    private void OnEnable() {
+        target = null;    
+    }
     void Start()
     {
         tower = GetComponentInParent<Tower>();

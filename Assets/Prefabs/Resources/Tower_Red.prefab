@@ -63,11 +63,11 @@ MonoBehaviour:
   - 7
   - 9
   AttackSpeedLevel:
-  - 1.5
-  - 1.8
-  - 2.1
+  - 2
   - 2.5
   - 3
+  - 3.5
+  - 4
   AttackRangeLevel:
   - 1.5
   - 1.8
