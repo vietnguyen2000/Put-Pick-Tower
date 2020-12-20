@@ -28,11 +28,11 @@ public class ButtonControl{
             buyMenuGameObject.transform.SetParent(button.transform.parent.parent,false);
             buyMenuGameObject.transform.localPosition = Vector3.zero;
         }
-        buyMenuGameObject.SetActive(true);
         BuyMenu buyMenu = buyMenuGameObject.GetComponent<BuyMenu>();
         buyMenu.cost = cost;
         buyMenu.buttonRequired = button;
         buyMenu.buyAction = buyAction;
+        buyMenuGameObject.SetActive(true);
         
     }
 }

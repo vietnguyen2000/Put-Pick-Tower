@@ -14,7 +14,7 @@ public class BuyMenu : MonoBehaviour{
     [HideInInspector]public Button buttonRequired;
     [HideInInspector]public int cost;
 
-    private void Start() {
+    private void OnEnable() {
         currentCoinsText.text = SaveLoadManager.Instance.SavedData.coins.ToString();
         costText.text = cost.ToString();
         remainingCoinsText.text = (SaveLoadManager.Instance.SavedData.coins - cost).ToString();
