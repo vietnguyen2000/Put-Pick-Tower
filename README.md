@@ -10,7 +10,7 @@ First project game of GameDevClub (HCMUT). We remake Tower Bag game (GMTK Game J
 
 ## Screenshots
 
-|![Menu Skins](./Screenshots/Skins.jpg)|![Menu tower](./Screenshots/tower.jpg)|
+|![Menu Skins](./Screenshots/Skins.jpg)|![Menu tower](./Screenshots/Tower.jpg)|
 |------------|-------------|
 |![1](./Screenshots/1.jpg)|![2](./Screenshots/2.jpg)|
 |![3](./Screenshots/3.jpg)|![3](./Screenshots/6.jpg)|
