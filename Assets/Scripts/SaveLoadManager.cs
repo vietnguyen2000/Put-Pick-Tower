@@ -14,7 +14,7 @@ public class SaveLoadManager
     // Start is called before the first frame update
     public PlayerData SavedData { get; set; }
     private SaveLoadManager(){
-        path = Application.persistentDataPath + "player_data.json";
+        path = Application.persistentDataPath + "/player_data.json";
         SavedData = new PlayerData();
         if (File.Exists(path))
             ReadSavedData();
@@ -73,7 +73,7 @@ public class SaveLoadManager
     }
     public void PassNewLevel()
     {
-        SavedData.passedLevel = Mathf.Max(GameData.levelChosen+1,SavedData.passedLevel);
+        SavedData.passedLevel = Mathf.Max(GameData.levelChosen,SavedData.passedLevel);
         WriteNewPlayerData();
     }
 }
