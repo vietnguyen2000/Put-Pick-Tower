@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.Tilemaps;
 public class GameManager : MonoBehaviour
 {
     public bool HasGlobalLight = true;
@@ -11,13 +12,14 @@ public class GameManager : MonoBehaviour
     public Tower currentTower;
     public Player player;
     public SpawnMonsterManager spawnMonsterManager;
+    public SpawnCoinManager spawnCoinManager;
     public UpgradeStage UpgradeStage;
     public SaveLoadManager saveLoadManager;
     public int numOfCoins;
     public int scaleOfCoinPoint;
     public int scaleOfMonsterPoint;
     public int scaleOfTimePoint;
-    
+    [HideInInspector]public List<Vector3> availablePlaces;
     private Light2D globalLight;
     private int totalPoints;
     private int totalCoinsCollected;
@@ -75,10 +77,31 @@ public class GameManager : MonoBehaviour
         }
         UpgradeStage= FindObjectOfType<UpgradeStage>();
         spawnMonsterManager = FindObjectOfType<SpawnMonsterManager>();
+        spawnCoinManager = FindObjectOfType<SpawnCoinManager>();
         saveLoadManager = SaveLoadManager.Instance;
         currentTower = listOfTower[0];
         player.CollectCoin = CollectCoin;
         globalLight = GetComponentInChildren<Light2D>();
+        availablePlaces = new List<Vector3>();
+        
+        Tilemap[] tileMaps = (Tilemap[])FindObjectsOfType<Tilemap>();
+        foreach( var tileMap in tileMaps){
+            if (tileMap.gameObject.layer == LayerMask.NameToLayer("Player Ground")){
+                for (int n = tileMap.cellBounds.xMin; n < tileMap.cellBounds.xMax; n++)
+                {
+                    for (int x = tileMap.cellBounds.yMin; x < tileMap.cellBounds.yMax; x++)
+                    {
+                        Vector3Int localPlace = (new Vector3Int(n, x, (int)tileMap.transform.position.y));
+                        Vector3 place = tileMap.CellToWorld(localPlace);
+                        if (tileMap.HasTile(localPlace))
+                        {
+                            //Tile at "place"
+                            availablePlaces.Add(place);
+                        }
+                    }
+                }
+            }
+        }
     }
     void Start(){
         if(HasGlobalLight){
