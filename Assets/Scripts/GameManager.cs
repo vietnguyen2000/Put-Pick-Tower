@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Experimental.Rendering.Universal;
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public bool HasGlobalLight = true;
     private Tower[] listOfTower;
     public Tower currentTower;
     public Player player;
@@ -16,7 +17,8 @@ public class GameManager : MonoBehaviour
     public int scaleOfCoinPoint;
     public int scaleOfMonsterPoint;
     public int scaleOfTimePoint;
-
+    
+    private Light2D globalLight;
     private int totalPoints;
     private int totalCoinsCollected;
     private int totalTimePlayed;
@@ -76,6 +78,15 @@ public class GameManager : MonoBehaviour
         saveLoadManager = SaveLoadManager.Instance;
         currentTower = listOfTower[0];
         player.CollectCoin = CollectCoin;
+        globalLight = GetComponentInChildren<Light2D>();
+    }
+    void Start(){
+        if(HasGlobalLight){
+            globalLight.enabled = true;
+        }
+        else{
+            globalLight.enabled = false;
+        }
     }
     public void changeSFX(Toggle toggle){
         bool isOn = toggle.isOn;
