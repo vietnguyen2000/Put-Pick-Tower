@@ -24,7 +24,7 @@ First project game of GameDevClub (HCMUT). We remake Tower Bag game (GMTK Game J
     - <b>Nguyen Hoang Viet</b>
     - Nguyen Luong Hoai Son
     - Do Minh Tam
-- Please contact us at: viet.nguyen2000@hcmut.edu.vn
+- Please contact us at: viet.nguyen.2000@hcmut.edu.vn
 
 ---
 [1]: https://craftpix.net/freebies/free-pixel-art-tiny-hero-sprites/
