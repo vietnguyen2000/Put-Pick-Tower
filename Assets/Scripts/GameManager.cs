@@ -66,8 +66,10 @@ public class GameManager : MonoBehaviour
     }
     public GUIStats guiStats;
     public GameOverMenu gameOverMenu;
+    [HideInInspector] public ObjectPooler objectPooler;
     void Awake()
     {
+        objectPooler = new ObjectPooler();
         GameObject p = GameObject.Instantiate(Resources.Load(GameData.skinChosen),Vector3.zero,new Quaternion()) as GameObject;
         player = p.GetComponent<Player>();
         listOfTower = new Tower[GameData.numofTower];

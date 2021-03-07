@@ -24,6 +24,16 @@ public class Monster : LiveObject
     {
         base.Start();
     }
+    protected override void OnEnable() {
+        base.OnEnable();
+        currentPointIndex = 1;
+        LivingStatus = LiveObject.Status.Alive;
+        hp = maxHp;
+    }
+    protected override void OnDisable() {
+        base.OnDisable();
+        LivingStatus = LiveObject.Status.Dead;
+    }
     protected override void Update()
     {
         base.Update();

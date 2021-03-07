@@ -848,7 +848,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7779089746833055163}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9140175959566939392
 MonoBehaviour:
@@ -1158,50 +1158,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 150
---- !u!1 &4974452040677064803
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7093573811987746147}
-  - component: {fileID: 8137608879445855055}
-  m_Layer: 0
-  m_Name: ObjectPooler
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7093573811987746147
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4974452040677064803}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -226.29167, y: -716.7717, z: 8.875}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 7779089746833055163}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8137608879445855055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4974452040677064803}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f88232c9c4f596942a3f1734bf161ac5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pools: []
 --- !u!1 &5121023847999000598
 GameObject:
   m_ObjectHideFlags: 0
@@ -1480,7 +1436,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7779089746833055163}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8018466720133185070
 MonoBehaviour:
@@ -3664,7 +3620,6 @@ Transform:
   - {fileID: 7779089747580148430}
   - {fileID: 7779089747586397865}
   - {fileID: 4474892370684946128}
-  - {fileID: 7093573811987746147}
   - {fileID: 3905496448469943780}
   - {fileID: 6032592155357490380}
   m_Father: {fileID: 0}
@@ -3682,14 +3637,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba98804fa8cfb6428d6c643c934ad90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HasGlobalLight: 1
   currentTower: {fileID: 0}
   player: {fileID: 0}
   spawnMonsterManager: {fileID: 0}
+  spawnCoinManager: {fileID: 0}
   UpgradeStage: {fileID: 0}
   numOfCoins: 0
   scaleOfCoinPoint: 20
   scaleOfMonsterPoint: 20
   scaleOfTimePoint: 1
+  availablePlaces: []
   guiStats:
     PlayerHP: {fileID: 7779089746485287621}
     PlayerSpeed: {fileID: 7779089747194235431}

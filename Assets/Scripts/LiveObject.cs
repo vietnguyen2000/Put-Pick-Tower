@@ -88,4 +88,6 @@ public class LiveObject : AnimateObject, IStatistic, IDamageable, IMoveable
         anim.Play(Constants.IDLE,0);
         rb.velocity = Vector2.zero;
     }
+    protected virtual void OnEnable(){}
+    protected virtual void OnDisable(){}
 }

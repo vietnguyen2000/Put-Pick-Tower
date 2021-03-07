@@ -2,73 +2,72 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPooler : MonoBehaviour
+public class ObjectPooler
 {
-    // Start is called before the first frame update
-
-    [System.Serializable]
     public class Pool
     {
-        public string tag;
         public GameObject prefab;
+        public List<GameObject> lst;
         public int size;
 
-        public Pool(string tag, GameObject prefab, int size)
+        private int curIndex;
+
+        public Pool(GameObject prefab, int size)
         {
-            this.tag = tag;
+            lst = new List<GameObject>();
             this.prefab = prefab;
+            addGameObject(prefab, size);
             this.size = size;
+                
+        }
+
+        public void addGameObject (GameObject prefab, int size ){
+            for (int i = 0 ; i < size ; i ++){
+                GameObject go = GameObject.Instantiate<GameObject>(prefab);
+                go.SetActive(false);
+                lst.Add(go);      
+            }
+        }
+
+        public GameObject Instantiate(){
+            GameObject res = null;
+            for (int i = curIndex ; i < size + curIndex; i++){
+                res = lst[i%size];
+                if (res.activeSelf == false){
+                    break;
+                }
+            }
+            if (res.activeSelf == false){
+                res.SetActive(true);
+                return res;
+            }
+            else{
+                this.addGameObject(this.prefab, size);
+                this.size *= 2;
+                return this.Instantiate();
+            }
         }
     }
-
-    public List<Pool> pools;
-
-    public Dictionary<string, Queue<GameObject>> poolDictionary;
-
-    //Can dc fix
+    const int DEFAULT_SIZE = 10;
     public static ObjectPooler SharedInstance;
-    private void Awake()
-    {
-        Debug.Log("Awake ObjectPooler is called");
+    public Dictionary<GameObject,Pool> pools;
+
+    public ObjectPooler(){
+        pools = new Dictionary<GameObject, Pool>();
         SharedInstance = this;
     }
-    //
 
-    void Start()
-    {
-        poolDictionary = new Dictionary<string, Queue<GameObject>>();
-
-        foreach (Pool pool in pools)
-        {
-            Queue<GameObject> objectPool = new Queue<GameObject>();
-
-            for (int i = 0; i < pool.size; i++)
-            {
-                GameObject obj = Instantiate(pool.prefab);
-                obj.SetActive(false);
-                objectPool.Enqueue(obj);
-            }
-
-            poolDictionary.Add(pool.tag, objectPool);
-        }
+    public void AddPool(GameObject prefabs, int size = DEFAULT_SIZE){
+        pools.Add(prefabs, new Pool(prefabs,size));
     }
 
-    public GameObject SpawnFromPool (string tag, Vector3 position, Quaternion rotation)
+    public GameObject Instantiate (GameObject prefabs)
     {
-        if (!poolDictionary.ContainsKey(tag))
-        {
-            Debug.LogWarning("Pool with tag " + tag + " doesn't exist.");
-            return null;
+        if (pools.ContainsKey(prefabs))
+            return pools[prefabs].Instantiate();
+        else {
+            this.AddPool(prefabs);
+            return this.Instantiate(prefabs);
         }
-
-        GameObject objectToSpawn = poolDictionary[tag].Dequeue();
-
-        objectToSpawn.SetActive(true);
-        objectToSpawn.transform.position = position;
-        objectToSpawn.transform.rotation = rotation;
-
-        poolDictionary[tag].Enqueue(objectToSpawn);
-
-        return objectToSpawn;
     }
 }

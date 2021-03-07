@@ -9,6 +9,8 @@ public class Projectile : MyObject
     float projectileSpeed; // moving speed of the projectile
     FiringController source; // The source which sends the projectile to the target
     public ParticleSystem die;
+    private bool isBreaking = false;
+
     public void SetupTarget(FiringController source, LiveObject tg, float speed)
     {
         this.target = tg;
@@ -17,7 +19,11 @@ public class Projectile : MyObject
         die.transform.parent = transform;
         die.transform.localPosition = Vector3.zero;
     }
-
+    private void OnEnable() {
+        isBreaking = false;
+        Debug.Log(spriteRenderer.gameObject);
+        spriteRenderer.gameObject.SetActive(true);
+    }
     // Update is called once per frame
     protected override void Update()
     {
@@ -32,8 +38,8 @@ public class Projectile : MyObject
                 //rb.velocity = dir * projectileSpeed;
 
                 // If the projectile reaches the target
-                if (Vector2.Distance(new Vector2(transform.position.x, transform.position.y),
-                    new Vector2(target.transform.position.x, target.transform.position.y)) <= 0.1f)
+                if ((Vector2.Distance(new Vector2(transform.position.x, transform.position.y),
+                    new Vector2(target.transform.position.x, target.transform.position.y)) <= 0.1f) && !isBreaking)
                 {
                     // Bring the projectile back to the pool
                     breakProjecttile();
@@ -46,14 +52,21 @@ public class Projectile : MyObject
                 // Bring the projectile back to the pool
                 target = null;
                 breakProjecttile();
+
             }
         }
 
     }
     public void breakProjecttile(){
+        isBreaking = true;
+        spriteRenderer.gameObject.SetActive(false);
+        die.Play();
+        StartCoroutine("breakProjecttileCoroutine");
+    }
+    private IEnumerator breakProjecttileCoroutine(){
+        yield return new WaitForSeconds(1.0f);
+        Debug.Log("project tile disable");
         gameObject.SetActive(false);
         source.projectilePool.Enqueue(gameObject.transform);
-        die.transform.parent = null;
-        die.Play();
     }
 }

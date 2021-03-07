@@ -35,21 +35,7 @@ public class SpawnMonsterManager : MonoBehaviour
     {
         Debug.Log("Awake SpawnMonsterManager is called");
         List<GameObject> temp = new List<GameObject>();
-        //Debug.Log(ObjectPooler.SharedInstance.pools.Capacity);
-        ObjectPooler.SharedInstance.pools.Capacity = EnemyTypeSize(waves, temp);
-        //Debug.Log(ObjectPooler.SharedInstance.pools.Capacity);
-        int[] sized = EnemySize(waves, temp);
-        for (int i = 0; i < ObjectPooler.SharedInstance.pools.Capacity; i++)
-        {
-            ObjectPooler.Pool newPool = new ObjectPooler.Pool(temp[i].name, temp[i], sized[i]);
-            ObjectPooler.SharedInstance.pools.Add(newPool);
-            Debug.Log("Count: " + ObjectPooler.SharedInstance.pools.Count);
-            Debug.Log("Enemy pooled: " + temp[i].name);
-        }
-        ObjectPooler.Pool portalPool = new ObjectPooler.Pool(Portal.name,Portal,10);
-        ObjectPooler.SharedInstance.pools.Add(portalPool);
     }
-    // Start is called before the first frame update
     void Start()
     {
         waveCountDown = waves[0].spawnAfterTime;
@@ -147,7 +133,8 @@ public class SpawnMonsterManager : MonoBehaviour
     IEnumerator SpawnWave(Wave _wave)
     {
         Debug.Log("Spawning Wave: " + _wave.name);
-        GameObject portal = ObjectPooler.SharedInstance.SpawnFromPool(Portal.name, _wave.path[0].position, new Quaternion());
+        GameObject portal = ObjectPooler.SharedInstance.Instantiate(Portal);
+        portal.transform.position = _wave.path[0].position;
         state = Spawn_State.Spawning;
 
         for (int i = 0; i < _wave.count; i++)
@@ -164,12 +151,11 @@ public class SpawnMonsterManager : MonoBehaviour
     void SpawnMonster (GameObject _monster, Transform position, Transform[] path)
     {
         Debug.Log("Spawning Enemy: " + _monster.name);
-        //Need to be fixed to use the ObjectPooler
-        GameObject _mons = ObjectPooler.SharedInstance.SpawnFromPool(_monster.name, position.position, new Quaternion());
-        //
+
+        GameObject _mons = ObjectPooler.SharedInstance.Instantiate(_monster);
+        _mons.transform.position = path[0].position;
         Monster m = _mons.GetComponent<Monster>();
         m.path = path;
-        m.LivingStatus = LiveObject.Status.Alive;
     }
 
     bool MonsterIsAlive(Wave[] waves)

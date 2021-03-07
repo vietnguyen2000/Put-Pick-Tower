@@ -35,7 +35,7 @@ public class MyObject : MonoBehaviour, ISpriteRenderer, ICollider
         }
     }
     protected SpriteRenderer shadowVisible;
-    protected virtual  void Start() {
+    protected virtual  void Awake() {
         gameManager = (GameManager)FindObjectOfType<GameManager>();
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         col = GetComponentInChildren<Collider2D>();
@@ -47,6 +47,9 @@ public class MyObject : MonoBehaviour, ISpriteRenderer, ICollider
             shadowVisible.sortingLayerName = "Top";
             shadowVisible.color = new Color(1,1,1,0.5f);
         }
+    }
+    protected virtual void Start(){
+        
     }
     protected virtual void Update(){
         

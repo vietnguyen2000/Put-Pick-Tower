@@ -25,7 +25,7 @@ public class MyCamera : MonoBehaviour {
         }
 
     transform.localPosition = _originalPos;
-}
+    }
 
 	// Use this for initialization
 	void Start () {
